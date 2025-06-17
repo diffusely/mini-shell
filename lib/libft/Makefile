@@ -1,6 +1,6 @@
 NAME		=	libft.a
 
-INCLUDES	=	../../includes
+INCLUDES	=	../../include/lib_headers
 
 SDIR		=	src/
 

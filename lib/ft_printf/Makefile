@@ -1,6 +1,6 @@
 NAME		=	libftprintf.a 
 
-INCLUDES	=	../../includes
+INCLUDES	=	../../include/lib_headers
 
 LIBFT		= 	../libft/
 

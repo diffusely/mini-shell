@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/12 16:19:13 by noavetis          #+#    #+#             */
-/*   Updated: 2025/06/17 23:14:37 by noavetis         ###   ########.fr       */
+/*   Created: 2025/06/17 22:23:48 by noavetis          #+#    #+#             */
+/*   Updated: 2025/06/17 22:40:23 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include "ast.h"
-#include "lexer.h"
+#include "free.h"
 
-int	main(int argc, char **argv, char **envp)
+void	free_split(char **str)
 {
-	(void)argc;
-	(void)argv;
-	(void)envp;
-	const char *line = "| |  | | | | | | | | |";
-	
-	
-	t_token *token = lexer(line);
-	print_tokens(token);
+	int	i;
 
-	free_tokens(token);
-	return (0);
+	i = 0;
+	if (!str)
+		return ;
+	while (str[i])
+		free(str[i++]);
+	free(str);
+	str = NULL;
 }
+

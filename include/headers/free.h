@@ -1,30 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   free.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/12 16:19:13 by noavetis          #+#    #+#             */
-/*   Updated: 2025/06/17 23:14:37 by noavetis         ###   ########.fr       */
+/*   Created: 2025/06/17 22:22:02 by noavetis          #+#    #+#             */
+/*   Updated: 2025/06/17 22:40:28 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include "ast.h"
-#include "lexer.h"
+#ifndef FREE_H
+# define FREE_H
 
-int	main(int argc, char **argv, char **envp)
-{
-	(void)argc;
-	(void)argv;
-	(void)envp;
-	const char *line = "| |  | | | | | | | | |";
-	
-	
-	t_token *token = lexer(line);
-	print_tokens(token);
+#include "libft.h"
 
-	free_tokens(token);
-	return (0);
-}
+void	free_split(char **str);
+
+#endif
