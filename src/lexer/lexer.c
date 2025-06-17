@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/12 16:19:13 by noavetis          #+#    #+#             */
-/*   Updated: 2025/06/17 17:47:38 by noavetis         ###   ########.fr       */
+/*   Created: 2025/06/17 17:06:06 by noavetis          #+#    #+#             */
+/*   Updated: 2025/06/17 17:47:54 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "lexer.h"
 
-int	main(int argc, char **argv, char **envp)
+void	lexer(const char *line)
 {
-	const char *line = "cat << EOF | grep hello >> file.txt";
 	
 }

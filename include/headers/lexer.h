@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token.h                                            :+:      :+:    :+:   */
+/*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:41:41 by noavetis          #+#    #+#             */
-/*   Updated: 2025/06/16 18:13:23 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/06/17 18:04:57 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TOKEN_H
-# define TOKEN_H
+#ifndef LEXER_H
+# define LEXER_H
 
 typedef enum e_token_type
 {
@@ -21,7 +21,7 @@ typedef enum e_token_type
 	PIP,
 	OUT,
 	IN,
-	EOF;
+	EOF
 }	t_token_type;
 
 typedef struct s_token
