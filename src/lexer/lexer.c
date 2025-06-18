@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 17:06:06 by noavetis          #+#    #+#             */
-/*   Updated: 2025/06/17 23:14:08 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/06/18 17:40:04 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,18 @@
 static t_token_type	token_type(const char *token)
 {
 	if (!token)
-		return END;
+		return (END);
 	if (token[0] == '<' && token[1] == '<')
-		return HEREDOC;
+		return (HEREDOC);
 	if (token[0] == '>' && token[1] == '>')
-		return APPEND;
+		return (APPEND);
 	if (token[0] == '>')
-		return OUT;
+		return (OUT);
 	if (token[0] == '<')
-		return IN;
+		return (IN);
 	if (token[0] == '|')
-		return PIP;
-	return WORD;
+		return (PIP);
+	return (WORD);
 }
 
 static t_token	*init_token(t_token_type type, const char *value)
@@ -35,11 +35,11 @@ static t_token	*init_token(t_token_type type, const char *value)
 
 	token = ft_calloc(1, sizeof(t_token));
 	if (!token)
-		exit(1);
+		error_handle("*TOKEN* Bad alloc!\n", 1);
 	token->type = type;
 	token->value = ft_strdup(value);
 	if (!token->value)
-		exit(1);
+		error_handle("*TOKEN VALUE* Bad alloc!\n", 1);
 	token->next = NULL;
 	return (token);
 }
@@ -63,7 +63,7 @@ t_token	*lexer(const char *line)
 	return (free_split(res), tokens);
 }
 
-void push_token(t_token	**tokens, t_token *temp)
+void	push_token(t_token	**tokens, t_token *temp)
 {
 	t_token	*head;
 
@@ -78,7 +78,7 @@ void push_token(t_token	**tokens, t_token *temp)
 	}
 }
 
-void free_tokens(t_token *tokens)
+void	free_tokens(t_token *tokens)
 {
 	t_token	*temp;
 
@@ -94,7 +94,7 @@ void free_tokens(t_token *tokens)
 	}
 }
 
-void print_tokens(t_token *lexer)
+void	print_tokens(t_token *lexer)
 {
 	while (lexer)
 	{

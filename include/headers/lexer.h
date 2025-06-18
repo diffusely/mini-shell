@@ -6,16 +6,17 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:41:41 by noavetis          #+#    #+#             */
-/*   Updated: 2025/06/17 22:42:25 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/06/18 17:40:29 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
 
-#include "libft.h"
-#include "ft_printf.h"
-#include "free.h"
+# include "libft.h"
+# include "ft_printf.h"
+# include "free.h"
+# include "message.h"
 
 typedef enum e_token_type
 {

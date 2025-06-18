@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.h                                             :+:      :+:    :+:   */
+/*   message.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/17 22:22:02 by noavetis          #+#    #+#             */
-/*   Updated: 2025/06/18 17:25:58 by noavetis         ###   ########.fr       */
+/*   Created: 2025/06/18 17:34:24 by noavetis          #+#    #+#             */
+/*   Updated: 2025/06/18 17:38:53 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FREE_H
-# define FREE_H
+#ifndef MESSAGE_H
+# define MESSAGE_H
 
+# include "ft_printf.h"
 # include "libft.h"
 
-void	free_split(char **str);
+void	error_print(const char *cmd, const char *msg, int flag);
+void	error_handle(char *msg, int flag);
 
 #endif

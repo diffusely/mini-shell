@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.h                                             :+:      :+:    :+:   */
+/*   readline.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/17 22:22:02 by noavetis          #+#    #+#             */
-/*   Updated: 2025/06/18 17:25:58 by noavetis         ###   ########.fr       */
+/*   Created: 2025/06/18 20:12:28 by noavetis          #+#    #+#             */
+/*   Updated: 2025/06/18 20:17:20 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FREE_H
-# define FREE_H
+#include "shell.h"
 
-# include "libft.h"
-
-void	free_split(char **str);
-
-#endif
+char	*readline(const char *name)
+{
+	ft_printf("%s", name);
+	return (get_next_line(0));
+}

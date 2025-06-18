@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.h                                             :+:      :+:    :+:   */
+/*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/17 22:22:02 by noavetis          #+#    #+#             */
-/*   Updated: 2025/06/18 17:25:58 by noavetis         ###   ########.fr       */
+/*   Created: 2025/06/18 20:09:57 by noavetis          #+#    #+#             */
+/*   Updated: 2025/06/18 20:14:17 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FREE_H
-# define FREE_H
+#ifndef SHELL_H
+# define SHELL_H
 
 # include "libft.h"
+# include "ft_printf.h"
+# include "get_next_line.h"
 
-void	free_split(char **str);
+char	*readline(const char *name);
 
 #endif

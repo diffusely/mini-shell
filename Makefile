@@ -10,10 +10,14 @@ SRC_DIR		= src/
 
 LEX_DIR		= $(SRC_DIR)lexer/
 FREE_DIR	= $(SRC_DIR)free_all/
+SHELL_DIR	= $(SRC_DIR)shell/
+MSG_DIR		= $(SRC_DIR)exit_msg/
 
 SRC 		= $(SRC_DIR)main.c \
 			  $(LEX_DIR)lexer.c \
-			  $(FREE_DIR)free.c
+			  $(FREE_DIR)free.c \
+			  $(SHELL_DIR)readline.c \
+			  $(MSG_DIR)error.c
 
 OBJ			= $(SRC:.c=.o)
 
@@ -31,6 +35,8 @@ $(NAME):	$(OBJ)
 
 %.o:		%.c
 			$(CC) $(CFLAG) $(IFLAG) -c $< -o $@
+
+all:		$(NAME)
 
 clean:				
 			make -C $(PRINTF) clean

@@ -1,48 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ast.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/12 16:19:13 by noavetis          #+#    #+#             */
-/*   Updated: 2025/06/18 20:27:22 by noavetis         ###   ########.fr       */
+/*   Created: 2025/06/18 18:48:53 by noavetis          #+#    #+#             */
+/*   Updated: 2025/06/18 19:01:29 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "ast.h"
-#include "lexer.h"
-#include "shell.h"
 
-int	main(int argc, char **argv, char **envp)
+t_ast_tree *create_node(t_node_type type)
 {
-	(void)argc;
-	(void)argv;
-	(void)envp;
-	t_token *token;
-	
-	while (1)
+	t_ast_tree	*res;
+
+	res = ft_calloc(1, sizeof(t_ast_tree));
+	if (!res)
+		error_handle("Bad alloc!\n", 1);
+	res->node = type;
+
+	return (res);
+}
+
+t_ast_tree *parse_tokens(t_token **tokens)
+{
+	t_token	*head;
+
+	head = *tokens;
+	while (head)
 	{
-		char	*input = readline("minishell$ ");
-
-		token = lexer(input);
-		print_tokens(token);
-
-		if (input[0] == 'e')
-		{
-			get_next_line(-1);
-			free(input);
-			break ;
-		}
-
-		
-		free(input);
-		free_tokens(token);
+		head = head->next;
 	}
-	
-	
+}
 
-	free_tokens(token);
-	return (0);
+void free_tree(t_ast_tree *root)
+{
+
+	
+}
+
+void print_tree(t_ast_tree *root, int level)
+{
+
+
 }
