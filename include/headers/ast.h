@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 18:03:48 by noavetis          #+#    #+#             */
-/*   Updated: 2025/06/20 19:38:48 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/06/20 21:50:33 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define AST_H
 
 # include "lexer.h"
-
+# include "free.h"
 typedef enum e_node
 {
 	NODE_CMD,

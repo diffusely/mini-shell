@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 16:19:13 by noavetis          #+#    #+#             */
-/*   Updated: 2025/06/20 20:33:56 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/06/20 21:59:11 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,19 @@ int	main(int argc, char **argv, char **envp)
 		{
 			get_next_line(-1);
 			free(input);
+			free_tokens(token);
+			free_tree(tree);
 			break ;
 		}
 
 		
-		//free(input);
-		//free_tokens(token);
+		free(input);
+		free_tokens(token);
+		free_tree(tree);
 	}
 	
 	
 
-	free_tokens(token);
+	
 	return (0);
 }

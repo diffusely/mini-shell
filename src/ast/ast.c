@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 18:48:53 by noavetis          #+#    #+#             */
-/*   Updated: 2025/06/20 19:38:37 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/06/20 21:53:12 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,19 @@
 // 	return (res);
 // }
 
-// void	free_tree(t_ast *root)
-// {
-// }
+void	free_tree(t_ast *root)
+{
+	if (!root)
+		return ;
+
+	free_tree(root->left);
+	free_tree(root->right);
+
+	if (root->type == NODE_CMD)
+		free_split(root->argv);
+
+	free(root);
+}
 
 void print_ast(t_ast *node, int depth)
 {
