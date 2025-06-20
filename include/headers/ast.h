@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 18:03:48 by noavetis          #+#    #+#             */
-/*   Updated: 2025/06/18 18:49:58 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/06/20 19:38:48 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,19 @@ typedef struct s_redirect
 	struct s_redirect	*next;
 }	t_redirect;
 
-typedef struct s_ast_tree
+typedef struct s_ast
 {
-	t_node_type			node;
+	t_node_type			type;
 	char				**argv;      // for exceve
 	t_redirect			*redir_list;
-	struct s_ast_tree	*left;
-	struct s_ast_tree	*right;
-}	t_ast_tree;
+	struct s_ast		*left;
+	struct s_ast		*right;
+}	t_ast;
 
-
-t_ast_tree	*create_node(t_node_type type);
-t_ast_tree	*parse_tokens(t_token **tokens);
-void		free_tree(t_ast_tree *root);
-void		print_tree(t_ast_tree *root, int level);
+t_ast		*create_node(t_node_type type);
+t_ast		*parse_pipe(t_token *tokens);
+t_ast		*parse_cmd(t_token *tokens);
+void		free_tree(t_ast *root);
+void		print_ast(t_ast *node, int depth);
 
 #endif

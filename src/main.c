@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 16:19:13 by noavetis          #+#    #+#             */
-/*   Updated: 2025/06/18 20:27:22 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/06/20 20:33:56 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,13 @@ int	main(int argc, char **argv, char **envp)
 		char	*input = readline("minishell$ ");
 
 		token = lexer(input);
+
+		
 		print_tokens(token);
+
+		t_ast *tree = parse_pipe(token);
+
+		print_ast(tree, 0);
 
 		if (input[0] == 'e')
 		{
@@ -37,8 +43,8 @@ int	main(int argc, char **argv, char **envp)
 		}
 
 		
-		free(input);
-		free_tokens(token);
+		//free(input);
+		//free_tokens(token);
 	}
 	
 	

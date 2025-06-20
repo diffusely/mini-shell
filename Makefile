@@ -12,12 +12,16 @@ LEX_DIR		= $(SRC_DIR)lexer/
 FREE_DIR	= $(SRC_DIR)free_all/
 SHELL_DIR	= $(SRC_DIR)shell/
 MSG_DIR		= $(SRC_DIR)exit_msg/
+AST_DIR		= $(SRC_DIR)ast/
+PARSE_DIR	= $(SRC_DIR)parse/
 
 SRC 		= $(SRC_DIR)main.c \
 			  $(LEX_DIR)lexer.c \
 			  $(FREE_DIR)free.c \
 			  $(SHELL_DIR)readline.c \
-			  $(MSG_DIR)error.c
+			  $(MSG_DIR)error.c \
+			  $(AST_DIR)ast.c \
+			  $(PARSE_DIR)parse_ast.c
 
 OBJ			= $(SRC:.c=.o)
 
