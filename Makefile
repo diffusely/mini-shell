@@ -27,7 +27,7 @@ OBJ			= $(SRC:.c=.o)
 
 LIB_FLAGS	= -L$(LIBFT) -lft -L$(PRINTF) -lftprintf
 IFLAG		= -I$(INC_HEADER) -I$(INC_LIB) -I$(LIBFT) -I$(PRINTF)
-CFLAG		= -Wall -Wextra -Werror
+CFLAG		= -Wall -Wextra -Werror -g
 
 CC			= cc
 RM			= rm -rf

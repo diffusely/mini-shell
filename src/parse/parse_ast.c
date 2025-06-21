@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 17:02:07 by noavetis          #+#    #+#             */
-/*   Updated: 2025/06/20 22:01:07 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/06/21 16:41:13 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ t_ast	*parse_pipe(t_token *tokens)
 	t_ast	*node;
 
 	if (!tokens)
-		return NULL;
+		return (NULL);
 
 	split_tokens(tokens, &left, &right);
-
+	ft_printf("aaaaa\n");
 	if (right)
 	{
 		node = ft_calloc(1, sizeof(t_ast));
@@ -72,12 +72,12 @@ t_ast	*parse_cmd(t_token *tokens)
 	}
 	node->argv = ft_calloc(count + 1, sizeof(char *));
 	i = 0;
-	while (tokens)
+	while (tokens && tokens->type != PIP)
 	{
 		node->argv[i++] = ft_strdup(tokens->value);
 		tokens = tokens->next;
 	}
-	node->argv[count] = NULL;
+	node->argv[i] = NULL;
 	node->type = NODE_CMD;
 	node->left = NULL;
 	node->right = NULL;
