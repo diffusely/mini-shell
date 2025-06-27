@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell.h                                            :+:      :+:    :+:   */
+/*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/18 20:09:57 by noavetis          #+#    #+#             */
-/*   Updated: 2025/06/27 19:30:06 by noavetis         ###   ########.fr       */
+/*   Created: 2025/06/27 19:18:55 by noavetis          #+#    #+#             */
+/*   Updated: 2025/06/27 19:22:15 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHELL_H
-# define SHELL_H
+#include "shell.h"
 
-# include "libft.h"
-# include "ft_printf.h"
-# include "get_next_line.h"
-
-char	*get_path(t_pip *pip, char *cmd);
-char	*readline(const char *name);
-
-#endif
+void	pipex()
+{
+	
+}
