@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 16:19:13 by noavetis          #+#    #+#             */
-/*   Updated: 2025/06/21 16:31:52 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/06/27 15:08:38 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,24 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	(void)envp;
-	input = "a | a ";
-	token = lexer(input);
-	print_tokens(token);
 
+	while (1)
+	{
+		input = readline("minishell$");
+		token = lexer(input);
+		print_tokens(token);
 	
-	tree = parse_pipe(token);
-	print_ast(tree, 0);
-	
-	free_tree(tree);
-	free_tokens(token);
+		
+		if (input[0] == 'e')
+			break;
+
+		tree = parse_pipe(token);
+		print_ast(tree, 0);
+		
+		free_tree(tree);
+		free_tokens(token);
+	}
+
 	//print_ast(tree, 0);
 	return (0);
 }
