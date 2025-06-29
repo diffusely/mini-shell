@@ -25,9 +25,17 @@ SRC 		= $(SRC_DIR)main.c \
 
 OBJ			= $(SRC:.c=.o)
 
-LIB_FLAGS	= -L$(LIBFT) -lft -L$(PRINTF) -lftprintf
-IFLAG		= -I$(INC_HEADER) -I$(INC_LIB) -I$(LIBFT) -I$(PRINTF)
-CFLAG		= -g -Wall -Wextra -Werror
+READLINE_DIR = /opt/homebrew/opt/readline
+
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Darwin)
+	LIB_FLAGS += -L$(READLINE_DIR)/lib
+	IFLAG += -I$(READLINE_DIR)/include
+endif
+
+LIB_FLAGS	+= -L$(LIBFT) -lft -L$(PRINTF) -lftprintf -lreadline -lhistory
+IFLAG		+= -I$(INC_HEADER) -I$(INC_LIB) -I$(LIBFT) -I$(PRINTF)
+CFLAG		= -Wall -Wextra -Werror -g
 
 CC			= cc
 RM			= rm -rf

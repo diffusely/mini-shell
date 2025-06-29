@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vmakarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 16:19:13 by noavetis          #+#    #+#             */
-/*   Updated: 2025/06/30 00:10:15 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/06/30 00:14:43 by vmakarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 int	main(int argc, char **argv, char **envp)
 {
 	t_token	*token;
-	t_token	*free_token;
 	char	*input;
 	t_ast	*tree;
 
@@ -28,31 +27,35 @@ int	main(int argc, char **argv, char **envp)
 
 	while (1)
 	{
-		input = readline("minishell$");
+		signal(SIGINT, sigint_handler);
+		signal(SIGQUIT, SIG_IGN);
 
-
+		while ((input = readline("minishell$ ")))
+		{
+			if (!input)
+			{
+				write(1, "exit\n", 5);
+				break;
+			}
+			if (*input)
+				add_history(input);
+			free(input);
+		}
 		token = lexer(input);
-		free_token = token;
 		print_tokens(token);
-	
-		
-		tree = parse_expr(&token);
+		tree = parse_pipe(&token);
 		print_ast(tree, 0);
 
 		if (input[0] == 'e')
 		{
 			free_tree(tree);
-			free_tokens(free_token);
 			free(input);
 			break;
 		}
 
 		free_tree(tree);
-		free_tokens(free_token);
 		free(input);
 	}
-
-	//print_ast(tree, 0);
 	
 	return (0);
 }
