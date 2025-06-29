@@ -27,8 +27,8 @@ SRC 		= $(SRC_DIR)main.c \
 OBJ			= $(SRC:.c=.o)
 
 
-LIB_FLAGS	+= -L$(LIBFT) -lft -L$(PRINTF) -L$(READLINE_DIR)/lib -lftprintf -lreadline -lhistory
-IFLAG		+= -I$(INC_HEADER) -I$(INC_LIB) -I$(LIBFT) -I$(PRINTF) -I$(READLINE_DIR)/include
+LIB_FLAGS	= -L$(LIBFT) -lft -L$(PRINTF) -L$(READLINE_DIR)/lib -lftprintf -lreadline -lhistory
+IFLAG		= -I$(INC_HEADER) -I$(INC_LIB) -I$(LIBFT) -I$(PRINTF) -I$(READLINE_DIR)/include
 CFLAG		= -Wall -Wextra -Werror -g
 
 CC			= cc
