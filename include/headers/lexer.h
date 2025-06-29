@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:41:41 by noavetis          #+#    #+#             */
-/*   Updated: 2025/06/21 15:54:49 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/06/29 19:35:38 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ typedef enum e_token_type
 	APPEND,  // >>
 	WORD,    // echo hello
 	PIP,     // |
+	AND,     // &&
+	OR,      // ||
+	LPAR,    // (
+	RPAR,    // )
 	OUT,     // >
 	IN,      // <
 	END      // end
@@ -37,6 +41,7 @@ typedef struct s_token
 }	t_token;
 
 void		push_token(t_token	**tokens, t_token *temp);
+t_token		*create_token(t_token_type type, const char *value);
 void		free_tokens(t_token *tokens);
 t_token		*lexer(const char *line);
 void		print_tokens(t_token *lexer);

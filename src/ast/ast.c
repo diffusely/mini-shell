@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 18:48:53 by noavetis          #+#    #+#             */
-/*   Updated: 2025/06/29 19:08:07 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/06/29 23:28:58 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,19 @@ void	free_tree(t_ast *root)
 	free_tree(root->right);
 
 	int i = 0;
-	while (root->type == NODE_CMD &&  root->argv && root->argv[i])
-		free(root->argv[i++]);
+	while (root->type == NODE_CMD &&  root->cmd && root->cmd[i])
+	{
+		free(root->cmd[i++]);
+	}
 	if (root->type == NODE_CMD)
 	{
-		free_tokens(root->ptr);
-		free(root->argv);
+		if (root->ptr)
+		{
+			//free_tokens(root->ptr);
+			root->ptr = NULL;
+		}
+		free(root->cmd);
+		root->cmd = NULL;
 	}
 	free(root);
 }
@@ -42,11 +49,17 @@ void print_ast(t_ast *node, int depth)
 
 	if (node->type == NODE_PIP)
 		printf("PIPE\n");
+	if (node->type == NODE_AND)
+		printf("AND\n");
+	if (node->type == NODE_OR)
+		printf("OR\n");
+	if (node->type == NODE_SUB)
+		printf("SUBSHELL\n");
 	else if (node->type == NODE_CMD)
 	{
 		printf("COMMAND:");
-		for (int i = 0; node->argv[i]; ++i)
-			printf(" %s", node->argv[i]);
+		for (int i = 0; node->cmd[i]; ++i)
+			printf(" %s", node->cmd[i]);
 		printf("\n");
 	}
 

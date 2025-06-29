@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 18:03:48 by noavetis          #+#    #+#             */
-/*   Updated: 2025/06/29 18:55:01 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/06/29 22:21:48 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ typedef enum e_node
 {
 	NODE_CMD,
 	NODE_PIP,
+	NODE_AND,
+	NODE_OR,
+	NODE_SUB,   // ()
+
+	
 	NODE_RDIR
 }	t_node_type;
 
@@ -35,23 +40,33 @@ typedef struct s_redirect
 {
 	t_redir_type		type;
 	char				*filename;
+
 	struct s_redirect	*next;
 }	t_redirect;
 
 typedef struct s_ast
 {
 	t_node_type			type;
-	char				**argv;      // for exceve
-	t_token				*ptr;
 	t_redirect			*redir_list;
+	t_token				*ptr;
+	
+	char				**cmd;      // for exceve
 	struct s_ast		*left;
 	struct s_ast		*right;
 }	t_ast;
 
-t_ast		*create_node(t_node_type type);
-t_ast		*parse_pipe(t_token *tokens);
-t_ast		*parse_cmd(t_token *tokens);
-void		free_tree(t_ast *root);
-void		print_ast(t_ast *node, int depth);
+t_ast	*create_node(t_node_type type, t_ast *right, t_ast *left);
+
+// Parse
+t_ast	*parse_expr(t_token **tokens);
+t_ast	*parse_and(t_token **tokens);
+t_ast	*parse_pipe(t_token **tokens);
+t_ast	*parse_factor(t_token **tokens);
+t_ast	*parse_cmd(t_token **tokens);
+
+
+
+void	free_tree(t_ast *root);
+void	print_ast(t_ast *node, int depth);
 
 #endif

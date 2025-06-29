@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 17:06:06 by noavetis          #+#    #+#             */
-/*   Updated: 2025/06/21 16:01:21 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/06/29 23:13:57 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,24 +24,17 @@ static t_token_type	token_type(const char *token)
 		return (OUT);
 	if (token[0] == '<')
 		return (IN);
+	if (token[0] == '&' && token[1] == '&')
+		return (AND);
+	if (token[0] == '|' && token[1] == '|')
+		return (OR);
 	if (token[0] == '|')
 		return (PIP);
+	if (token[0] == '(')
+		return (LPAR);
+	if (token[0] == ')')
+		return (RPAR);
 	return (WORD);
-}
-
-static t_token	*init_token(t_token_type type, const char *value)
-{
-	t_token	*token;
-
-	token = ft_calloc(1, sizeof(t_token));
-	if (!token)
-		error_handle("*TOKEN* Bad alloc!\n", 1);
-	token->type = type;
-	token->value = ft_strdup(value);
-	if (!token->value)
-		error_handle("*TOKEN VALUE* Bad alloc!\n", 1);
-	token->next = NULL;
-	return (token);
 }
 
 t_token	*lexer(const char *line)
@@ -56,7 +49,7 @@ t_token	*lexer(const char *line)
 	res = ft_split(line, ' ');
 	while (res && res[i])
 	{
-		temp = init_token(token_type(res[i]), res[i]);
+		temp = create_token(token_type(res[i]), res[i]);
 		push_token(&tokens, temp);
 		++i;
 	}
@@ -78,6 +71,21 @@ void	push_token(t_token	**tokens, t_token *temp)
 	}
 }
 
+t_token *create_token(t_token_type type, const char *value)
+{
+	t_token *token;
+
+	token = ft_calloc(1, sizeof(t_token));
+	if (!token)
+		error_handle("Bad alloc!\n", 1);
+	token->type = type;
+	token->value = ft_strdup(value);
+	if (!token->value)
+		error_handle("Bad alloc!\n", 1);
+	token->next = NULL;
+	return (token);
+}
+
 void	free_tokens(t_token *tokens)
 {
 	t_token	*temp;
@@ -88,7 +96,9 @@ void	free_tokens(t_token *tokens)
 	{
 		temp = tokens;
 		tokens = tokens->next;
+		temp->next = NULL;
 		free(temp->value);
+		temp->value = NULL;
 		free(temp);
 		temp = NULL;
 	}

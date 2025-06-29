@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 16:19:13 by noavetis          #+#    #+#             */
-/*   Updated: 2025/06/29 19:07:11 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/06/29 23:10:39 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	main(int argc, char **argv, char **envp)
 		print_tokens(token);
 	
 		
-		tree = parse_pipe(token);
+		tree = parse_expr(&token);
 		print_ast(tree, 0);
 
 		if (input[0] == 'e')
