@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 16:19:13 by noavetis          #+#    #+#             */
-/*   Updated: 2025/06/29 23:10:39 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/06/30 00:10:15 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 int	main(int argc, char **argv, char **envp)
 {
 	t_token	*token;
+	t_token	*free_token;
 	char	*input;
 	t_ast	*tree;
 
@@ -31,6 +32,7 @@ int	main(int argc, char **argv, char **envp)
 
 
 		token = lexer(input);
+		free_token = token;
 		print_tokens(token);
 	
 		
@@ -40,11 +42,13 @@ int	main(int argc, char **argv, char **envp)
 		if (input[0] == 'e')
 		{
 			free_tree(tree);
+			free_tokens(free_token);
 			free(input);
 			break;
 		}
 
 		free_tree(tree);
+		free_tokens(free_token);
 		free(input);
 	}
 

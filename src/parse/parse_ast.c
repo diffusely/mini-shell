@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 17:02:07 by noavetis          #+#    #+#             */
-/*   Updated: 2025/06/29 23:21:51 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/06/30 00:07:43 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ t_ast *create_node(t_node_type type, t_ast *right, t_ast *left)
 		error_handle("Bad alloc!\n", 1);
 	node->type = type;
 	node->cmd = NULL;
-	node->ptr = NULL;
 	node->left = left;
 	node->right = right;
 	return (node);
@@ -104,7 +103,6 @@ static void	init_node(t_ast **node, t_token *tokens, int count)
 	if (!(*node)->cmd)
 		error_handle("Bad alloc for cmd\n", 1);
 	i = 0;
-	(*node)->ptr = tokens;
 	while (tokens && i < count)
 	{
 		(*node)->cmd[i++] = ft_strdup(tokens->value);

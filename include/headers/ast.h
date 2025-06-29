@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 18:03:48 by noavetis          #+#    #+#             */
-/*   Updated: 2025/06/29 22:21:48 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/06/30 00:07:20 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ typedef struct s_ast
 {
 	t_node_type			type;
 	t_redirect			*redir_list;
-	t_token				*ptr;
 	
 	char				**cmd;      // for exceve
 	struct s_ast		*left;

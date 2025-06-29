@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 18:48:53 by noavetis          #+#    #+#             */
-/*   Updated: 2025/06/29 23:28:58 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/06/30 00:06:31 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,6 @@ void	free_tree(t_ast *root)
 	}
 	if (root->type == NODE_CMD)
 	{
-		if (root->ptr)
-		{
-			//free_tokens(root->ptr);
-			root->ptr = NULL;
-		}
 		free(root->cmd);
 		root->cmd = NULL;
 	}
