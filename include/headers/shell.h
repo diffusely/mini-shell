@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 20:09:57 by noavetis          #+#    #+#             */
-/*   Updated: 2025/06/27 19:30:06 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/06/29 18:55:38 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "ft_printf.h"
 # include "get_next_line.h"
 
-char	*get_path(t_pip *pip, char *cmd);
+// char	*get_path(t_pip *pip, char *cmd);
 char	*readline(const char *name);
 
 #endif

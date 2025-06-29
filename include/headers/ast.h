@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 18:03:48 by noavetis          #+#    #+#             */
-/*   Updated: 2025/06/21 16:21:07 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/06/29 18:55:01 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_ast
 {
 	t_node_type			type;
 	char				**argv;      // for exceve
+	t_token				*ptr;
 	t_redirect			*redir_list;
 	struct s_ast		*left;
 	struct s_ast		*right;

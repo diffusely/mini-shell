@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_ast.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 17:02:07 by noavetis          #+#    #+#             */
-/*   Updated: 2025/06/27 16:30:02 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/06/29 19:11:59 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ t_ast	*parse_pipe(t_token *tokens)
 		right_node = parse_cmd(left_tokens);
 		new_node = ft_calloc(1, sizeof(t_ast));
 		new_node->type = NODE_PIP;
+		new_node->ptr = NULL;
 		new_node->left = left_node;
 		new_node->right = right_node;
 		left_node = new_node;
@@ -61,6 +62,7 @@ static void	init_node(t_ast **node, t_token *tokens)
 	int	i;
 
 	i = 0;
+	(*node)->ptr = tokens;
 	while (tokens && tokens->type != PIP)
 	{
 		(*node)->argv[i++] = ft_strdup(tokens->value);
@@ -83,6 +85,7 @@ t_ast	*parse_cmd(t_token *tokens)
 		error_handle("Bad alloc!\n", 1);
 	count = 0;
 	head = tokens;
+	node->ptr = tokens;
 	while (head && head->type != PIP)
 	{
 		++count;
