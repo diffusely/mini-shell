@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 17:02:07 by noavetis          #+#    #+#             */
-/*   Updated: 2025/06/30 00:07:43 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/06/30 00:53:27 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,5 +132,5 @@ t_ast	*parse_cmd(t_token **tokens)
 	init_node(&node, *tokens, count);
 	while (*tokens && (*tokens)->type == WORD)
 		*tokens = (*tokens)->next;
-	return node;
+	return (node);
 }
