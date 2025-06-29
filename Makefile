@@ -5,6 +5,7 @@ LIBFT		= lib/libft/
 
 INC_LIB		= include/lib_headers/
 INC_HEADER	= include/headers/
+READLINE_DIR = /opt/homebrew/opt/readline
 
 SRC_DIR		= src/
 
@@ -25,16 +26,9 @@ SRC 		= $(SRC_DIR)main.c \
 
 OBJ			= $(SRC:.c=.o)
 
-READLINE_DIR = /opt/homebrew/opt/readline
 
-UNAME_S := $(shell uname -s)
-ifeq ($(UNAME_S),Darwin)
-	LIB_FLAGS += -L$(READLINE_DIR)/lib
-	IFLAG += -I$(READLINE_DIR)/include
-endif
-
-LIB_FLAGS	+= -L$(LIBFT) -lft -L$(PRINTF) -lftprintf -lreadline -lhistory
-IFLAG		+= -I$(INC_HEADER) -I$(INC_LIB) -I$(LIBFT) -I$(PRINTF)
+LIB_FLAGS	+= -L$(LIBFT) -lft -L$(PRINTF) -L$(READLINE_DIR)/lib -lftprintf -lreadline -lhistory
+IFLAG		+= -I$(INC_HEADER) -I$(INC_LIB) -I$(LIBFT) -I$(PRINTF) -I$(READLINE_DIR)/include
 CFLAG		= -Wall -Wextra -Werror -g
 
 CC			= cc
