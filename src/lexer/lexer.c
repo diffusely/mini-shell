@@ -3,57 +3,109 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 17:06:06 by noavetis          #+#    #+#             */
-/*   Updated: 2025/06/30 00:02:58 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/07/01 19:51:56 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-static t_token_type	token_type(const char *token)
+static t_token_type	token_type(char first, char second)
 {
-	if (!token)
+	if (first == '\0')
 		return (END);
-	if (token[0] == '<' && token[1] == '<')
+	if (first == '<' && second == '<')
 		return (HEREDOC);
-	if (token[0] == '>' && token[1] == '>')
+	if (first == '>' && second == '>')
 		return (APPEND);
-	if (token[0] == '>')
-		return (OUT);
-	if (token[0] == '<')
-		return (IN);
-	if (token[0] == '&' && token[1] == '&')
+	if (first == '&' && second == '&')
 		return (AND);
-	if (token[0] == '|' && token[1] == '|')
+	if (first == '|' && second == '|')
 		return (OR);
-	if (token[0] == '|')
+	if (first == '>')
+		return (OUT);
+	if (first == '<')
+		return (IN);
+	if (first == '|')
 		return (PIP);
-	if (token[0] == '(')
+	if (first == '(')
 		return (LPAR);
-	if (token[0] == ')')
+	if (first == ')')
 		return (RPAR);
 	return (WORD);
 }
 
+static char	*token_value(t_token_type type)
+{
+	char*	res;
+
+	res = NULL;
+    if (type == END)
+        res = ft_strdup("");
+    else if (type == HEREDOC)
+        res = ft_strdup("<<");
+    else if (type == APPEND)
+        res = ft_strdup(">>");
+    else if (type == AND)
+        res = ft_strdup("&&");
+    else if (type == OR)
+        res = ft_strdup("||");
+    else if (type == OUT)
+        res = ft_strdup(">");
+    else if (type == IN)
+        res = ft_strdup("<");
+    else if (type == PIP)
+        res = ft_strdup("|");
+    else if (type == LPAR)
+        res = ft_strdup("(");
+    else if (type == RPAR)
+        res = ft_strdup(")");
+    return (res);
+}
+
+static char	*word_dup(int *i, const char *line)
+{
+	int	start;
+
+	start = *i;
+	while (line[*i] && token_type(line[*i], line[*i + 1]) == WORD)
+		++(*i);
+	return (ft_substr(line, start, *i - start));
+}
+
 t_token	*lexer(const char *line)
 {
-	t_token	*tokens;
-	t_token	*temp;
-	char	**res;
-	int		i;
+	t_token			*tokens;
+	t_token			*temp;
+	t_token_type	type;
+	char			*res;
+	int				i;
 
+	if (!line)
+		return (NULL);
 	i = 0;
 	tokens = NULL;
-	res = ft_split(line, ' ');
-	while (res && res[i])
+	while (line[i])
 	{
-		temp = create_token(token_type(res[i]), res[i]);
-		push_token(&tokens, temp);
-		++i;
+		type = token_type(line[i], line[i + 1]);
+		if (type == WORD)
+			res = word_dup(&i, line);
+		else if (type == HEREDOC || type == APPEND || type == AND || type == OR)
+		{
+			res = token_value(type);
+			i += 2;
+		}
+		else
+		{
+			res = token_value(type);
+			++i;
+		}
+		temp = create_token(type, res);
+		push_token(&tokens, temp);		
 	}
-	return (free_split(res), tokens);
+	return (tokens);
 }
 
 void	push_token(t_token	**tokens, t_token *temp)
@@ -71,7 +123,7 @@ void	push_token(t_token	**tokens, t_token *temp)
 	}
 }
 
-t_token *create_token(t_token_type type, const char *value)
+t_token *create_token(t_token_type type, char *value)
 {
 	t_token *token;
 
@@ -79,9 +131,9 @@ t_token *create_token(t_token_type type, const char *value)
 	if (!token)
 		error_handle("Bad alloc!\n", 1);
 	token->type = type;
-	token->value = ft_strdup(value);
-	if (!token->value)
+	if (!value)
 		error_handle("Bad alloc!\n", 1);
+	token->value = value;
 	token->next = NULL;
 	return (token);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:41:41 by noavetis          #+#    #+#             */
-/*   Updated: 2025/06/29 19:35:38 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/07/01 19:14:11 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct s_token
 }	t_token;
 
 void		push_token(t_token	**tokens, t_token *temp);
-t_token		*create_token(t_token_type type, const char *value);
+t_token		*create_token(t_token_type type, char *value);
 void		free_tokens(t_token *tokens);
 t_token		*lexer(const char *line);
 void		print_tokens(t_token *lexer);

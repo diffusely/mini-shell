@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_ast.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 17:02:07 by noavetis          #+#    #+#             */
-/*   Updated: 2025/06/30 00:53:27 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/06/30 16:45:15 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ t_ast *parse_factor(t_token **tokens)
 			error_handle("Missing )\n", 1);
 		*tokens = (*tokens)->next;
 		node = create_node(NODE_SUB, NULL, sub);
-		return node;
+		return (node);
 	}
 	return parse_cmd(tokens);
 }
