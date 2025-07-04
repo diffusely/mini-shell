@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 18:48:53 by noavetis          #+#    #+#             */
-/*   Updated: 2025/06/30 00:06:31 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/07/04 20:04:22 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	free_tree(t_ast *root)
 	free_tree(root->right);
 
 	int i = 0;
-	while (root->type == NODE_CMD &&  root->cmd && root->cmd[i])
+	while (root->type == NODE_CMD && root->cmd && root->cmd[i])
 	{
 		free(root->cmd[i++]);
 	}

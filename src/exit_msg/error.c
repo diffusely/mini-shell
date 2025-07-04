@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 17:37:14 by noavetis          #+#    #+#             */
-/*   Updated: 2025/06/18 17:37:24 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/07/04 21:42:54 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	error_print(const char *cmd, const char *msg, int flag)
 {
-	ft_printf("%s: %s", cmd, msg);
+	printf("%s: %s", cmd, msg);
 	if (flag)
 		perror(msg);
 	exit(EXIT_FAILURE);

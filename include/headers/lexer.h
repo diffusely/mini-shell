@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:41:41 by noavetis          #+#    #+#             */
-/*   Updated: 2025/07/01 19:14:11 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/07/04 21:44:20 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 # define LEXER_H
 
 # include "libft.h"
-# include "ft_printf.h"
 # include "free.h"
 # include "message.h"
+# include "shell.h"
 
 typedef enum e_token_type
 {

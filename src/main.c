@@ -6,12 +6,11 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 16:19:13 by noavetis          #+#    #+#             */
-/*   Updated: 2025/06/30 00:37:50 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/07/04 21:44:58 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ast.h"
-#include "ft_printf.h"
 #include "lexer.h"
 #include "shell.h"
 

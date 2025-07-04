@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 17:06:06 by noavetis          #+#    #+#             */
-/*   Updated: 2025/07/01 19:51:56 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/07/04 21:42:27 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ static char	*word_dup(int *i, const char *line)
 	int	start;
 
 	start = *i;
-	while (line[*i] && token_type(line[*i], line[*i + 1]) == WORD)
+	while (line[*i] && line[*i] != ' ' &&
+		token_type(line[*i], line[*i + 1]) == WORD)
 		++(*i);
 	return (ft_substr(line, start, *i - start));
 }
@@ -89,6 +90,10 @@ t_token	*lexer(const char *line)
 	tokens = NULL;
 	while (line[i])
 	{
+		while (line[i] && ft_isspace(line[i]))
+			++i;
+		if (!line[i])
+			break ;
 		type = token_type(line[i], line[i + 1]);
 		if (type == WORD)
 			res = word_dup(&i, line);
@@ -159,7 +164,7 @@ void	print_tokens(t_token *lexer)
 {
 	while (lexer)
 	{
-		ft_printf("%d -> %s\n", lexer->type, lexer->value);
+		printf("%d -> %s\n", lexer->type, lexer->value);
 		lexer = lexer->next;
 	}
 }

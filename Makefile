@@ -1,6 +1,5 @@
 NAME		= minishell
 
-PRINTF		= lib/ft_printf/
 LIBFT		= lib/libft/
 
 INC_LIB		= include/lib_headers/
@@ -20,6 +19,7 @@ SRC 		= $(SRC_DIR)main.c \
 			  $(LEX_DIR)lexer.c \
 			  $(FREE_DIR)free.c \
 			  $(SHELL_DIR)readline.c \
+			  $(SHELL_DIR)utils.c \
 			  $(MSG_DIR)error.c \
 			  $(AST_DIR)ast.c \
 			  $(PARSE_DIR)parse_ast.c
@@ -27,15 +27,14 @@ SRC 		= $(SRC_DIR)main.c \
 OBJ			= $(SRC:.c=.o)
 
 
-LIB_FLAGS	= -L$(LIBFT) -lft -L$(PRINTF) -L$(READLINE_DIR)/lib -lftprintf -lreadline -lhistory
+LIB_FLAGS	= -L$(LIBFT) -lft -L$(READLINE_DIR)/lib -lreadline -lhistory
 IFLAG		= -I$(INC_HEADER) -I$(INC_LIB) -I$(LIBFT) -I$(PRINTF) -I$(READLINE_DIR)/include
-CFLAG		= -Wall -Wextra -Werror -g
+CFLAG		= -Wall -Wextra -Werror -fsanitize=address,undefined -g
 
 CC			= cc
 RM			= rm -rf
 
 $(NAME):	$(OBJ)
-			make -C $(PRINTF)
 			make -C $(LIBFT)
 			$(CC) $(CFLAG) $(OBJ) $(LIB_FLAGS) -o $(NAME)
 
@@ -45,12 +44,10 @@ $(NAME):	$(OBJ)
 all:		$(NAME)
 
 clean:				
-			make -C $(PRINTF) clean
 			make -C $(LIBFT) clean
 			$(RM) $(OBJ)
 
 fclean: 	clean
-			make -C $(PRINTF) fclean
 			make -C $(LIBFT) fclean
 			$(RM) $(NAME)
 
