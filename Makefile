@@ -18,8 +18,7 @@ PARSE_DIR	= $(SRC_DIR)parse/
 SRC 		= $(SRC_DIR)main.c \
 			  $(LEX_DIR)lexer.c \
 			  $(FREE_DIR)free.c \
-			  $(SHELL_DIR)readline.c \
-			  $(SHELL_DIR)utils.c \
+			  $(SHELL_DIR)readline.c\
 			  $(MSG_DIR)error.c \
 			  $(AST_DIR)ast.c \
 			  $(PARSE_DIR)parse_ast.c
@@ -27,14 +26,15 @@ SRC 		= $(SRC_DIR)main.c \
 OBJ			= $(SRC:.c=.o)
 
 
-LIB_FLAGS	= -L$(LIBFT) -lft -L$(READLINE_DIR)/lib -lreadline -lhistory
-IFLAG		= -I$(INC_HEADER) -I$(INC_LIB) -I$(LIBFT) -I$(PRINTF) -I$(READLINE_DIR)/include
-CFLAG		= -Wall -Wextra -Werror -fsanitize=address,undefined -g
+LIB_FLAGS	= -L$(LIBFT) -lft -L$(READLINE_DIR)/lib -lreadline -lhistory -lncurses
+IFLAG		= -I$(INC_HEADER) -I$(INC_LIB) -I$(LIBFT) -I$(READLINE_DIR)/include
+CFLAG		= -Wall -Wextra -Werror -g
 
 CC			= cc
 RM			= rm -rf
 
 $(NAME):	$(OBJ)
+
 			make -C $(LIBFT)
 			$(CC) $(CFLAG) $(OBJ) $(LIB_FLAGS) -o $(NAME)
 

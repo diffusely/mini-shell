@@ -3,14 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vmakarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 17:06:06 by noavetis          #+#    #+#             */
-/*   Updated: 2025/07/04 21:42:27 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/07/05 17:43:22 by vmakarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
+
+int	ft_isspace(char c)
+{
+	return ((c >= 9 && c <= 13) || c == ' ');
+}
 
 static t_token_type	token_type(char first, char second)
 {
