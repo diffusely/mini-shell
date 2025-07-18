@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 18:48:53 by noavetis          #+#    #+#             */
-/*   Updated: 2025/07/04 20:04:22 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/07/18 16:10:02 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	free_tree(t_ast *root)
 	if (!root)
 		return ;
 
-	printf("free_ast: type %d\n", root->type);
+	//printf("free_ast: type %d\n", root->type);
 	free_tree(root->left);
 	free_tree(root->right);
 

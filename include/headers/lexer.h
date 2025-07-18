@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmakarya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:41:41 by noavetis          #+#    #+#             */
-/*   Updated: 2025/07/05 17:37:48 by vmakarya         ###   ########.fr       */
+/*   Updated: 2025/07/18 17:05:53 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,6 @@ t_token		*create_token(t_token_type type, char *value);
 void		free_tokens(t_token *tokens);
 t_token		*lexer(const char *line);
 void		print_tokens(t_token *lexer);
-int			ft_isspace(char c);
+
 
 #endif

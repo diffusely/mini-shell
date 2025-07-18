@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 17:34:02 by noavetis          #+#    #+#             */
-/*   Updated: 2025/05/10 01:37:29 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/07/18 17:05:14 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 
 # include "get_next_line.h"
+# include <stdbool.h>
 # include <unistd.h>
 # include <stdlib.h>
 
@@ -59,6 +60,7 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstnew(void *content);
 t_list	*ft_lstlast(t_list *lst);
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+char	*ft_strncpy(char *dest, const char *src, size_t n);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_bzero(void *s, size_t n);
 long	ft_atoi(const char *str);
@@ -69,5 +71,6 @@ int		ft_isdigit(int c);
 int		ft_isascii(int c);
 int		ft_isalpha(int c);
 int		ft_isalnum(int c);
+bool	ft_isspace(char c);
 
 #endif

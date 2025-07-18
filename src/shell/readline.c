@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   readline.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmakarya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 20:12:28 by noavetis          #+#    #+#             */
-/*   Updated: 2025/07/05 17:52:48 by vmakarya         ###   ########.fr       */
+/*   Updated: 2025/07/18 17:59:20 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,56 +21,57 @@ void sigint_handler(int signum)
 	rl_redisplay();
 }
 
-char	*ft_strncpy(char *dest, const char *src, size_t n)
+int	open_fd()
 {
-	size_t	i = 0;
+	int	fd;
 
-	while (src[i] && i < n)
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	while (i < n)
-	{
-		dest[i] = '\0';
-		i++;
-	}
-	return (dest);
+	fd = open("output.txt", O_RDWR | O_CREAT | O_APPEND, 0644);
+	if (fd == -1)
+		error_handle("", 0);
+	return (fd);
 }
 
-int open_fd(int fd)
+bool	is_history(char *input)
 {
-		fd = open("output.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		if (fd == -1)
-		{
-			perror("open failed");
-			return 1;
-		}
-	return (0); 
+	if (!input)
+		return (false);
+	while (*input && ft_isspace(*input))
+		input++;
+	if (!ft_strncmp(input, "history", 7))
+		input += 7;
+	while (*input && ft_isspace(*input))
+		input++;
+	if (*input)
+		return (false);
+	return (true);
 }
 
-void history_settings(int fd, char *input, char *history, int history_size)
+void	print_history()
 {
-	size_t input_len = ft_strlen(input);
-		char *new_history = malloc(history_size + input_len + 2);
-		if (!new_history)
-			return ;
-		if (history)
-		{
-			ft_strncpy(new_history, history, history_size);
-			free(history);
-		}
-		if (ft_strcmp(input, "history"))
-			ft_strncpy(new_history + history_size, input, input_len);
-		new_history[history_size + input_len] = '\n';
-		new_history[history_size + input_len + 1] = '\0';
-		history = new_history;
-		history_size += input_len + 1;
-		if (!ft_strcmp(input, "history"))
-			printf("%s", history);
-		else if (*input)
-		{
-			write(fd, input, input_len);
-			write(fd, "\n", 1);
-		}
+	int		fd;
+	int		count;
+	char	*str;
+
+	count = 1;
+	fd = open_fd();
+	str = get_next_line(fd);
+	while (str)
+	{
+		ft_putnbr_fd(count++, 1);
+		printf(" %s", str);
+		free(str);
+		str = get_next_line(fd);
+	}
+	get_next_line(-1);
+	close(fd);
+}
+
+void	add_history(const char *input)
+{
+	int		fd;
+
+	fd = open_fd();
+	write(fd, input, ft_strlen(input));
+	write(fd, "\n", 1);
+	close(fd);
 }
