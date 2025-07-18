@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 18:03:48 by noavetis          #+#    #+#             */
-/*   Updated: 2025/07/18 17:56:46 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/07/18 20:25:23 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define AST_H
 
 # include "lexer.h"
-# include "free.h"
 
 typedef enum e_node
 {
@@ -65,7 +64,7 @@ t_ast	*parse_cmd(t_token **tokens);
 
 
 
-void	free_tree(t_ast *root);
+
 void	print_ast(t_ast *node, int depth);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 17:06:06 by noavetis          #+#    #+#             */
-/*   Updated: 2025/07/18 17:05:59 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/07/18 20:17:41 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,23 +141,6 @@ t_token *create_token(t_token_type type, char *value)
 	token->value = value;
 	token->next = NULL;
 	return (token);
-}
-
-void	free_tokens(t_token *tokens)
-{
-	t_token	*temp;
-
-	if (!tokens)
-		return ;
-	while (tokens)
-	{
-		temp = tokens;
-		tokens = tokens->next;
-		free(temp->value);
-		temp->value = NULL;
-		free(temp);
-		temp = NULL;
-	}
 }
 
 void	print_tokens(t_token *lexer)

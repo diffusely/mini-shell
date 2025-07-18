@@ -6,13 +6,13 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 20:12:28 by noavetis          #+#    #+#             */
-/*   Updated: 2025/07/18 17:59:20 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/07/18 19:07:39 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void sigint_handler(int signum)
+void	sigint_handler(int signum)
 {
 	(void)signum;
 	write(1, "\n", 1);
@@ -25,9 +25,12 @@ int	open_fd()
 {
 	int	fd;
 
-	fd = open("output.txt", O_RDWR | O_CREAT | O_APPEND, 0644);
+	fd = open("history.txt", O_RDWR | O_CREAT | O_APPEND, 0644);
 	if (fd == -1)
+	{
+		
 		error_handle("", 0);
+	}
 	return (fd);
 }
 

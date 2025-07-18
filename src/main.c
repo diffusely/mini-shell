@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 16:19:13 by noavetis          #+#    #+#             */
-/*   Updated: 2025/07/18 17:27:15 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/07/18 19:15:20 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,15 @@ int	main(int argc, char **argv, char **envp)
 		token = lexer(input);
 		free_token = token;
 		tree = parse_expr(&token);
-		print_ast(tree, 0);
+		
+		//print_ast(tree, 0);
 		
 		if (!ft_strcmp(input, "e"))
 		{
-			free_tree(tree);
-			free_tokens(free_token);
-			free(input);
+			free_all(tree, input, free_token);
 			break;
 		}
-		free_tree(tree);
-		free_tokens(free_token);
-		free(input);
+		free_all(tree, input, free_token);
 	}
 	return (0);
 }

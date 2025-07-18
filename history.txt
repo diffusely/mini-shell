@@ -1,0 +1,9 @@
+ls | pwd
+cd 
+history
+la
+pwd
+history
+history
+history
+e

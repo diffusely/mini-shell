@@ -6,33 +6,11 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 18:48:53 by noavetis          #+#    #+#             */
-/*   Updated: 2025/07/18 16:10:02 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/07/18 20:18:55 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ast.h"
-
-void	free_tree(t_ast *root)
-{
-	if (!root)
-		return ;
-
-	//printf("free_ast: type %d\n", root->type);
-	free_tree(root->left);
-	free_tree(root->right);
-
-	int i = 0;
-	while (root->type == NODE_CMD && root->cmd && root->cmd[i])
-	{
-		free(root->cmd[i++]);
-	}
-	if (root->type == NODE_CMD)
-	{
-		free(root->cmd);
-		root->cmd = NULL;
-	}
-	free(root);
-}
 
 void print_ast(t_ast *node, int depth)
 {
