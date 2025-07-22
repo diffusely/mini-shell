@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vmakarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 19:36:19 by noavetis          #+#    #+#             */
-/*   Updated: 2025/07/22 21:30:21 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/07/22 22:46:42 by vmakarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "ast.h"
 #include "lexer.h"
@@ -30,7 +29,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	(void)envp;
-
+	printf("porcnakan\n");
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, SIG_IGN);
 
@@ -67,7 +66,7 @@ int	main(int argc, char **argv, char **envp)
 		{
 			free_all(tree, input, free_token);
 			break;
-		}
+		}   
 		free_all(tree, input, free_token);
 	}
 	return (0);
