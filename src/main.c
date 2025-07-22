@@ -3,19 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-<<<<<<< HEAD
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/12 16:19:13 by noavetis          #+#    #+#             */
-/*   Updated: 2025/07/22 00:00:17 by noavetis         ###   ########.fr       */
-=======
-/*   By: vmakarya <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/12 16:19:13 by noavetis          #+#    #+#             */
-/*   Updated: 2025/07/22 15:48:52 by vmakarya         ###   ########.fr       */
->>>>>>> 9b8e807b3616ce9a4df3fdd1432f4c0a08c5ed05
+/*   Created: 2025/07/22 19:36:19 by noavetis          #+#    #+#             */
+/*   Updated: 2025/07/22 19:42:07 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "ast.h"
 #include "lexer.h"
@@ -67,13 +61,10 @@ int	main(int argc, char **argv, char **envp)
 		free_token = token;
 		tree = parse_expr(&token);
 		
-<<<<<<< HEAD
 		print_ast(tree, 0);
 		
-=======
-		//print_ast(tree, 0);
+		print_ast(tree, 0);
 
->>>>>>> 9b8e807b3616ce9a4df3fdd1432f4c0a08c5ed05
 		if (!ft_strcmp(input, "e"))
 		{
 			free_all(tree, input, free_token);
