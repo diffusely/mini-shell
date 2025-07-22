@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vmakarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 16:19:13 by noavetis          #+#    #+#             */
-/*   Updated: 2025/07/18 19:15:20 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/07/22 15:48:52 by vmakarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ast.h"
 #include "lexer.h"
 #include "shell.h"
+#include "free.h"
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -21,6 +22,10 @@ int	main(int argc, char **argv, char **envp)
 	char	*input;
 	t_ast	*tree;
 
+	token = NULL;
+	free_token = NULL;
+	input = NULL;
+	tree = NULL;
 	(void)argc;
 	(void)argv;
 	(void)envp;
@@ -28,19 +33,24 @@ int	main(int argc, char **argv, char **envp)
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, SIG_IGN);
 
-	
 	while (1)
 	{
 		input = readline("minishell$ ");
 
-		
 		if (!input)
 		{
 			write(1, "exit\n", 5);
 			break;
 		}
 
-		
+		if (!exec_pwd(input))
+		{
+			free_all(tree, input, free_token);
+			break ;
+		}
+ 
+		exec_cd(input);
+
 		if (*input && is_history(input))
 			print_history();
 		add_history(input);
@@ -50,7 +60,7 @@ int	main(int argc, char **argv, char **envp)
 		tree = parse_expr(&token);
 		
 		//print_ast(tree, 0);
-		
+
 		if (!ft_strcmp(input, "e"))
 		{
 			free_all(tree, input, free_token);
