@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 18:03:48 by noavetis          #+#    #+#             */
-/*   Updated: 2025/07/18 20:25:23 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/07/22 21:41:44 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define AST_H
 
 # include "lexer.h"
+
+//typedef struct s_token t_token;
 
 typedef enum e_node
 {

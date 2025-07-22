@@ -1,0 +1,30 @@
+pwd 
+pwd
+pwd     
+pwd
+pwd   
+pwd      
+               pwd
+                                                           pwd 
+cd test/
+pwd
+ls
+pwd
+pwd
+pwd
+pwd
+pwd
+pwd
+e
+ls | pwd
+ls 
+pwd
+e
+ls | pwd
+ls
+ls
+slslsl
+slsls
+lsls
+ls
+pwd

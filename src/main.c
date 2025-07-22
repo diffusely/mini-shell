@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 19:36:19 by noavetis          #+#    #+#             */
-/*   Updated: 2025/07/22 19:42:07 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/07/22 21:30:21 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ int	main(int argc, char **argv, char **envp)
 		exec_cd(input);
 
 		if (*input && is_history(input))
-			print_history();
-		add_history(input);
+			print_history(tree, input, token);
+		add_history_input(tree, input, token);
 		
 		token = lexer(input);
 		print_tokens(token);
@@ -63,8 +63,6 @@ int	main(int argc, char **argv, char **envp)
 		
 		print_ast(tree, 0);
 		
-		print_ast(tree, 0);
-
 		if (!ft_strcmp(input, "e"))
 		{
 			free_all(tree, input, free_token);
