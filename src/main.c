@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 16:19:13 by noavetis          #+#    #+#             */
-/*   Updated: 2025/07/18 19:15:20 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/07/22 00:00:17 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ast.h"
 #include "lexer.h"
 #include "shell.h"
+#include "free.h"
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -46,10 +47,11 @@ int	main(int argc, char **argv, char **envp)
 		add_history(input);
 		
 		token = lexer(input);
+		print_tokens(token);
 		free_token = token;
 		tree = parse_expr(&token);
 		
-		//print_ast(tree, 0);
+		print_ast(tree, 0);
 		
 		if (!ft_strcmp(input, "e"))
 		{

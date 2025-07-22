@@ -7,3 +7,21 @@ history
 history
 history
 e
+ls
+ls|pwd
+echo "hello world"
+echo "hello world "how are you""
+echo how are you
+history
+echo "hello world" how are 'you'""
+echo "hello world "how are you""
+echo "hello world "how "are you"
+echo "hello world "how areyou "" |
+echo "hellow owrld "how are you " |
+echo "hh : " 
+echo wqwe
+echo "hello world"
+echo "hello world "how are you  "  "    |
+echo "hello world "''    | echo
+ls|pwd|cd
+echo "hello"    a|
