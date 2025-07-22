@@ -21,7 +21,9 @@ SRC 		= $(SRC_DIR)main.c \
 			  $(SHELL_DIR)readline.c\
 			  $(MSG_DIR)error.c \
 			  $(AST_DIR)ast.c \
-			  $(PARSE_DIR)parse_ast.c
+			  $(PARSE_DIR)parse_ast.c \
+			  $(SHELL_DIR)pwd.c \
+			  $(SHELL_DIR)cd.c
 
 OBJ			= $(SRC:.c=.o)
 

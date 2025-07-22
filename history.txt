@@ -1,12 +1,14 @@
-ls | pwd
-cd 
+aksmv
+adf;kv m;kdamv f
+a;dkfm ;mad 
 history
-la
-pwd
-history
-history
+ls
+adf ,
+adfvfd 
+history.txt 
 history
 e
+<<<<<<< HEAD
 ls
 ls|pwd
 echo "hello world"
@@ -25,3 +27,199 @@ echo "hello world "how are you  "  "    |
 echo "hello world "''    | echo
 ls|pwd|cd
 echo "hello"    a|
+=======
+asfv
+adfvadfb
+adfb
+e
+e
+lkefv
+krm em 
+pwd
+pwd
+      pwd
+e
+dac
+adfsafsadf
+e
+sfv
+dfbasfd
+asdfasdf
+pwd
+e
+;ksdmf;sd
+pwd
+pwd
+e
+savasv
+asfvasfv
+pwd
+pwd
+e
+sdфас
+асдфсадф
+пшд
+pwd
+e
+savsd
+e
+asdasd
+asdvdasv
+sadvsadv
+sadvsav
+pwd
+history
+e
+sdvasdv
+sadvasdv
+pwd
+history
+e
+asdfadsf
+afvadfv
+aer
+wf
+wef
+w
+f
+av
+pwd
+history
+clear
+e
+lknasklv
+asd;vma;ksfdmv
+asv;na;kdfmv 
+history
+         history
+e
+alsndl
+;akdsmv;kmdfa v
+;akdfb ;
+pwd
+cd ..
+pwd
+e
+pwd
+ksmv;msv
+;kdmf b;m
+cd ..
+e
+klasndvl
+lkads fv
+lkasnvl
+cd ..
+pwd
+e
+sadva
+pwd
+cd ..
+e
+cd ..
+pwd
+e
+cd ..
+e
+;smd v;lsmd
+sd; m;lsm 
+pwd
+cd ..
+e
+cd ..
+pwd
+e
+cd ..
+pwd
+e
+       pwd
+e
+pwd
+adcdsц
+
+lsnkd v
+;sm ;vm
+pwd
+pwd
+pwd
+
+
+
+pwd
+
+pwd
+s;dlmvsd
+
+pwd
+pwd
+e
+pwd
+s;dmc
+;sm afv;msafv
+a;skm v;m
+e
+pwd
+cd ..
+pwd
+cd ..
+pwd
+e
+pwd
+e
+pwd
+pwd
+e
+pwd
+lnsd ln
+pwd
+e
+cd ..
+pwd
+e
+cd ..
+pwd
+pwd
+e
+pwd
+cd ..
+pwd
+cd ..
+pwd
+
+pwd
+cd ..
+pwd
+e
+pwd
+cd adsd
+pwd
+asdasd
+sadfasdf
+cd ..
+pwd
+e
+pwd
+pwd
+e
+pwd
+pwd
+pwd
+pwd
+pwd
+e
+pwd
+pwd
+pwd
+pwd
+pwd
+pwd
+cd asdasd
+pwd
+pwd
+cd
+e
+pwd
+cd Desktop/mini-shell/
+pwd
+pwd
+pwd
+>>>>>>> 9b8e807b3616ce9a4df3fdd1432f4c0a08c5ed05
