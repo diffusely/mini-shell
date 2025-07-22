@@ -23,14 +23,15 @@ SRC 		= $(SRC_DIR)main.c \
 			  $(AST_DIR)ast.c \
 			  $(PARSE_DIR)parse_ast.c \
 			  $(SHELL_DIR)commands.c \
-			  $(SHELL_DIR)history.c
+			  $(SHELL_DIR)history.c \
+			  $(SHELL_DIR)utils.c
 
 OBJ			= $(SRC:.c=.o)
 
 
 LIB_FLAGS	= -L$(LIBFT) -lft -L$(READLINE_DIR)/lib -lreadline -lhistory -lncurses
 IFLAG		= -I$(INC_HEADER) -I$(INC_LIB) -I$(LIBFT) -I$(READLINE_DIR)/include
-CFLAG		= # -Wall -Wextra -Werror -g
+CFLAG		=  -Wall -Wextra -Werror -g
 
 CC			= cc
 RM			= rm -rf

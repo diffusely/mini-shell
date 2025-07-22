@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 20:09:57 by noavetis          #+#    #+#             */
-/*   Updated: 2025/07/22 22:58:06 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/07/22 23:16:01 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,8 @@ int		open_fd(t_ast *tree, char *input, t_token *token);
 // commands
 int		exec_pwd(const char *path);
 int		exec_cd(const char *path);
+
+// functions
+int		is_space_or_newline(char *input);
 
 #endif

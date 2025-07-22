@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmakarya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 19:36:19 by noavetis          #+#    #+#             */
-/*   Updated: 2025/07/22 22:46:42 by vmakarya         ###   ########.fr       */
+/*   Updated: 2025/07/22 23:16:35 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	(void)envp;
-	printf("porcnakan\n");
+
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, SIG_IGN);
 
@@ -43,6 +43,11 @@ int	main(int argc, char **argv, char **envp)
 			break;
 		}
 
+		if (is_space_or_newline(input))
+		{
+			free(input);
+			continue ;
+		}
 		if (!exec_pwd(input))
 		{
 			free_all(tree, input, free_token);

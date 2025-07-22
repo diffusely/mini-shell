@@ -29,3 +29,15 @@ lsls
 ls
 pwd
 pwd
+ls
+pwd
+c
+ls
+history
+history
+ls 
+pwd
+lsw
+pwd
+pwd
+e
