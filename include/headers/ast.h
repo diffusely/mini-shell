@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 18:03:48 by noavetis          #+#    #+#             */
-/*   Updated: 2025/07/22 21:41:44 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/07/22 22:57:39 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "lexer.h"
 
-//typedef struct s_token t_token;
+typedef struct s_token t_token;
 
 typedef enum e_node
 {

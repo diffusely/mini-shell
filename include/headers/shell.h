@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 20:09:57 by noavetis          #+#    #+#             */
-/*   Updated: 2025/07/22 21:26:04 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/07/22 22:58:06 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@
 # include <signal.h>
 # include <fcntl.h>
 # include <unistd.h>
+
+
+typedef struct s_ast t_ast;
+typedef struct s_token t_token;
 
 void	sigint_handler(int signum);
 
