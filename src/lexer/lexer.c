@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 17:06:06 by noavetis          #+#    #+#             */
-/*   Updated: 2025/07/22 18:42:57 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/07/22 23:42:57 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static t_token_type	token_type(char first, char second)
 static char	*token_value(t_token_type type)
 {
 	char	*res;
-	
+
 	res = NULL;
 	if (type == END)
 		res = ft_strdup("");
@@ -77,8 +77,8 @@ static char	*word_dup(int *i, const char *line)
 	}
 	else
 	{
-		while (line[*i] && line[*i] != ' ' &&
-			token_type(line[*i], line[*i + 1]) == WORD)
+		while (line[*i] && line[*i] != ' '
+			&& token_type(line[*i], line[*i + 1]) == WORD)
 			++(*i);
 	}
 	return (ft_substr(line, start, *i - start));
@@ -103,8 +103,6 @@ t_token	*lexer(const char *line)
 		if (!line[i])
 			break ;
 		type = token_type(line[i], line[i + 1]);
-		
-		
 		if (type == WORD)
 			res = word_dup(&i, line);
 		else if (type == HEREDOC || type == APPEND || type == AND || type == OR)
@@ -118,7 +116,7 @@ t_token	*lexer(const char *line)
 			++i;
 		}
 		temp = create_token(type, res);
-		push_token(&tokens, temp);		
+		push_token(&tokens, temp);
 	}
 	return (tokens);
 }

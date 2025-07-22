@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 22:23:48 by noavetis          #+#    #+#             */
-/*   Updated: 2025/07/18 20:19:00 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/07/22 23:41:34 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,18 +63,16 @@ void	free_tokens(t_token *tokens)
 
 void	free_tree(t_ast *root)
 {
+	int	i;
+
 	if (!root)
 		return ;
-
 	//printf("free_ast: type %d\n", root->type);
 	free_tree(root->left);
 	free_tree(root->right);
-
-	int i = 0;
+	i = 0;
 	while (root->type == NODE_CMD && root->cmd && root->cmd[i])
-	{
 		free(root->cmd[i++]);
-	}
 	if (root->type == NODE_CMD)
 	{
 		free(root->cmd);

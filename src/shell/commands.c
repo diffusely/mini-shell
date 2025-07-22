@@ -6,13 +6,13 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 20:54:54 by noavetis          #+#    #+#             */
-/*   Updated: 2025/07/22 21:08:45 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/07/22 23:38:02 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-int	exec_cd(const char *input)
+bool	exec_cd(const char *input)
 {
 	while (*input && ft_isspace(*input))
 		input++;
@@ -33,7 +33,7 @@ int	exec_cd(const char *input)
 	return (false);
 }
 
-int	exec_pwd(const char *input)
+bool	exec_pwd(const char *input)
 {
 	char	*pwd;
 

@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 18:03:48 by noavetis          #+#    #+#             */
-/*   Updated: 2025/07/22 22:57:39 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/07/22 23:49:01 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "lexer.h"
 
-typedef struct s_token t_token;
+typedef struct s_token	t_token;
 
 typedef enum e_node
 {
@@ -23,9 +23,7 @@ typedef enum e_node
 	NODE_PIP,
 	NODE_AND,
 	NODE_OR,
-	NODE_SUB,   // ()
-
-	
+	NODE_SUB,
 	NODE_RDIR
 }	t_node_type;
 
@@ -55,6 +53,7 @@ typedef struct s_ast
 	struct s_ast		*right;
 }	t_ast;
 
+// Creat node
 t_ast	*create_node(t_node_type type, t_ast *right, t_ast *left);
 
 // Parse
@@ -64,9 +63,7 @@ t_ast	*parse_pipe(t_token **tokens);
 t_ast	*parse_factor(t_token **tokens);
 t_ast	*parse_cmd(t_token **tokens);
 
-
-
-
+// Print ast
 void	print_ast(t_ast *node, int depth);
 
 #endif
