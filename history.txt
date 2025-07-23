@@ -41,3 +41,31 @@ lsw
 pwd
 pwd
 e
+l
+ls
+pwd
+pwd
+echo "hello "how are you '' """"
+echo "hello "how are you '' """" |
+echo "hello "how are you '' """" |
+echo "hello "how are you '' """" |
+echo "hello "how are you '' """"    | a
+echo "hello "how are you '' """"
+echo "hello "how are you '' """"
+echo ""hello world""
+echi "hello" "wqer"
+ls|cmd
+ls|||
+./minishell 
+ld||((&&& )dsfcs)
+ls | nor || (echo || noro )
+ls | nor || (echo || noro )
+ls | nor || (echo || noro )
+ls | nor || ((echo || noro ))
+ls | nor || ((echo || noro &&&)fgty)
+echo &&& a
+echo ||| a
+echo |||| a
+ls &&&& pwd
+echo &&* a
+&

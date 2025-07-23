@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 17:06:06 by noavetis          #+#    #+#             */
-/*   Updated: 2025/07/22 23:42:57 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/07/23 20:16:09 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,16 +70,21 @@ static char	*word_dup(int *i, const char *line)
 	int	start;
 
 	start = *i;
-	if (line[*i] == '"' || line[*i] == '\'')
+	while (!ft_strchr("&|><()", line[*i]) && line[*i] != ' ')
 	{
-		while (line[*i] && token_type(line[*i], line[*i + 1]) == WORD)
+		if (line[*i] == '"')
+		{
 			++(*i);
-	}
-	else
-	{
-		while (line[*i] && line[*i] != ' '
-			&& token_type(line[*i], line[*i + 1]) == WORD)
+			while (line[*i] && line[*i] != '"')
+				++(*i);
+		}
+		else if (line[*i] == '\'')
+		{
 			++(*i);
+			while (line[*i] && line[*i] != '\'')
+				++(*i);
+		}
+		++(*i);
 	}
 	return (ft_substr(line, start, *i - start));
 }
@@ -87,16 +92,13 @@ static char	*word_dup(int *i, const char *line)
 t_token	*lexer(const char *line)
 {
 	t_token			*tokens;
-	t_token			*temp;
 	t_token_type	type;
 	char			*res;
 	int				i;
 
-	if (!line)
-		return (NULL);
 	i = 0;
 	tokens = NULL;
-	while (line[i])
+	while (line && line[i])
 	{
 		while (line[i] && ft_isspace(line[i]))
 			++i;
@@ -105,18 +107,15 @@ t_token	*lexer(const char *line)
 		type = token_type(line[i], line[i + 1]);
 		if (type == WORD)
 			res = word_dup(&i, line);
-		else if (type == HEREDOC || type == APPEND || type == AND || type == OR)
-		{
-			res = token_value(type);
-			i += 2;
-		}
 		else
 		{
 			res = token_value(type);
-			++i;
+			if (type == HEREDOC || type == APPEND || type == AND || type == OR)
+				i += 2;
+			else
+				++i;
 		}
-		temp = create_token(type, res);
-		push_token(&tokens, temp);
+		push_token(&tokens, create_token(type, res));
 	}
 	return (tokens);
 }

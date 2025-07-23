@@ -1,2 +1,5 @@
 *.o
 .vscode
+*.a
+minishell
+history.txt
