@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vmakarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 18:03:48 by noavetis          #+#    #+#             */
-/*   Updated: 2025/07/22 22:57:39 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/07/22 23:01:44 by vmakarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,6 @@ t_ast	*parse_and(t_token **tokens);
 t_ast	*parse_pipe(t_token **tokens);
 t_ast	*parse_factor(t_token **tokens);
 t_ast	*parse_cmd(t_token **tokens);
-
-
-
 
 void	print_ast(t_ast *node, int depth);
 

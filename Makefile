@@ -30,7 +30,7 @@ OBJ			= $(SRC:.c=.o)
 
 LIB_FLAGS	= -L$(LIBFT) -lft -L$(READLINE_DIR)/lib -lreadline -lhistory -lncurses
 IFLAG		= -I$(INC_HEADER) -I$(INC_LIB) -I$(LIBFT) -I$(READLINE_DIR)/include
-CFLAG		= # -Wall -Wextra -Werror -g
+CFLAG		= -Wall -Wextra -Werror -g -fsanitize=address
 
 CC			= cc
 RM			= rm -rf

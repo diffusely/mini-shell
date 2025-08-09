@@ -15,7 +15,7 @@ MFILES		= 	$(SDIR)ft_isalpha.c $(SDIR)ft_isdigit.c $(SDIR)ft_isalnum.c $(SDIR)ft
 	  			$(SDIR)ft_calloc.c $(SDIR)ft_strdup.c $(SDIR)ft_substr.c $(SDIR)ft_strjoin.c \
 				$(SDIR)ft_strtrim.c $(SDIR)ft_split.c $(SDIR)ft_itoa.c $(SDIR)ft_strmapi.c \
 	  			$(SDIR)ft_striteri.c $(SDIR)ft_putchar_fd.c $(SDIR)ft_putstr_fd.c $(SDIR)ft_putendl_fd.c \
-				$(SDIR)ft_putnbr_fd.c $(SDIR)get_next_line_utils.c $(SDIR)get_next_line.c \
+				$(SDIR)ft_putnbr_fd.c $(SDIR)get_next_line_utils.c $(SDIR)get_next_line.c $(SDIR)ft_strcpy.c \
 				$(SDIR)ft_strjoin_free.c $(SDIR)ft_strcmp.c $(SDIR)ft_strncpy.c $(SDIR)ft_isspace.c
 
 BFILES 		= 	$(SDIR)ft_lstnew_bonus.c $(SDIR)ft_lstadd_front_bonus.c $(SDIR)ft_lstsize_bonus.c \

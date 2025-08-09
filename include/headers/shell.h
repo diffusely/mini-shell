@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vmakarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 20:09:57 by noavetis          #+#    #+#             */
-/*   Updated: 2025/07/22 22:58:06 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/07 18:31:51 by vmakarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ int		open_fd(t_ast *tree, char *input, t_token *token);
 
 // commands
 int		exec_pwd(const char *path);
-int		exec_cd(const char *path);
+bool	exec_cd(const char *input, t_list *envp_list);
+void	exec_env(char *input, t_list **list_env);
+void	check_unset(char *input, t_list **env_list);
+void	init_env(char **envp, t_list **list_env);
+void	exec_home(const char *input);
 
 #endif
