@@ -24,24 +24,19 @@ SRC 		= $(SRC_DIR)main.c \
 			  $(PARSE_DIR)parse_ast.c \
 			  $(SHELL_DIR)commands.c \
 			  $(SHELL_DIR)history.c \
-<<<<<<< HEAD
-			  $(SHELL_DIR)utils.c
-=======
+			  $(SHELL_DIR)utils.c \
 			  $(SHELL_DIR)exec_cd.c \
 			  $(SHELL_DIR)exec_pwd.c \
 			  $(SHELL_DIR)exec_env.c 
->>>>>>> built-in
+
 
 OBJ			= $(SRC:.c=.o)
 
 
 LIB_FLAGS	= -L$(LIBFT) -lft -L$(READLINE_DIR)/lib -lreadline -lhistory -lncurses
 IFLAG		= -I$(INC_HEADER) -I$(INC_LIB) -I$(LIBFT) -I$(READLINE_DIR)/include
-<<<<<<< HEAD
-CFLAG		=  -Wall -Wextra -Werror -g
-=======
+
 CFLAG		= -Wall -Wextra -Werror -g -fsanitize=address
->>>>>>> built-in
 
 CC			= cc
 RM			= rm -rf

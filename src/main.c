@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vmakarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/22 19:36:19 by noavetis          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/07/22 23:16:35 by noavetis         ###   ########.fr       */
-=======
-/*   Updated: 2025/08/13 18:04:54 by vmakarya         ###   ########.fr       */
->>>>>>> built-in
+/*   Created: 2025/08/13 18:16:42 by vmakarya          #+#    #+#             */
+/*   Updated: 2025/08/13 18:31:34 by vmakarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +31,6 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	(void)envp;
-<<<<<<< HEAD
-
-=======
->>>>>>> built-in
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, SIG_IGN);
 	// input = readline("minishell$ ");
@@ -51,22 +43,18 @@ int	main(int argc, char **argv, char **envp)
 		if (!input)
 		{
 			write(1, "exit\n", 5);
-<<<<<<< HEAD
-			break;
-		}
-
-		if (is_space_or_newline(input))
-		{
-			free(input);
-			continue ;
-		}
-		if (!exec_pwd(input))
-		{
-			free_all(tree, input, free_token);
-=======
->>>>>>> built-in
 			break ;
 		}
+
+		if (!*input)
+		{
+			if (is_space_or_newline(input))
+			{
+				free(input);
+				continue ;
+			}
+		}
+		
 		init_env(envp, &list_env);
 		// if (*input && is_history(input))
 		// print_history(tree, input, token);

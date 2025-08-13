@@ -5,20 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vmakarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/22 20:54:54 by noavetis          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/07/22 23:38:02 by noavetis         ###   ########.fr       */
-=======
-/*   Updated: 2025/08/13 18:10:50 by vmakarya         ###   ########.fr       */
->>>>>>> built-in
+/*   Created: 2025/08/13 18:19:55 by vmakarya          #+#    #+#             */
+/*   Updated: 2025/08/13 18:27:35 by vmakarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-<<<<<<< HEAD
-bool	exec_cd(const char *input)
-=======
 static int find_word_place(char *word)
 {
 	int i;
@@ -60,7 +53,6 @@ bool find_list(const char *input, t_list **envp_list)
 }
 
 void check_unset(char *input, t_list **env_list)
->>>>>>> built-in
 {
 	while (*input && ft_isspace(*input))
 		input++;
@@ -139,36 +131,9 @@ bool builtins(t_list **list_env, char *input, t_ast	*tree, t_token *free_token)
 		else
 			return (true);
 	}
-<<<<<<< HEAD
 	if (chdir(input) == 0)
 		return (true);
+		
 	printf("cd: no such file or directory: %s\n", input);
 	return (false);
-}
-
-bool	exec_pwd(const char *input)
-{
-	char	*pwd;
-
-	if (!input)
-		return (false);
-	while (*input && ft_isspace(*input))
-		input++;
-	if (!ft_strncmp(input, "pwd", 3))
-		input += 2;
-	else
-		return (true);
-	while (*input && ft_isspace(*input))
-		input++;
-	pwd = NULL;
-	pwd = getcwd(NULL, 0);
-	if (pwd)
-	{
-		printf("%s\n", pwd);
-		free(pwd);
-		return (true);
-	}
-	return (false);
-=======
->>>>>>> built-in
 }

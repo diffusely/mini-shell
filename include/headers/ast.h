@@ -5,12 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vmakarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/17 18:03:48 by noavetis          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/07/22 23:49:01 by noavetis         ###   ########.fr       */
-=======
-/*   Updated: 2025/07/22 23:01:44 by vmakarya         ###   ########.fr       */
->>>>>>> built-in
+/*   Created: 2025/08/13 18:27:11 by vmakarya          #+#    #+#             */
+/*   Updated: 2025/08/13 18:27:14 by vmakarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +63,7 @@ t_ast	*parse_pipe(t_token **tokens);
 t_ast	*parse_factor(t_token **tokens);
 t_ast	*parse_cmd(t_token **tokens);
 
-<<<<<<< HEAD
 // Print ast
-=======
->>>>>>> built-in
 void	print_ast(t_ast *node, int depth);
 
 #endif
