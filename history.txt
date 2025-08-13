@@ -29,6 +29,7 @@ lsls
 ls
 pwd
 pwd
+<<<<<<< HEAD
 ls
 pwd
 c
@@ -69,3 +70,83 @@ echo |||| a
 ls &&&& pwd
 echo &&* a
 &
+=======
+pwd
+pwd
+pwd
+pwd
+pwd
+pwd
+
+e
+ 
+pwd
+pwd
+pwd
+cd 
+e
+pwd
+e
+pwd
+pwd
+pwd
+pwd
+pwd
+pwd
+pwd
+pwd
+pwd
+pwd
+pwd
+pwd
+pwd
+pwd
+pwd
+pwd
+pwd
+pwd
+pwd
+pwd
+pwd
+cd
+e
+pwd
+pwd
+pwd
+pwd
+pwd
+pwd
+cd asdfasd
+safvadfv
+cd dsфсд
+е
+e
+cd adasd
+asdsdavasdv
+cd sdсадв
+е
+е
+е
+е
+е
+
+е
+e
+pwd
+pwd
+cd
+pwd
+cdhtgfv
+e
+cdaf
+e
+cdasdsdfadsf
+e
+cdacavasvf
+pwd
+pwd
+pwd
+ls
+asfa n
+cd
+>>>>>>> built-in

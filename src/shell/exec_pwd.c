@@ -1,30 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
+/*   exec_pwd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vmakarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/26 21:15:39 by noavetis          #+#    #+#             */
-/*   Updated: 2025/07/24 17:14:10 by vmakarya         ###   ########.fr       */
+/*   Created: 2025/08/13 12:37:59 by vmakarya          #+#    #+#             */
+/*   Updated: 2025/08/13 12:39:03 by vmakarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <shell.h>
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+int	exec_pwd(const char *input)
 {
-	t_list	*head;
-
-	head = *lst;
-	if (!new)
-		return ;
-	if (!head)
-		*lst = new;
+	char	*pwd;
+      
+	if (!input)
+		return (false);
+	while (*input && ft_isspace(*input))
+		input++;
+	if (!ft_strncmp(input, "pwd", 3))
+		input += 2;
 	else
+		return (true);
+	while (*input && ft_isspace(*input))
+		input++;
+	pwd = NULL;
+	pwd = getcwd(NULL, 0);
+	if (pwd)
 	{
-		while (head->next)
-			head = head->next;
-		head->next = new;
+		printf("%s\n", pwd);
+		free(pwd);
+		return (true);
 	}
+	return (false);
 }
