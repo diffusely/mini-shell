@@ -6,7 +6,7 @@
 /*   By: vmakarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 19:36:19 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/09 15:02:26 by vmakarya         ###   ########.fr       */
+/*   Updated: 2025/08/13 18:04:54 by vmakarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,15 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		input = readline("minishell$ ");
-
+		
 		if (!input)
 		{
 			write(1, "exit\n", 5);
 			break ;
 		}
-
+		init_env(envp, &list_env);
 		// if (*input && is_history(input))
-		// 	print_history(tree, input, token);
+		// print_history(tree, input, token);
 		// add_history_input(tree, input, token);
 		
 		token = lexer(input);
@@ -56,28 +56,8 @@ int	main(int argc, char **argv, char **envp)
 		tree = parse_expr(&token);
 		// print_ast(tree, 0);
 		
-		init_env(envp, &list_env);
-		exec_env(input, &list_env);
-		check_unset(input, &list_env);
-		if (!ft_strcmp(input, "e"))
-		{
-			printf("cccccc\n");
-			free_all(tree, input, free_token);
-			break;
-		}
-		else if (!exec_pwd(input))
-		{
-			printf("bbbbbbb\n");
-			free_all(tree, input, free_token);
+		if(!builtins(&list_env, input, tree, free_token))
 			break ;
-		}
-		else if (!exec_cd(input, list_env))
-		{
-			free_all(tree, input, free_token);
-			break ;
-		}
-		else
-			continue ;
 	}
 	return (0);
 }

@@ -23,7 +23,10 @@ SRC 		= $(SRC_DIR)main.c \
 			  $(AST_DIR)ast.c \
 			  $(PARSE_DIR)parse_ast.c \
 			  $(SHELL_DIR)commands.c \
-			  $(SHELL_DIR)history.c
+			  $(SHELL_DIR)history.c \
+			  $(SHELL_DIR)exec_cd.c \
+			  $(SHELL_DIR)exec_pwd.c \
+			  $(SHELL_DIR)exec_env.c 
 
 OBJ			= $(SRC:.c=.o)
 
