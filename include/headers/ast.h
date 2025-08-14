@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmakarya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:27:11 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/08/13 18:27:14 by vmakarya         ###   ########.fr       */
+/*   Updated: 2025/08/14 21:10:24 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,10 @@ typedef struct s_ast
 
 // Creat node
 t_ast	*create_node(t_node_type type, t_ast *right, t_ast *left);
+void	init_node(t_ast **node, t_token *tokens, int count);
 
 // Parse
-t_ast	*parse_expr(t_token **tokens);
-t_ast	*parse_and(t_token **tokens);
-t_ast	*parse_pipe(t_token **tokens);
-t_ast	*parse_factor(t_token **tokens);
-t_ast	*parse_cmd(t_token **tokens);
+t_ast	*create_tree(t_token **tokens);
 
 // Print ast
 void	print_ast(t_ast *node, int depth);

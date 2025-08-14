@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmakarya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:19:55 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/08/14 16:30:08 by vmakarya         ###   ########.fr       */
+/*   Updated: 2025/08/14 20:14:09 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int find_word_place(char *word)
 	int i;
 
 	i = 0;
-	while (word[i] && word[i] != '=')
+	while (word && word[i] && word[i] != '=')
 		i++;
 	return (i);
 }
