@@ -6,13 +6,13 @@
 /*   By: vmakarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:19:55 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/08/13 18:27:35 by vmakarya         ###   ########.fr       */
+/*   Updated: 2025/08/14 16:30:08 by vmakarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static int find_word_place(char *word)
+int find_word_place(char *word)
 {
 	int i;
 
@@ -22,7 +22,7 @@ static int find_word_place(char *word)
 	return (i);
 }
 
-bool find_list(const char *input, t_list **envp_list)
+bool remove_list(const char *input, t_list **envp_list)
 {
 	t_list *curr = *envp_list;
 	t_list *prev = NULL;
@@ -62,24 +62,9 @@ void check_unset(char *input, t_list **env_list)
 		return ;
 	while (*input && ft_isspace(*input))
 		input++;
-	find_list(input, env_list);
+	remove_list(input, env_list);
 	return ;
 }
-
-// void exec_home(const char *input)
-// {
-// 	while (*input && ft_isspace(*input))
-// 		input++;
-// 	if (ft_strncmp(input, "cd", 2) == 0)
-// 		input += 2;
-// 	else
-// 		return ;
-// 	while (*input && ft_isspace(*input))
-// 		input++;
-// 	if (!(*input))
-// 		if(chdir(getenv("HOME")) == 0)
-// 				return ;
-// }
 
 void init_env(char **envp, t_list **list_env)
 {
@@ -114,26 +99,15 @@ bool builtins(t_list **list_env, char *input, t_ast	*tree, t_token *free_token)
 		check_unset(input, list_env);
 
 		if (!ft_strcmp(input, "e"))
-		{
-			free_all(tree, input, free_token);
-			return (false);
-		}
+			return (free_all(tree, input, free_token), false);
 		else if (!exec_pwd(input))
-		{
-			free_all(tree, input, free_token);
-			return (false);
-		}
+			return (free_all(tree, input, free_token), false);
 		else if (!exec_cd(input, list_env))
-		{
-			free_all(tree, input, free_token);
-			return (false);
-		}
+			return (free_all(tree, input, free_token), false);
 		else
 			return (true);
 	}
 	if (chdir(input) == 0)
 		return (true);
-		
-	printf("cd: no such file or directory: %s\n", input);
-	return (false);
+	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: vmakarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:16:42 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/08/13 18:31:34 by vmakarya         ###   ########.fr       */
+/*   Updated: 2025/08/14 16:34:32 by vmakarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,10 @@ int	main(int argc, char **argv, char **envp)
 	signal(SIGQUIT, SIG_IGN);
 	// input = readline("minishell$ ");
 	// exec_home(input);
-	
+	init_env(envp, &list_env);
 	while (1)
 	{
 		input = readline("minishell$ ");
-		
-		if (!input)
-		{
-			write(1, "exit\n", 5);
-			break ;
-		}
 
 		if (!*input)
 		{
@@ -55,7 +49,6 @@ int	main(int argc, char **argv, char **envp)
 			}
 		}
 		
-		init_env(envp, &list_env);
 		// if (*input && is_history(input))
 		// print_history(tree, input, token);
 		// add_history_input(tree, input, token);
