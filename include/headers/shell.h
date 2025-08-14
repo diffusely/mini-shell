@@ -6,7 +6,7 @@
 /*   By: vmakarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:26:24 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/08/13 18:26:27 by vmakarya         ###   ########.fr       */
+/*   Updated: 2025/08/14 16:09:29 by vmakarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,10 @@ bool	exec_cd(const char *input, t_list **envp_list);
 void	exec_env(char *input, t_list **list_env);
 void	check_unset(char *input, t_list **env_list);
 void	init_env(char **envp, t_list **list_env);
+int		find_word_place(char *word);
 
 // void	exec_home(const char *input);
 bool	builtins(t_list **list_env, char *input, t_ast	*tree, t_token *free_token);
-bool	find_list(const char *input, t_list **envp_list);
+bool	remove_list(const char *input, t_list **envp_list);
 
 #endif
