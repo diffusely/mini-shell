@@ -6,7 +6,7 @@
 /*   By: vmakarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 12:35:24 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/08/14 16:27:25 by vmakarya         ###   ########.fr       */
+/*   Updated: 2025/08/15 19:48:02 by vmakarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ bool	exec_cd(const char *input, t_list **envp_list)
 		input++;
 	if (!(*input))
 	{
-		// print_env(*envp_list);
 		if(find_list("HOME", envp_list) && chdir(getenv("HOME")) == 0)
 				return (true);
+		printf("stex el hasav\n");
 		return (true);
 	}
 	if (chdir(input) == 0)

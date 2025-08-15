@@ -6,7 +6,7 @@
 /*   By: vmakarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:26:24 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/08/14 16:09:29 by vmakarya         ###   ########.fr       */
+/*   Updated: 2025/08/15 19:44:57 by vmakarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,15 @@
 typedef struct s_ast	t_ast;
 typedef struct s_token	t_token;
 
+typedef struct	s_shell
+{
+	t_token	*token;
+	t_token *free_token;
+	char	*input;
+	t_ast	*tree;
+	t_list	*list_env;
+}	t_shell;
+
 void	sigint_handler(int signum);
 
 // History
@@ -37,17 +46,17 @@ int		open_fd(t_ast *tree, char *input, t_token *token);
 
 // Functions
 int		is_space_or_newline(char *input);
-
+void	print_env(t_list *env);
 // commands
 int		exec_pwd(const char *path);
 bool	exec_cd(const char *input, t_list **envp_list);
-void	exec_env(char *input, t_list **list_env);
-void	check_unset(char *input, t_list **env_list);
-void	init_env(char **envp, t_list **list_env);
+bool	exec_env(char *input, t_list **list_env);
+bool	check_unset(char *input, t_list **env_list);
+t_list	*init_env(char **envp);
 int		find_word_place(char *word);
 
 // void	exec_home(const char *input);
-bool	builtins(t_list **list_env, char *input, t_ast	*tree, t_token *free_token);
+bool	check_builtins(char *cmd, t_list **list_env);
 bool	remove_list(const char *input, t_list **envp_list);
 
 #endif

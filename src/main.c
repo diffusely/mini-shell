@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vmakarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:16:42 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/08/15 03:10:48 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/15 19:47:37 by vmakarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,53 +15,54 @@
 #include "shell.h"
 #include "free.h"
 
+// void	init_minishell(t_shell **mish, int argc, char **argv, char **envp)
+// {
+// 	(void)argc;
+// 	(void)argv;
+// 	init_env(envp, &(*mish)->list_env);
+// }
+
 int	main(int argc, char **argv, char **envp)
 {
-	t_token	*token;
-	t_token *free_token;
-	char	*input;
-	t_ast	*tree;
-	t_list	*list_env;
+	t_shell *mish;
 
-	list_env = NULL;
-	token = NULL;
-	free_token = NULL;
-	input = NULL;
-	tree = NULL;
 	(void)argc;
 	(void)argv;
-	(void)envp;
+	mish = ft_calloc(1, sizeof(t_shell));
+	mish->list_env = init_env(envp);
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, SIG_IGN);
-	// input = readline("minishell$ ");
-	// exec_home(input);
-	init_env(envp, &list_env);
 	while (1)
 	{
-		input = readline("minishell$ ");
-
-		if (!*input)
+		mish->input = readline("minishell$ ");
+		if (!mish->input)
+			break ; 
+		if (!*mish->input)
 		{
-			if (is_space_or_newline(input))
+			if (is_space_or_newline(mish->input))
 			{
-				free(input);
+				free(mish->input);
 				continue ;
 			}
 		}
-		
+
 		// if (*input && is_history(input))
 		// print_history(tree, input, token);
 		// add_history_input(tree, input, token);
 		
-		token = lexer(input);
-		//print_tokens(token);
-		free_token = token;
-		tree = create_tree(&token);
-		validate_ast(tree);
-		print_ast(tree, 0);
+		mish->token = lexer(mish->input);
+		// print_tokens(token);
+		mish->free_token = mish->token;
+		mish->tree = create_tree(&mish->token);
+		// print_ast(tree, 0);
+		validate_ast(mish->tree);
+		//print_ast(mish->tree, 0);
 		
-		if(!builtins(&list_env, input, tree, free_token))
+		if(!check_builtins(mish->input, &mish->list_env))
+		{
+			free_all(mish->tree, mish->input, mish->free_token);
 			break ;
+		}
 	}
 	return (0);
 }
