@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:27:11 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/08/14 21:10:24 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/15 03:25:35 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ typedef enum e_node
 	NODE_AND,
 	NODE_OR,
 	NODE_SUB,
-	NODE_RDIR
 }	t_node_type;
 
 typedef enum e_redir_type
@@ -62,5 +61,8 @@ t_ast	*create_tree(t_token **tokens);
 
 // Print ast
 void	print_ast(t_ast *node, int depth);
+
+// Validation
+bool	validate_ast(t_ast *node);
 
 #endif

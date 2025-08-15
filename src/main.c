@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:16:42 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/08/14 20:38:38 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/15 03:10:48 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,10 @@ int	main(int argc, char **argv, char **envp)
 		// add_history_input(tree, input, token);
 		
 		token = lexer(input);
-		print_tokens(token);
+		//print_tokens(token);
 		free_token = token;
 		tree = create_tree(&token);
+		validate_ast(tree);
 		print_ast(tree, 0);
 		
 		if(!builtins(&list_env, input, tree, free_token))

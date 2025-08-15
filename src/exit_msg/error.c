@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 17:37:14 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/14 22:14:02 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/15 02:25:49 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,3 +28,9 @@ void	error_handle(char *msg, int flag)
 		perror(msg);
 	exit(EXIT_FAILURE);
 }
+
+void	ft_err(char *msg)
+{
+	ft_putstr_fd(msg, 2);
+}
+

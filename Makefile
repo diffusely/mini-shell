@@ -14,23 +14,24 @@ SHELL_DIR	= $(SRC_DIR)shell/
 MSG_DIR		= $(SRC_DIR)exit_msg/
 AST_DIR		= $(SRC_DIR)ast/
 PARSE_DIR	= $(SRC_DIR)parse/
+EXEC_DIR	= $(SRC_DIR)exec/
 
 SRC 		= $(SRC_DIR)main.c \
 			  $(LEX_DIR)lexer.c \
 			  $(LEX_DIR)init_lexer.c \
-			  $(LEX_DIR)token_analyse.c \
 			  $(FREE_DIR)free.c \
 			  $(SHELL_DIR)readline.c\
 			  $(MSG_DIR)error.c \
 			  $(AST_DIR)ast.c \
 			  $(PARSE_DIR)parse_ast.c \
 			  $(PARSE_DIR)init_ast.c \
+			  $(PARSE_DIR)validate_ast.c \
 			  $(SHELL_DIR)commands.c \
 			  $(SHELL_DIR)history.c \
 			  $(SHELL_DIR)utils.c \
-			  $(SHELL_DIR)exec_cd.c \
-			  $(SHELL_DIR)exec_pwd.c \
-			  $(SHELL_DIR)exec_env.c
+			  $(EXEC_DIR)exec_cd.c \
+			  $(EXEC_DIR)exec_pwd.c \
+			  $(EXEC_DIR)exec_env.c
 
 
 
