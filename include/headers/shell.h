@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmakarya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:26:24 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/08/15 19:44:57 by vmakarya         ###   ########.fr       */
+/*   Updated: 2025/08/27 20:20:01 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ typedef struct	s_shell
 void	sigint_handler(int signum);
 
 // History
-void	print_history(t_ast *tree, char *input, t_token *token);
+void	print_history(t_shell *mish);
 bool	is_history(char *input);
-void	add_history_input(t_ast *tree, char *input, t_token *token);
-int		open_fd(t_ast *tree, char *input, t_token *token);
+void	add_history_input(t_shell *mish);
+int		open_fd(t_shell *mish);
 
 // Functions
 int		is_space_or_newline(char *input);

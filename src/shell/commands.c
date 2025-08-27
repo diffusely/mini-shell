@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmakarya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:19:55 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/08/15 19:53:15 by vmakarya         ###   ########.fr       */
+/*   Updated: 2025/08/27 21:08:12 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-int find_word_place(char *word)
+int	find_word_place(char *word)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (word[i] && word[i] != '=')
@@ -22,16 +22,16 @@ int find_word_place(char *word)
 	return (i);
 }
 
-bool remove_list(const char *input, t_list **envp_list)
+bool	remove_list(const char *input, t_list **envp_list)
 {
-	t_list *curr;
-	t_list *prev;
+	t_list	*curr;
+	t_list	*prev;
 
 	curr = *envp_list;
 	prev = NULL;
 	while (curr)
 	{
-		if (curr->content && ft_strchr(curr->content, '=')) 
+		if (curr->content && ft_strchr(curr->content, '='))
 		{
 			int place = find_word_place(curr->content);
 			if (ft_strncmp(curr->content, input, place) == 0)
@@ -75,9 +75,9 @@ t_list* init_env(char **envp)
 	i = 0;
 	if (list_env == NULL)
 	{
-		while (envp[++i])
+		while (envp && envp[++i])
 		{
-			copy = malloc(ft_strlen(envp[i]) + 1);
+			copy = ft_calloc(1, ft_strlen(envp[i]) + 1);
 			if (!copy)
 				return (NULL);
 			ft_strcpy(copy, envp[i]);
@@ -100,15 +100,15 @@ bool	check_builtins(char *cmd, t_list **list_env)
 	if (!ft_strncmp(cmd, "cd", 2))
 		return (exec_cd(cmd, list_env));
 	else if (!ft_strncmp(cmd, "echo", 4))
-		return (false);
-	else if (!ft_strncmp(cmd, "pwd", 3))
-		return (exec_pwd(cmd));
+		return (true);
+	else if (!ft_strncmp(cmd, "echo", 4))
+		return (true);
 	else if (!ft_strncmp(cmd, "unset", 5))
 		return(check_unset(cmd, list_env));
 	else if (!ft_strncmp(cmd, "export", 6))
-		return (false);
+		return (true);
 	else if (!ft_strncmp(cmd, "env", 3))
 		return (exec_env(cmd, list_env));
 	else
-		return (false);
+		return (true);
 }

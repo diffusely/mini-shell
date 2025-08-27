@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmakarya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:16:42 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/08/15 19:47:37 by vmakarya         ###   ########.fr       */
+/*   Updated: 2025/08/27 21:11:37 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	mish = ft_calloc(1, sizeof(t_shell));
 	mish->list_env = init_env(envp);
+	
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
@@ -51,18 +52,26 @@ int	main(int argc, char **argv, char **envp)
 		// add_history_input(tree, input, token);
 		
 		mish->token = lexer(mish->input);
-		// print_tokens(token);
+		print_tokens(mish->token);
 		mish->free_token = mish->token;
 		mish->tree = create_tree(&mish->token);
-		// print_ast(tree, 0);
-		validate_ast(mish->tree);
-		//print_ast(mish->tree, 0);
+		//validate_ast(mish->tree);
+		print_ast(mish->tree, 0);
 		
-		if(!check_builtins(mish->input, &mish->list_env))
+		if (!ft_strncmp(mish->input, "e", 1))
 		{
-			free_all(mish->tree, mish->input, mish->free_token);
+			free_all(mish);
 			break ;
 		}
+
+		if(!check_builtins(mish->input, &mish->list_env))
+		{
+			free_all(mish);
+			break ;
+		}
+		free_all(mish);
 	}
+	ft_lstclear(&mish->list_env);
+	free(mish);
 	return (0);
 }

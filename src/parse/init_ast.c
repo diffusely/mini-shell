@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 20:30:27 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/14 21:15:21 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/27 17:34:10 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,24 @@ t_ast	*create_node(t_node_type type, t_ast *right, t_ast *left)
 	node->left = left;
 	node->right = right;
 	return (node);
+}
+
+void	add_redir(t_ast *node, t_token_type type, char *filename)
+{
+	t_redir	*redir;
+
+	redir = ft_calloc(1, sizeof(t_redir));
+	if (type == IN)
+		redir->type = R_IN;
+	else if (type == OUT)
+		redir->type = R_OUT;
+	else if (type == HEREDOC)
+		redir->type = R_HEREDOC;
+	else
+		redir->type = R_APPEND;
+	redir->filename = ft_strdup(filename);
+	redir->next = node->redirs;
+	node->redirs = redir;
 }
 
 void	init_node(t_ast **node, t_token *tokens, int count)

@@ -3,31 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 22:23:48 by noavetis          #+#    #+#             */
-/*   Updated: 2025/07/22 23:41:34 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/27 20:12:47 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "free.h"
 
-void	free_all(t_ast *tree, char *input, t_token *token)
+void	free_all(t_shell *mish)
 {
-	if (tree)
+	if (mish->tree)
 	{
-		free_tree(tree);
-		tree = NULL;
+		free_tree(mish->tree);
+		mish->tree = NULL;
 	}
-	if (input)
+	if (mish->input)
 	{
-		free(input);
-		input = NULL;
+		free(mish->input);
+		mish->input = NULL;
 	}
-	if (token)
+	if (mish->free_token)
 	{
-		free_tokens(token);
-		token = NULL;
+		free_tokens(mish->free_token);
+		mish->free_token = NULL;
 	}
 }
 
@@ -61,22 +61,38 @@ void	free_tokens(t_token *tokens)
 	}
 }
 
+void	free_redirs(t_redir *redir)
+{
+	t_redir	*tmp;
+
+	while (redir)
+	{
+		tmp = redir->next;
+		free(redir->filename);
+		free(redir);
+		redir->filename = NULL;
+		redir = NULL;
+		redir = tmp;
+	}
+}
+
 void	free_tree(t_ast *root)
 {
 	int	i;
 
 	if (!root)
 		return ;
-	//printf("free_ast: type %d\n", root->type);
 	free_tree(root->left);
 	free_tree(root->right);
 	i = 0;
-	while (root->type == NODE_CMD && root->cmd && root->cmd[i])
-		free(root->cmd[i++]);
 	if (root->type == NODE_CMD)
 	{
+		while (root->cmd && root->cmd[i])
+			free(root->cmd[i++]);
 		free(root->cmd);
 		root->cmd = NULL;
+		if (root->redirs)
+			free_redirs(root->redirs);
 	}
 	free(root);
 }

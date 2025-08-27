@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 23:05:42 by noavetis          #+#    #+#             */
-/*   Updated: 2025/01/29 17:49:22 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/27 20:06:21 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void*))
+void	ft_lstclear(t_list **lst)
 {
 	t_list	*head;
 	t_list	*temp;
@@ -25,7 +25,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void*))
 	{
 		temp = head;
 		head = head->next;
-		ft_lstdelone(temp, del);
+		ft_lstdelone(temp);
 	}
 	*lst = NULL;
 }

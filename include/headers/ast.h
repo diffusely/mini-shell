@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:27:11 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/08/15 03:25:35 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/27 17:43:21 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 # include "lexer.h"
 
-typedef struct s_token	t_token;
+typedef struct s_token		t_token;
+typedef enum e_token_type	t_token_type;
 
 typedef enum e_node
 {
@@ -28,10 +29,10 @@ typedef enum e_node
 
 typedef enum e_redir_type
 {
-	RDIR_IN,      // <
-	RDIR_OUT,     // >
-	RDIR_HEREDOC, // <<
-	RDIR_APPEND   // >>
+	R_IN,      // <
+	R_OUT,     // >
+	R_HEREDOC, // <<
+	R_APPEND   // >>
 }	t_redir_type;
 
 typedef struct s_redirect
@@ -40,12 +41,12 @@ typedef struct s_redirect
 	char				*filename;
 
 	struct s_redirect	*next;
-}	t_redirect;
+}	t_redir;
 
 typedef struct s_ast
 {
 	t_node_type			type;
-	t_redirect			*redir_list;
+	t_redir				*redirs;
 
 	char				**cmd;      // for exceve
 	struct s_ast		*left;
@@ -58,6 +59,7 @@ void	init_node(t_ast **node, t_token *tokens, int count);
 
 // Parse
 t_ast	*create_tree(t_token **tokens);
+void	add_redir(t_ast *node, t_token_type type, char *filename);
 
 // Print ast
 void	print_ast(t_ast *node, int depth);
