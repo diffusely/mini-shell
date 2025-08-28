@@ -3,3 +3,4 @@
 *.a
 minishell
 history.txt
+valgrind-out.txt

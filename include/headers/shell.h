@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:26:24 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/08/27 20:20:01 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/28 22:57:06 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,14 @@
 # include <fcntl.h>
 # include <unistd.h>
 
-typedef struct s_ast	t_ast;
-typedef struct s_token	t_token;
+typedef struct s_ast		t_ast;
+typedef struct s_token		t_token;
+typedef enum e_token_type	t_token_type;
 
 typedef struct	s_shell
 {
 	t_token	*token;
-	t_token *free_token;
+	t_token	*free_token;
 	char	*input;
 	t_ast	*tree;
 	t_list	*list_env;
@@ -47,7 +48,7 @@ int		open_fd(t_shell *mish);
 // Functions
 int		is_space_or_newline(char *input);
 void	print_env(t_list *env);
-// commands
+// Commands
 int		exec_pwd(const char *path);
 bool	exec_cd(const char *input, t_list **envp_list);
 bool	exec_env(char *input, t_list **list_env);
@@ -58,5 +59,10 @@ int		find_word_place(char *word);
 // void	exec_home(const char *input);
 bool	check_builtins(char *cmd, t_list **list_env);
 bool	remove_list(const char *input, t_list **envp_list);
+
+// Utils
+bool	is_redirect(t_token_type type);
+bool	is_operator(t_token_type type);
+void	check_type(t_token_type type);
 
 #endif

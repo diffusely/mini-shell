@@ -19,6 +19,8 @@ EXEC_DIR	= $(SRC_DIR)exec/
 SRC 		= $(SRC_DIR)main.c \
 			  $(LEX_DIR)lexer.c \
 			  $(LEX_DIR)init_lexer.c \
+			  $(LEX_DIR)syntax_validator.c \
+			  $(LEX_DIR)utils.c \
 			  $(FREE_DIR)free.c \
 			  $(SHELL_DIR)readline.c\
 			  $(MSG_DIR)error.c \

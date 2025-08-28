@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:27:11 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/08/27 17:43:21 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/28 18:57:36 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	init_node(t_ast **node, t_token *tokens, int count);
 
 // Parse
 t_ast	*create_tree(t_token **tokens);
-void	add_redir(t_ast *node, t_token_type type, char *filename);
+void	add_redir(t_ast *node, t_token_type type, t_token *t);
 
 // Print ast
 void	print_ast(t_ast *node, int depth);

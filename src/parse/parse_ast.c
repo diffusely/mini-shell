@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_ast.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 17:02:07 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/27 17:37:50 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/28 18:56:30 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,13 +102,13 @@ static t_ast	*parse_cmd(t_token **tokens)
 	init_node(&node, *tokens, count);
 	while (*tokens && (*tokens)->type == WORD)
 		*tokens = (*tokens)->next;
-	while (*tokens && ((*tokens)->type == OUT || (*tokens)->type == APPEND
-			|| (*tokens)->type == HEREDOC || (*tokens)->type == IN))
+	while (*tokens && is_redirect((*tokens)->type))
 	{
 		r_tok = *tokens;
 		*tokens = (*tokens)->next;
-		add_redir(node, r_tok->type, (*tokens)->value);
-		*tokens = (*tokens)->next;
+		add_redir(node, r_tok->type, *tokens);
+		if (*tokens)
+			*tokens = (*tokens)->next;
 	}
 	return (node);
 }

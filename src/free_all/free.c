@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 22:23:48 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/27 20:12:47 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/28 14:34:36 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ void	free_redirs(t_redir *redir)
 	{
 		tmp = redir->next;
 		free(redir->filename);
-		free(redir);
 		redir->filename = NULL;
+		free(redir);
 		redir = NULL;
 		redir = tmp;
 	}

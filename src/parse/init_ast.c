@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_ast.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 20:30:27 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/27 17:34:10 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/28 18:57:25 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,12 @@ t_ast	*create_node(t_node_type type, t_ast *right, t_ast *left)
 	return (node);
 }
 
-void	add_redir(t_ast *node, t_token_type type, char *filename)
+void	add_redir(t_ast *node, t_token_type type, t_token *t)
 {
 	t_redir	*redir;
 
+	if (!t)
+		return ;
 	redir = ft_calloc(1, sizeof(t_redir));
 	if (type == IN)
 		redir->type = R_IN;
@@ -39,7 +41,7 @@ void	add_redir(t_ast *node, t_token_type type, char *filename)
 		redir->type = R_HEREDOC;
 	else
 		redir->type = R_APPEND;
-	redir->filename = ft_strdup(filename);
+	redir->filename = ft_strdup(t->value);
 	redir->next = node->redirs;
 	node->redirs = redir;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_lexer.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 20:46:25 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/14 22:09:38 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/29 00:01:43 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	push_token(t_token	**tokens, t_token *temp)
 		while (head->next)
 			head = head->next;
 		head->next = temp;
+		temp->prev = head;
 	}
 }
 
@@ -48,5 +49,6 @@ t_token	*create_token(t_token_type type, char *value)
 		error_handle("Bad alloc!\n", 1);
 	token->value = value;
 	token->next = NULL;
+	token->prev = NULL;
 	return (token);
 }
