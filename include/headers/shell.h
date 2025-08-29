@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:26:24 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/08/28 22:57:06 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/29 16:55:48 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ bool	remove_list(const char *input, t_list **envp_list);
 // Utils
 bool	is_redirect(t_token_type type);
 bool	is_operator(t_token_type type);
-void	check_type(t_token_type type);
+bool	is_subshell(t_token_type type);
+void	check_type(t_token *tok);
 
 #endif

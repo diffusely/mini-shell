@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 20:59:16 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/28 22:57:00 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/29 16:53:39 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ bool	is_operator(t_token_type type)
 	return (type == OR || type == AND || type == PIP);
 }
 
+bool	is_subshell(t_token_type type)
+{
+	return (type == RPAR || type == LPAR);
+}
+
 int	is_space_or_newline(char *input)
 {
 	while (*input)
@@ -33,27 +38,11 @@ int	is_space_or_newline(char *input)
 	return (true);
 }
 
-void	check_type(t_token_type type)
+void	check_type(t_token *tok)
 {
 	ft_err("minishell: syntax error near unexpected token `");
-	if (type == PIP)
-		ft_err("|");
-	else if (type == OR)
-		ft_err("||");
-	else if (type == AND)
-		ft_err("&&");
-	else if (type == OUT)
-		ft_err(">");
-	else if (type == APPEND)
-		ft_err(">>");
-	else if (type == IN)
-		ft_err("<");
-	else if (type == HEREDOC)
-		ft_err("<<");
-	else if (type == LPAR)
-		ft_err("(");
-	else if (type == RPAR)
-		ft_err(")");
+	if (tok)
+		ft_err(tok->value);
 	else
 		ft_err("newline");
 	ft_err("'\n");

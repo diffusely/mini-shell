@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:41:41 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/29 01:41:32 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/29 18:10:23 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@
 
 typedef enum e_token_type
 {
-	HEREDOC, // <<
-	APPEND,  // >>
-	WORD,    // echo hello
-	PIP,     // |
-	AND,     // &&
-	OR,      // ||
-	LPAR,    // (
-	RPAR,    // )
-	OUT,     // >
-	IN,      // <
-	END      // end
+	HEREDOC, // << 0
+	APPEND,  // >> 1
+	WORD,    // echo hello 2
+	PIP,     // | 3
+	AND,     // && 4
+	OR,      // || 5
+	LPAR,    // ( 6
+	RPAR,    // ) 7
+	OUT,     // > 8
+	IN,      // < 9
+	END      // end 10
 }	t_token_type;
 
 typedef struct s_token
@@ -51,6 +51,6 @@ void		print_tokens(t_token *lexer);
 
 // Utils
 void		init_sub_val(t_token **st, t_token **a, int *d, bool *v);
-
+bool		syntax_check(t_token *input);
 
 #endif

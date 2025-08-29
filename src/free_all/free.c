@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 22:23:48 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/28 14:34:36 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/29 20:27:46 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	free_tree(t_ast *root)
 	free_tree(root->left);
 	free_tree(root->right);
 	i = 0;
-	if (root->type == NODE_CMD)
+	if (root->type == NODE_CMD || root->type == NODE_SUB)
 	{
 		while (root->cmd && root->cmd[i])
 			free(root->cmd[i++]);

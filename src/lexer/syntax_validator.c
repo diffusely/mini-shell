@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_validator.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 14:37:58 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/29 01:48:02 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/29 18:09:35 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,32 @@
 
 static bool	check_errors(t_token *cur)
 {
+	if (cur->prev && cur->prev->type == LPAR && cur->type == RPAR)
+		return (check_type(cur), false);
+	if (!cur->prev && (is_operator(cur->type) || cur->type == RPAR))
+	{
+		return (check_type(cur), false);
+	}
 	if (is_operator(cur->type)
-		&& (!cur->next || is_operator(cur->next->type)))
+		&& (!cur->next || is_operator(cur->next->type)
+			|| cur->next->type == RPAR))
 	{
 		if (cur->next)
-			check_type(cur->next->type);
-		else
-			check_type(cur->type);
-		return (false);
+			return (check_type(cur->next), false);
+		return (check_type(cur), false);
+	}
+	if (cur->type == WORD && cur->next && cur->next->type == LPAR)
+	{
+
+		if (!cur->next->next)
+			return (check_type(cur->next), false);
+		return (check_type(cur->next->next), false);
 	}
 	if ((is_redirect(cur->type)) && (!cur->next || cur->next->type != WORD))
 	{
 		if (cur->next)
-			check_type(cur->next->type);
-		else
-			check_type(END);
-		return (false);
+			return (check_type(cur->next), false);
+		return (check_type(NULL), false);
 	}
 	return (true);
 }
@@ -42,7 +52,7 @@ static bool	check_end(t_token *input)
 	while (last->next)
 		last = last->next;
 	if (is_redirect(last->type) || is_operator(last->type))
-		return (check_type(last->type), false);
+		return (check_type(last), false);
 	return (true);
 }
 
@@ -51,14 +61,12 @@ static t_token	*condition(t_token **st, t_token **after, t_token *tmp, bool *v)
 	bool	res;
 
 	*after = tmp->next;
-	if (tmp->prev)
-		tmp->prev->next = NULL;
+	tmp->next = NULL;
 	if (*st)
 		res = syntax_validation(*st);
 	else
 		res = true;
-	if (tmp->prev)
-		tmp->prev->next = tmp;
+	tmp->next = *after;
 	if (!res)
 		return (*v = false, NULL);
 	return (*after);
@@ -81,15 +89,13 @@ static t_token	*check_subshell(t_token *tmp, bool *valid, int *depth)
 		else if (tmp->type == RPAR)
 		{
 			--(*depth);
-			if (*depth < 0)
-				return (*valid = false, check_type(RPAR), NULL);
 			if (*depth == 0)
 				return (condition(&start, &after, tmp, valid));
 		}
 		tmp = tmp->next;
 	}
 	if (*depth > 0)
-		return (check_type(LPAR), *valid = false, NULL);
+		return (check_type(NULL), *valid = false, NULL);
 	return (NULL);
 }
 
@@ -98,11 +104,9 @@ bool	syntax_validation(t_token *input)
 	t_token	*cur;
 	bool	valid;
 	int		depth;
-
+	
 	if (!input)
 		return (true);
-	if (is_operator(input->type) || input->type == RPAR)
-		return (check_type(input->type), false);
 	cur = input;
 	while (cur)
 	{
@@ -113,8 +117,6 @@ bool	syntax_validation(t_token *input)
 				return (false);
 			continue ;
 		}
-		else if (cur->type == RPAR)
-			return (check_type(RPAR), false);
 		if (!check_errors(cur))
 			return (false);
 		cur = cur->next;

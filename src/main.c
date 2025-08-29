@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:16:42 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/08/29 00:38:22 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/29 18:10:34 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	main(int argc, char **argv, char **envp)
 		mish->token = lexer(mish->input);
 		mish->free_token = mish->token;
 		//print_tokens(mish->token);
-		if (!syntax_validation(mish->token))
+		if (!syntax_check(mish->token))
 		{
 			free_all(mish);
 			continue ;

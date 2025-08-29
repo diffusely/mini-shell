@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_ast.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 17:02:07 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/28 18:56:30 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/29 20:25:31 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,25 @@ static t_ast	*parse_factor(t_token **tokens)
 {
 	t_ast	*sub;
 	t_ast	*node;
+	t_token	*r_tok;
 
 	if (*tokens && (*tokens)->type == LPAR)
 	{
 		*tokens = (*tokens)->next;
 		sub = create_tree(tokens);
-		*tokens = (*tokens)->next;
+		if (*tokens && (*tokens)->type == RPAR)
+			*tokens = (*tokens)->next;
 		node = create_node(NODE_SUB, NULL, sub);
+		while (*tokens && is_redirect((*tokens)->type))
+		{
+			r_tok = *tokens;
+			*tokens = (*tokens)->next;
+			if (*tokens)
+			{
+				add_redir(node, r_tok->type, *tokens);
+				*tokens = (*tokens)->next;
+			}
+		}
 		return (node);
 	}
 	return (parse_cmd(tokens));
@@ -108,7 +120,7 @@ static t_ast	*parse_cmd(t_token **tokens)
 		*tokens = (*tokens)->next;
 		add_redir(node, r_tok->type, *tokens);
 		if (*tokens)
-			*tokens = (*tokens)->next;
+			*tokens = (*tokens)->next;			
 	}
 	return (node);
 }
