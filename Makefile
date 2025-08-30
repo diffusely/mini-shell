@@ -14,8 +14,8 @@ SHELL_DIR	= $(SRC_DIR)shell/
 MSG_DIR		= $(SRC_DIR)exit_msg/
 AST_DIR		= $(SRC_DIR)ast/
 PARSE_DIR	= $(SRC_DIR)parse/
-EXEC_DIR	= $(SRC_DIR)exec/
 ENV_DIR		= $(SRC_DIR)env/
+BUILT_DIR	= $(SRC_DIR)builtins/
 
 SRC 		= $(SRC_DIR)main.c \
 			  $(LEX_DIR)lexer.c \
@@ -33,10 +33,13 @@ SRC 		= $(SRC_DIR)main.c \
 			  $(SHELL_DIR)history.c \
 			  $(SHELL_DIR)utils.c \
 			  $(SHELL_DIR)get_path.c \
-			  $(EXEC_DIR)exec_cd.c \
-			  $(EXEC_DIR)exec_pwd.c \
-			  $(EXEC_DIR)exec_env.c \
-			  $(ENV_DIR)init_env.c
+			  $(BUILT_DIR)exec_cd.c \
+			  $(BUILT_DIR)exec_pwd.c \
+			  $(BUILT_DIR)exec_env.c \
+			  $(BUILT_DIR)exec_echo.c \
+			  $(BUILT_DIR)utils.c \
+			  $(ENV_DIR)init_env.c 
+			  
 
 
 

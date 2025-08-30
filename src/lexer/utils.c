@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 01:26:47 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/30 15:36:43 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/30 21:55:40 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,14 @@ bool	is_and(const char *line, int i)
 	if (line[i] && line[i + 1] && line[i] == '&' && line[i + 1] == '&')
 		return (true);
 	return (false);
+}
+
+void	check_type(t_token *tok)
+{
+	ft_err("minishell: syntax error near unexpected token `");
+	if (tok)
+		ft_err(tok->value);
+	else
+		ft_err("newline");
+	ft_err("'\n");
 }

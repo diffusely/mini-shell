@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:16:42 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/08/30 20:29:07 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/30 22:23:49 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,19 +67,18 @@ int	main(int argc, char **argv, char **envp)
 		//refresh_env_matrix(&mish);
 
 		//print_ast(mish->tree, 0);
-		exec_ast(mish, envp);
-		//printf("exit\n");
-		if (!ft_strncmp(mish->input, "e", 1))
-		{
-			free_all(mish);
-			break ;
-		}
+		exec_ast(mish);
 
-		if(!check_builtins(mish->input, &mish->list_env))
-		{
-			free_all(mish);
-			break ;
-		}
+
+
+		
+		//printf("exit\n");
+		// if (!ft_strncmp(mish->input, "e", 1))
+		// {
+		// 	free_all(mish);
+		// 	break ;
+		// }
+
 		free_all(mish);
 	}
 	free(mish->env);

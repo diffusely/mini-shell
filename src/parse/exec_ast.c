@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 15:48:25 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/30 20:39:28 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/30 22:18:26 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void exec_cmd(char *cmd, char *args[], char *envp[])
 		error_handle("fork error\n", 0);
 }
 
-void	exec_ast(t_shell *mish, char **env)
+void	exec_ast(t_shell *mish)
 {
 	char	*path;
 	if (!mish->tree)
@@ -39,7 +39,8 @@ void	exec_ast(t_shell *mish, char **env)
 	if (mish->tree->type == NODE_CMD)
 	{
 		path = get_path(mish, mish->tree->cmd[0]);
-		exec_cmd(path, mish->tree->cmd, env);
+		if (!check_builtins(mish->tree->cmd[0], &mish->list_env))
+			exec_cmd(path, mish->tree->cmd, mish->env);
 		free(path);
 	}
 }

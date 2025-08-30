@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 20:59:16 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/29 16:53:39 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/30 21:55:37 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,4 @@ int	is_space_or_newline(char *input)
 		input++;
 	}
 	return (true);
-}
-
-void	check_type(t_token *tok)
-{
-	ft_err("minishell: syntax error near unexpected token `");
-	if (tok)
-		ft_err(tok->value);
-	else
-		ft_err("newline");
-	ft_err("'\n");
 }

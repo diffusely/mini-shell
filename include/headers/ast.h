@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:27:11 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/08/30 19:01:17 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/30 20:48:42 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,6 @@ void	add_redir(t_ast *node, t_token_type type, t_token *t);
 void	print_ast(t_ast *node, int depth);
 
 // Exec ast
-void	exec_ast(t_shell *mish, char **env);
+void	exec_ast(t_shell *mish);
 
 #endif

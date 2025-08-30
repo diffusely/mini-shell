@@ -6,21 +6,11 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:19:55 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/08/30 20:30:15 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/30 22:18:04 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
-
-int	find_word_place(char *word)
-{
-	int	i;
-
-	i = 0;
-	while (word[i] && word[i] != '=')
-		i++;
-	return (i);
-}
 
 bool	remove_list(const char *input, t_list **envp_list)
 {
@@ -91,24 +81,4 @@ t_list* init_env(char **envp)
 		}
 	}
 	return (list_env);
-}
-
-bool	check_builtins(char *cmd, t_list **list_env)
-{
-	while (cmd && *cmd && ft_isspace(*cmd))
-		cmd++;
-	if (!ft_strncmp(cmd, "cd", 2))
-		return (exec_cd(cmd, list_env));
-	else if (!ft_strncmp(cmd, "echo", 4))
-		return (true);
-	else if (!ft_strncmp(cmd, "echo", 4))
-		return (true);
-	else if (!ft_strncmp(cmd, "unset", 5))
-		return(check_unset(cmd, list_env));
-	else if (!ft_strncmp(cmd, "export", 6))
-		return (true);
-	else if (!ft_strncmp(cmd, "env", 3))
-		return (exec_env(cmd, list_env));
-	else
-		return (true);
 }
