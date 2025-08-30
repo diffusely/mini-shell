@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 15:48:25 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/30 22:18:26 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/30 22:55:51 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	exec_ast(t_shell *mish)
 	if (mish->tree->type == NODE_CMD)
 	{
 		path = get_path(mish, mish->tree->cmd[0]);
-		if (!check_builtins(mish->tree->cmd[0], &mish->list_env))
+		if (!check_builtins(mish->tree->cmd, &mish->list_env))
 			exec_cmd(path, mish->tree->cmd, mish->env);
 		free(path);
 	}

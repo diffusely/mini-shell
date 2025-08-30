@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 21:27:32 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/30 22:03:40 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/30 23:23:37 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,6 @@ void	print_env(t_list *env);
 
 // Utils
 int		find_word_place(char *word);
-bool	check_builtins(char *cmd, t_list **envp_list);
+bool	check_builtins(char **cmd, t_list **envp_list);
 
 #endif

@@ -6,11 +6,11 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 14:20:25 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/08/30 22:21:01 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/30 22:46:43 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
+#include "builtins.h"
 
 static char*	check(char *input, bool *new_line)
 {

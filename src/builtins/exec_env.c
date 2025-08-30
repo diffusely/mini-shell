@@ -6,11 +6,11 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 12:39:23 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/08/30 22:05:11 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/30 22:46:45 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
+#include "builtins.h"
 
 void	print_env(t_list *env)
 {

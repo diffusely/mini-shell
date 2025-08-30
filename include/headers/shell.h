@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:26:24 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/08/30 22:19:02 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/30 23:24:26 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,10 @@ int		is_space_or_newline(char *input);
 void	print_env(t_list *env);
 
 // Commands
-bool	exec_pwd(const char *path);
-bool	exec_cd(const char *input, t_list **envp_list);
-bool	exec_env(char *input, t_list **list_env);
 bool	check_unset(char *input, t_list **env_list);
 t_list	*init_env(char **envp);
 
 // void	exec_home(const char *input);
-bool	check_builtins(char *cmd, t_list **list_env);
 bool	remove_list(const char *input, t_list **envp_list);
 
 // Utils

@@ -6,11 +6,11 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 12:35:24 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/08/30 22:19:21 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/30 23:05:52 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
+#include "builtins.h"
 
 static bool	find_list(const char *input, t_list **envp_list)
 {
@@ -33,9 +33,6 @@ static bool	find_list(const char *input, t_list **envp_list)
 
 bool	exec_cd(const char *input, t_list **envp_list)
 {
-	input += 2;
-	while (*input && ft_isspace(*input))
-		input++;
 	if (!(*input))
 	{
 		if (find_list("HOME", envp_list) && chdir(getenv("HOME")) == 0)
