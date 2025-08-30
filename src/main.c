@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:16:42 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/08/30 00:48:37 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/30 20:29:07 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	mish = ft_calloc(1, sizeof(t_shell));
 	mish->list_env = init_env(envp);
+	mish->env = init_env_matrix(mish->list_env);
+	
 	
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, SIG_IGN);
@@ -53,15 +55,20 @@ int	main(int argc, char **argv, char **envp)
 		
 		mish->token = lexer(mish->input);
 		mish->free_token = mish->token;
-		print_tokens(mish->token);
+		//print_tokens(mish->token);
 		if (!syntax_check(mish->token))
 		{
 			free_all(mish);
 			continue ;
 		}
 		mish->tree = create_tree(&mish->token);
-		print_ast(mish->tree, 0);
 		
+		//print_env_matrix(mish->env);
+		//refresh_env_matrix(&mish);
+
+		//print_ast(mish->tree, 0);
+		exec_ast(mish, envp);
+		//printf("exit\n");
 		if (!ft_strncmp(mish->input, "e", 1))
 		{
 			free_all(mish);
@@ -75,6 +82,7 @@ int	main(int argc, char **argv, char **envp)
 		}
 		free_all(mish);
 	}
+	free(mish->env);
 	ft_lstclear(&mish->list_env);
 	free(mish);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:26:24 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/08/30 15:40:51 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/30 20:08:57 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <sys/wait.h>
 # include <signal.h>
 # include <fcntl.h>
 # include <unistd.h>
@@ -30,6 +31,7 @@ typedef enum e_token_type	t_token_type;
 
 typedef struct s_shell
 {
+	char	**env;
 	t_token	*token;
 	t_token	*free_token;
 	char	*input;
@@ -66,5 +68,13 @@ bool	is_operator(t_token_type type);
 bool	is_subshell(t_token_type type);
 void	check_type(t_token *tok);
 bool	check_quoted(const char *input);
+
+// Path
+char	*get_path(t_shell *mish, char *cmd);
+
+// Env
+void	print_env_matrix(char **env);
+char	**init_env_matrix(t_list *env);
+void	refresh_env_matrix(t_shell **shell);
 
 #endif

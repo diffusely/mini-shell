@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:27:11 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/08/28 18:57:36 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/30 19:01:17 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 # define AST_H
 
 # include "lexer.h"
+# include "shell.h"
 
 typedef struct s_token		t_token;
+typedef struct s_shell		t_shell;
 typedef enum e_token_type	t_token_type;
 
 typedef enum e_node
@@ -64,7 +66,7 @@ void	add_redir(t_ast *node, t_token_type type, t_token *t);
 // Print ast
 void	print_ast(t_ast *node, int depth);
 
-// Validation
-bool	validate_ast(t_ast *node);
+// Exec ast
+void	exec_ast(t_shell *mish, char **env);
 
 #endif

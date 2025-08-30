@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 18:48:53 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/29 20:06:09 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/30 16:20:32 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,7 @@ void print_ast(t_ast *node, int depth)
     else if (node->type == NODE_SUB)
     {
         printf("SUBSHELL\n");
-        // печатаем редиректы у SUBSHELL тоже
-        print_redir(node->redirs, depth + 1);
+		print_redir(node->redirs, depth + 1);
     }
     else if (node->type == NODE_CMD)
     {

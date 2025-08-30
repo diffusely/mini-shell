@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:41:41 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/30 15:36:17 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/30 15:50:51 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,5 @@ void		print_tokens(t_token *lexer);
 void		init_sub_val(t_token **st, t_token **a, int *d, bool *v);
 bool		syntax_check(t_token *input);
 bool		is_and(const char *line, int i);
+
 #endif

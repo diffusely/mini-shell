@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:19:55 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/08/27 21:08:12 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/30 20:30:15 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ t_list* init_env(char **envp)
 
 bool	check_builtins(char *cmd, t_list **list_env)
 {
-	while (*cmd && ft_isspace(*cmd))
+	while (cmd && *cmd && ft_isspace(*cmd))
 		cmd++;
 	if (!ft_strncmp(cmd, "cd", 2))
 		return (exec_cd(cmd, list_env));
