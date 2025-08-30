@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:26:24 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/08/29 16:55:48 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/30 15:40:51 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_ast		t_ast;
 typedef struct s_token		t_token;
 typedef enum e_token_type	t_token_type;
 
-typedef struct	s_shell
+typedef struct s_shell
 {
 	t_token	*token;
 	t_token	*free_token;
@@ -65,5 +65,6 @@ bool	is_redirect(t_token_type type);
 bool	is_operator(t_token_type type);
 bool	is_subshell(t_token_type type);
 void	check_type(t_token *tok);
+bool	check_quoted(const char *input);
 
 #endif

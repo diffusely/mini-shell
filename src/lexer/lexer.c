@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 17:06:06 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/14 21:03:44 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/30 15:36:59 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ static char	*word_dup(int *i, const char *line)
 	int	start;
 
 	start = *i;
-	while (!ft_strchr("&|><()", line[*i]) && line[*i] != ' ')
+	while (!is_and(line, *i) && !ft_strchr("|><()", line[*i])
+		&& line[*i] != ' ')
 	{
 		if (line[*i] == '"')
 		{
