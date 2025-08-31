@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 20:30:27 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/31 19:09:11 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/31 19:45:44 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,5 @@ void	init_node(t_ast **node, t_token *tokens, int count)
 	(*node)->type = NODE_CMD;
 	(*node)->left = NULL;
 	(*node)->right = NULL;
+	(*node)->redirs = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 15:48:25 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/31 19:23:50 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/31 20:39:13 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ static int	exec_pipe(t_shell *mish, t_ast *left, t_ast *right)
 	char	*path_right;
 
 	if (pipe(fd) == -1)
-		error_handle("minishell: fork error\n", 0);
+		error_handle("minishell: pip error\n", 0);
 	pid1 = fork();
 	if (pid1 == -1)
 		error_handle("minishell: fork error\n", 0);
@@ -143,6 +143,66 @@ static int	exec_pipe(t_shell *mish, t_ast *left, t_ast *right)
 	return (check_pipe_status(fd, pid1, pid2));
 }
 
+int	exec_redir(t_shell *mish, t_ast *redir)
+{
+	t_redir	*r;
+	int		fd;
+	int		status;
+	pid_t	pid;
+
+	r = redir->redirs;
+	pid = fork();
+	if (pid == -1)
+		error_handle("minishell: fork error\n", 0);
+
+	if (pid == 0)
+	{
+		while (r)
+		{
+			if (r->type == R_OUT)
+				fd = open(r->filename, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+			else if (r->type == R_APPEND)
+				fd = open(r->filename, O_CREAT | O_WRONLY | O_APPEND, 0644);
+			else if (r->type == R_IN)
+				fd = open(r->filename, O_RDONLY);
+
+
+			if (fd < 0)
+			{
+				ft_err("minishell: ");
+				ft_err(r->filename);
+				ft_err(" error\n");
+				exit(1);
+			}
+
+			if (r->type == R_OUT || r->type == R_APPEND)
+				dup2(fd, STDOUT_FILENO);
+			else
+				dup2(fd, STDIN_FILENO);
+
+			close(fd);
+
+			char *path = NULL;
+			
+			if (mish->tree->cmd[0] && mish->tree->cmd[0][0])
+				path = get_path(mish, mish->tree->cmd[0]);
+			status = exec_cmd(path, mish->tree->cmd, mish->env);
+			if (path)
+				free(path);
+
+
+			r = r->next;
+		}
+
+		exit(status);
+	}
+
+	waitpid(pid, &status, 0);
+	if (WIFEXITED(status))
+		return WEXITSTATUS(status);
+	return 1;
+}
+
 int exec_ast(t_shell *mish)
 {
 	char *path;
@@ -153,14 +213,23 @@ int exec_ast(t_shell *mish)
 	path = NULL;
 	if (mish->tree->type == NODE_CMD)
 	{
+		
 		if (!check_builtins(mish->tree->cmd, &mish->list_env))
 		{
-			if (mish->tree->cmd[0] && mish->tree->cmd[0][0])
-				path = get_path(mish, mish->tree->cmd[0]);
-			status = exec_cmd(path, mish->tree->cmd, mish->env);
-			if (path)
-				free(path);
+			if (mish->tree->redirs)
+				return exec_redir(mish, mish->tree);
+			else
+			{
+				if (mish->tree->cmd[0] && mish->tree->cmd[0][0])
+					path = get_path(mish, mish->tree->cmd[0]);
+				status = exec_cmd(path, mish->tree->cmd, mish->env);
+				if (path)
+					free(path);
+			}
 		}
+
+		
+		
 		return status;
 	}
 	else if (mish->tree->type == NODE_PIP)
