@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 21:27:32 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/30 23:23:37 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/31 01:21:00 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 typedef struct s_list	t_list;
 
 // Exec
-bool	exec_cd(const char *input, t_list **envp_list);
+bool	exec_cd(char *input, t_list **envp_list);
 bool	exec_echo(char *input, t_list **list_env);
 bool	exec_env(char *input, t_list **list_env);
 bool	exec_pwd(const char *input);

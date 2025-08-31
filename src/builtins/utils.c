@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 21:27:14 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/30 23:24:36 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/31 01:00:18 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,28 @@ int	find_word_place(char *word)
 
 bool	check_builtins(char **cmd, t_list **envp)
 {
+	char	*tmp;
+
 	if (!cmd || !(*cmd))
 		return (false);
-	while (**cmd && ft_isspace(**cmd))
-		(*cmd)++;
+	tmp = *cmd;
+	while (*tmp && is_quoted(*tmp))
+		tmp++;
+	if (*tmp == ' ')
+		return (false);
 	// if (!ft_strncmp(*cmd, "echo", 4))
-	// 	return (exec_echo(cmd, envp));
-	if (cmd[1] && !ft_strncmp(*cmd, "cd", 2))
+	// 	return (exec_echo(tmp, envp));
+	if (tmp[1] && !ft_strncmp(tmp, "cd", 2))
 		return (exec_cd(cmd[1], envp));
-	else if (!ft_strncmp(*cmd, "pwd", 3))
-		return (exec_pwd(*cmd));
-	else if (!ft_strncmp(*cmd, "export", 6))
+	else if (!ft_strncmp(tmp, "pwd", 3))
+		return (exec_pwd(tmp));
+	else if (!ft_strncmp(tmp, "export", 6))
 		return (true);
-	else if (!ft_strncmp(*cmd, "unset", 5))
+	else if (!ft_strncmp(tmp, "unset", 5))
 		return (true);
-	// else if (!ft_strncmp(*cmd, "env", 3))
-	// 	return (exec_env(cmd ,envp));
-	else if (!ft_strncmp(*cmd, "exit", 4))
+	else if (!ft_strncmp(tmp, "env", 3))
+		return (exec_env(tmp ,envp));
+	else if (!ft_strncmp(tmp, "exit", 4))
 		return (true);
 	return (false);
 }

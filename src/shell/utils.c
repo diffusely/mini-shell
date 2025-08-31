@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 20:59:16 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/30 21:55:37 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/31 00:46:47 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ bool	is_operator(t_token_type type)
 bool	is_subshell(t_token_type type)
 {
 	return (type == RPAR || type == LPAR);
+}
+
+bool	is_quoted(char c)
+{
+	return (c == '"' || c == '\'');
 }
 
 int	is_space_or_newline(char *input)

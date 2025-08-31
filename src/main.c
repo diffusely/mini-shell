@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:16:42 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/08/30 22:23:49 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/31 17:46:24 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(int argc, char **argv, char **envp)
 	mish->list_env = init_env(envp);
 	mish->env = init_env_matrix(mish->list_env);
 	
-	
+	mish->tree = NULL;
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
@@ -67,7 +67,7 @@ int	main(int argc, char **argv, char **envp)
 		//refresh_env_matrix(&mish);
 
 		//print_ast(mish->tree, 0);
-		exec_ast(mish);
+		mish->status = exec_ast(mish);
 
 
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_ast.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 17:02:07 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/29 20:25:31 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/31 17:33:19 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ static t_ast	*parse_cmd(t_token **tokens)
 		*tokens = (*tokens)->next;
 		add_redir(node, r_tok->type, *tokens);
 		if (*tokens)
-			*tokens = (*tokens)->next;			
+			*tokens = (*tokens)->next;
 	}
 	return (node);
 }

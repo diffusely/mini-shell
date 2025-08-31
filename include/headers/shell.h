@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:26:24 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/08/30 23:24:26 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/31 17:45:02 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,15 @@ typedef enum e_token_type	t_token_type;
 typedef struct s_shell
 {
 	char	**env;
+	
 	t_token	*token;
 	t_token	*free_token;
-	char	*input;
+
 	t_ast	*tree;
+	
+	char	*input;
+	int		status;
+	
 	t_list	*list_env;
 }	t_shell;
 
@@ -63,6 +68,7 @@ bool	remove_list(const char *input, t_list **envp_list);
 bool	is_redirect(t_token_type type);
 bool	is_operator(t_token_type type);
 bool	is_subshell(t_token_type type);
+bool	is_quoted(char c);
 bool	check_quoted(const char *input);
 
 // Path

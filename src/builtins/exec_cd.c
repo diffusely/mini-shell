@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 12:35:24 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/08/30 23:05:52 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/31 01:20:44 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,17 @@ static bool	find_list(const char *input, t_list **envp_list)
 	return (false);
 }
 
-bool	exec_cd(const char *input, t_list **envp_list)
+bool	exec_cd(char *input, t_list **envp_list)
 {
+	int	i;
+
+	while (*input && is_quoted(*input))
+		++input;
+	i = 0;
+	while (input[i] && !is_quoted(input[i]))
+		++i;
+	if (input[i])
+		input[i] = '\0';
 	if (!(*input))
 	{
 		if (find_list("HOME", envp_list) && chdir(getenv("HOME")) == 0)
