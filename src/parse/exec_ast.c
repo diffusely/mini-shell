@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 15:48:25 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/31 18:25:46 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/31 19:23:50 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	exec_cmd(char *cmd, char **args, char **envp)
 	{
 		if (execve(cmd, args, envp) == -1)
 		{
-			if (args[0])
+			if (args[0] && args[0][0])
 				ft_err(args[0]);
 			ft_err(": command not found\n");
 			exit(127);
@@ -111,7 +111,7 @@ static int	exec_pipe(t_shell *mish, t_ast *left, t_ast *right)
 			path_left = get_path(mish, left->cmd[0]);
 			execve(path_left, left->cmd, mish->env);
 			free(path_left);
-			if (left->cmd[0])
+			if (left->cmd[0] && left->cmd[0][0])
 				ft_err(left->cmd[0]);
 			error_handle(": command not found\n", 1);
 		}
@@ -134,7 +134,7 @@ static int	exec_pipe(t_shell *mish, t_ast *left, t_ast *right)
 			path_right = get_path(mish, right->cmd[0]);
 			execve(path_right, right->cmd, mish->env);
 			free(path_right);
-			if (right->cmd[0])
+			if (right->cmd[0] && right->cmd[0][0])
 				ft_err(right->cmd[0]);
 			error_handle(": command not found\n", 1);
 		}
@@ -150,14 +150,16 @@ int exec_ast(t_shell *mish)
 
 	if (!mish->tree)
 		return 0;
-
+	path = NULL;
 	if (mish->tree->type == NODE_CMD)
 	{
 		if (!check_builtins(mish->tree->cmd, &mish->list_env))
 		{
-			path = get_path(mish, mish->tree->cmd[0]);
+			if (mish->tree->cmd[0] && mish->tree->cmd[0][0])
+				path = get_path(mish, mish->tree->cmd[0]);
 			status = exec_cmd(path, mish->tree->cmd, mish->env);
-			free(path);
+			if (path)
+				free(path);
 		}
 		return status;
 	}

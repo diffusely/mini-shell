@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 21:27:14 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/31 01:00:18 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/31 19:24:01 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ bool	check_builtins(char **cmd, t_list **envp)
 {
 	char	*tmp;
 
-	if (!cmd || !(*cmd))
+	if (!cmd || !cmd[0] || !cmd[0][0] == '\0')
 		return (false);
 	tmp = *cmd;
 	while (*tmp && is_quoted(*tmp))

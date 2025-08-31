@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:16:42 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/08/31 18:23:27 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/31 19:12:10 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	main(int argc, char **argv, char **envp)
 	{
 		mish->input = readline("minishell$ ");
 		if (!mish->input)
-			break ; 
+			break ;
 		if (!*mish->input)
 		{
 			if (is_space_or_newline(mish->input))

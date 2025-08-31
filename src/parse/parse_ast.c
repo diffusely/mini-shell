@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 17:02:07 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/31 17:33:19 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/31 19:10:41 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ t_ast	*create_tree(t_token **tokens)
 	t_ast	*left;
 	t_ast	*right;
 
+	if (!tokens || !*tokens)
+		return (NULL);
 	left = parse_and(tokens);
 	while (*tokens && (*tokens)->type == OR)
 	{

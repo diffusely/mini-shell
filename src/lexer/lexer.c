@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 17:06:06 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/30 15:36:59 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/31 19:00:53 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static char	*word_dup(int *i, const char *line)
 	int	start;
 
 	start = *i;
-	while (!is_and(line, *i) && !ft_strchr("|><()", line[*i])
+	while (line[*i] && !is_and(line, *i) && !ft_strchr("|><()", line[*i])
 		&& line[*i] != ' ')
 	{
 		if (line[*i] == '"')
@@ -85,7 +85,8 @@ static char	*word_dup(int *i, const char *line)
 			while (line[*i] && line[*i] != '\'')
 				++(*i);
 		}
-		++(*i);
+		if (line[*i])
+			++(*i);
 	}
 	return (ft_substr(line, start, *i - start));
 }
