@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 15:48:25 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/31 18:08:47 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/31 18:25:46 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	exec_ast_subtree(t_shell *mish, t_ast *subtree)
 
 	temp = *mish;
 	temp.tree = subtree;
-	return exec_ast(&temp);
+	return (exec_ast(&temp));
 }
 
 static int	exec_cmd(char *cmd, char **args, char **envp)
@@ -103,6 +103,8 @@ static int	exec_pipe(t_shell *mish, t_ast *left, t_ast *right)
 		dup2(fd[1], STDOUT_FILENO);
 		close(fd[1]);
 
+		if (left->type == NODE_PIP)
+			exit(exec_pipe(mish, left->left, left->right));
 		
 		if (!check_builtins(left->cmd, &mish->list_env))
 		{
@@ -161,8 +163,8 @@ int exec_ast(t_shell *mish)
 	}
 	else if (mish->tree->type == NODE_PIP)
 	{
-		exec_pipe(mish, mish->tree->left, mish->tree->right);
-		return 0;
+		status = exec_pipe(mish, mish->tree->left, mish->tree->right);
+		return status;
 	}
 	else if (mish->tree->type == NODE_AND)
 	{
