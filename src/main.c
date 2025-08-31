@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:16:42 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/08/31 20:40:21 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/31 20:43:09 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	main(int argc, char **argv, char **envp)
 		
 		mish->token = lexer(mish->input);
 		mish->free_token = mish->token;
-		print_tokens(mish->token);
+		//print_tokens(mish->token);
 		if (!syntax_check(mish->token))
 		{
 			free_all(mish);
@@ -66,7 +66,7 @@ int	main(int argc, char **argv, char **envp)
 		//print_env_matrix(mish->env);
 		//refresh_env_matrix(&mish);
 
-		print_ast(mish->tree, 0);
+		//print_ast(mish->tree, 0);
 		mish->status = exec_ast(mish);
 
 

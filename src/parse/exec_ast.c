@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 15:48:25 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/31 20:39:13 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/08/31 20:52:18 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,7 +186,8 @@ int	exec_redir(t_shell *mish, t_ast *redir)
 			
 			if (mish->tree->cmd[0] && mish->tree->cmd[0][0])
 				path = get_path(mish, mish->tree->cmd[0]);
-			status = exec_cmd(path, mish->tree->cmd, mish->env);
+			if (mish->tree->cmd && mish->tree->cmd[0][0] != '\0')
+				status = exec_cmd(path, mish->tree->cmd, mish->env);
 			if (path)
 				free(path);
 
@@ -227,9 +228,6 @@ int exec_ast(t_shell *mish)
 					free(path);
 			}
 		}
-
-		
-		
 		return status;
 	}
 	else if (mish->tree->type == NODE_PIP)
