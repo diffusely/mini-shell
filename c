@@ -1,0 +1,12 @@
+a
+b
+c
+history.txt
+ignore_readline.supp
+include
+lib
+Makefile
+minishell
+out.txt
+README.md
+src

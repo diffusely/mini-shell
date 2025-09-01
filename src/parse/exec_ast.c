@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 15:48:25 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/01 20:09:44 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/01 22:10:32 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ static int	exec_sub(t_shell *mish)
 {
 	pid_t	pid;
 	int		status;
+	t_ast	*tree;
 
 	pid = fork();
 	if (pid == -1)
@@ -63,9 +64,9 @@ static int	exec_sub(t_shell *mish)
 	{
 		if (mish->tree->redirs)
 		{
-			t_shell *m = mish;
-			m->tree = m->tree->left;
-			status = exec_redir(m, mish->tree);
+			tree = mish->tree;
+			mish->tree = mish->tree->left;
+			status = exec_redir(mish, tree);
 		}
 		else
 			status = exec_ast_subtree(mish, mish->tree->left);
@@ -184,8 +185,8 @@ int	exec_redir(t_shell *mish, t_ast *redir)
 			if (fd < 0)
 			{
 				ft_err("minishell: ");
-				ft_err(r->filename);
-				ft_err(" error\n");
+				perror(r->filename);
+				free_all(mish);	
 				exit(1);
 			}
 
