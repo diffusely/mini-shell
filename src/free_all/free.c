@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 22:23:48 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/30 20:12:39 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/01 20:08:48 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "free.h"
 
-void	free_all(t_shell *mish)
+void	free_mish(t_shell *mish)
 {
 	if (mish->tree)
 	{
@@ -31,48 +31,14 @@ void	free_all(t_shell *mish)
 	}
 }
 
-void	free_split(char **str)
+void	free_all(t_shell *mish)
 {
-	int	i;
-
-	i = 0;
-	if (!str)
-		return ;
-	while (str[i])
-		free(str[i++]);
-	free(str);
-	str = NULL;
-}
-
-void	free_tokens(t_token *tokens)
-{
-	t_token	*temp;
-
-	if (!tokens)
-		return ;
-	while (tokens)
+	if (mish)
 	{
-		temp = tokens;
-		tokens = tokens->next;
-		free(temp->value);
-		temp->value = NULL;
-		free(temp);
-		temp = NULL;
-	}
-}
-
-void	free_redirs(t_redir *redir)
-{
-	t_redir	*tmp;
-
-	while (redir)
-	{
-		tmp = redir->next;
-		free(redir->filename);
-		redir->filename = NULL;
-		free(redir);
-		redir = NULL;
-		redir = tmp;
+		free_mish(mish);
+		free(mish->env);
+		ft_lstclear(&mish->list_env);
+		free(mish);
 	}
 }
 

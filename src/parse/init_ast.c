@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_ast.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 20:30:27 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/31 19:45:44 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/01 18:00:26 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_ast	*create_node(t_node_type type, t_ast *right, t_ast *left)
 void	add_redir(t_ast *node, t_token_type type, t_token *t)
 {
 	t_redir	*redir;
+	t_redir	*tmp;
 
 	if (!t)
 		return ;
@@ -42,8 +43,16 @@ void	add_redir(t_ast *node, t_token_type type, t_token *t)
 	else
 		redir->type = R_APPEND;
 	redir->filename = ft_strdup(t->value);
-	redir->next = node->redirs;
-	node->redirs = redir;
+	redir->next = NULL;
+	if (!node->redirs)
+    	node->redirs = redir;
+	else
+	{
+		tmp = node->redirs;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = redir;
+	}
 }
 
 void	init_node(t_ast **node, t_token *tokens, int count)

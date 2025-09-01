@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:16:42 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/08/31 20:43:09 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/01 19:56:41 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	main(int argc, char **argv, char **envp)
 		//print_tokens(mish->token);
 		if (!syntax_check(mish->token))
 		{
-			free_all(mish);
+			free_mish(mish);
 			continue ;
 		}
 		mish->tree = create_tree(&mish->token);
@@ -79,10 +79,8 @@ int	main(int argc, char **argv, char **envp)
 		// 	break ;
 		// }
 
-		free_all(mish);
+		free_mish(mish);
 	}
-	free(mish->env);
-	ft_lstclear(&mish->list_env);
-	free(mish);
+	free_all(mish);
 	return (0);
 }

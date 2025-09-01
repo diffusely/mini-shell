@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 21:27:14 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/31 19:24:01 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/01 16:42:22 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ bool	check_builtins(char **cmd, t_list **envp)
 {
 	char	*tmp;
 
-	if (!cmd || !cmd[0] || !cmd[0][0] == '\0')
+	if (!cmd || !cmd[0] || !cmd[0][0])
 		return (false);
 	tmp = *cmd;
 	while (*tmp && is_quoted(*tmp))

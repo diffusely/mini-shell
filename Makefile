@@ -23,6 +23,7 @@ SRC 		= $(SRC_DIR)main.c \
 			  $(LEX_DIR)syntax_validator.c \
 			  $(LEX_DIR)utils.c \
 			  $(FREE_DIR)free.c \
+			  $(FREE_DIR)utils.c \
 			  $(SHELL_DIR)readline.c\
 			  $(MSG_DIR)error.c \
 			  $(AST_DIR)ast.c \
@@ -73,5 +74,8 @@ fclean: 	clean
 			$(RM) $(NAME)
 
 re:			fclean all
+
+valgrind:
+			valgrind --track-origins=yes --leak-check=full --show-leak-kinds=all --track-fds=yes --suppressions=ignore_readline.supp ./minishell
 
 .PHONY:	all clean fclean re

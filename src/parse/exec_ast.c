@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec_ast.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 15:48:25 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/31 20:52:18 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/01 20:09:44 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ast.h"
+
+int	exec_redir(t_shell *mish, t_ast *redir);
 
 static int	exec_ast_subtree(t_shell *mish, t_ast *subtree)
 {
@@ -21,7 +23,7 @@ static int	exec_ast_subtree(t_shell *mish, t_ast *subtree)
 	return (exec_ast(&temp));
 }
 
-static int	exec_cmd(char *cmd, char **args, char **envp)
+static int	exec_cmd(t_shell *mish, char *cmd, char **args, char **envp)
 {
 	pid_t	pid;
 	int		status;
@@ -36,6 +38,8 @@ static int	exec_cmd(char *cmd, char **args, char **envp)
 			if (args[0] && args[0][0])
 				ft_err(args[0]);
 			ft_err(": command not found\n");
+			free(cmd);
+			free_all(mish);
 			exit(127);
 		}
 	}
@@ -57,7 +61,14 @@ static int	exec_sub(t_shell *mish)
 		error_handle("minishell: fork error\n", 0);
 	if (pid == 0)
 	{
-		status = exec_ast_subtree(mish, mish->tree->right);
+		if (mish->tree->redirs)
+		{
+			t_shell *m = mish;
+			m->tree = m->tree->left;
+			status = exec_redir(m, mish->tree);
+		}
+		else
+			status = exec_ast_subtree(mish, mish->tree->left);
 		exit(status);
 	}
 	waitpid(pid, &status, 0);
@@ -113,6 +124,7 @@ static int	exec_pipe(t_shell *mish, t_ast *left, t_ast *right)
 			free(path_left);
 			if (left->cmd[0] && left->cmd[0][0])
 				ft_err(left->cmd[0]);
+			free_all(mish);
 			error_handle(": command not found\n", 1);
 		}
 		exit(0);
@@ -136,6 +148,7 @@ static int	exec_pipe(t_shell *mish, t_ast *left, t_ast *right)
 			free(path_right);
 			if (right->cmd[0] && right->cmd[0][0])
 				ft_err(right->cmd[0]);
+			free_all(mish);
 			error_handle(": command not found\n", 1);
 		}
 		exit(0);
@@ -147,8 +160,9 @@ int	exec_redir(t_shell *mish, t_ast *redir)
 {
 	t_redir	*r;
 	int		fd;
-	int		status;
+	int		status = 0;
 	pid_t	pid;
+	char *path = NULL;
 
 	r = redir->redirs;
 	pid = fork();
@@ -181,23 +195,18 @@ int	exec_redir(t_shell *mish, t_ast *redir)
 				dup2(fd, STDIN_FILENO);
 
 			close(fd);
-
-			char *path = NULL;
-			
-			if (mish->tree->cmd[0] && mish->tree->cmd[0][0])
-				path = get_path(mish, mish->tree->cmd[0]);
-			if (mish->tree->cmd && mish->tree->cmd[0][0] != '\0')
-				status = exec_cmd(path, mish->tree->cmd, mish->env);
-			if (path)
-				free(path);
-
-
 			r = r->next;
 		}
 
+		if (mish->tree->cmd[0] && mish->tree->cmd[0][0])
+			path = get_path(mish, mish->tree->cmd[0]);
+		if (mish->tree->cmd && mish->tree->cmd[0][0] != '\0')
+			status = exec_cmd(mish, path, mish->tree->cmd, mish->env);
+		if (path)
+			free(path);
 		exit(status);
 	}
-
+	
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
 		return WEXITSTATUS(status);
@@ -223,7 +232,7 @@ int exec_ast(t_shell *mish)
 			{
 				if (mish->tree->cmd[0] && mish->tree->cmd[0][0])
 					path = get_path(mish, mish->tree->cmd[0]);
-				status = exec_cmd(path, mish->tree->cmd, mish->env);
+				status = exec_cmd(mish, path, mish->tree->cmd, mish->env);
 				if (path)
 					free(path);
 			}
