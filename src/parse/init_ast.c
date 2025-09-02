@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 20:30:27 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/01 18:00:26 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/02 22:00:36 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,34 @@ void	init_node(t_ast **node, t_token *tokens, int count)
 	(*node)->left = NULL;
 	(*node)->right = NULL;
 	(*node)->redirs = NULL;
+}
+
+void	realoc_node(t_ast **node, t_token *tokens, int size)
+{
+	char	**tmp;
+	char	**res;
+	int		count;
+	int		i;
+
+	if (!*node)
+		return ;
+	tmp = (*node)->cmd;
+	count = 0;
+	while (tmp && tmp[count])
+		++count;
+	res = ft_calloc((count + size + 1), sizeof(char *));
+	i = 0;	
+	while (i < count)
+	{
+		res[i] = tmp[i];
+		++i;
+	}
+	free(tmp);
+	while (i < count + size)
+	{
+		res[i++] = ft_strdup(tokens->value);
+		tokens = tokens->next;
+	}
+	(*node)->cmd = res;
+	(*node)->cmd[i] = NULL;
 }

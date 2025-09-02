@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_lexer.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 20:46:25 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/29 00:01:43 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/02 22:36:40 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,18 @@ t_token	*create_token(t_token_type type, char *value)
 	token->next = NULL;
 	token->prev = NULL;
 	return (token);
+}
+
+bool	syntax_help(t_token *cur)
+{
+	if (is_redirect(cur->type) && cur->prev
+		&& cur->prev->type == RPAR
+		&& cur->next->next
+		&& cur->next->next->type == WORD)
+		return (check_type(cur->next->next), false);
+	if (cur->prev && cur->prev->type == LPAR && cur->type == RPAR)
+		return (check_type(cur), false);
+	if (!cur->prev && (is_operator(cur->type) || cur->type == RPAR))
+		return (check_type(cur), false);
+	return (true);
 }

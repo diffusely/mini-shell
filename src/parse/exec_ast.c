@@ -6,213 +6,11 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 15:48:25 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/01 22:10:32 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/02 19:56:20 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ast.h"
-
-int	exec_redir(t_shell *mish, t_ast *redir);
-
-static int	exec_ast_subtree(t_shell *mish, t_ast *subtree)
-{
-	t_shell temp;
-
-	temp = *mish;
-	temp.tree = subtree;
-	return (exec_ast(&temp));
-}
-
-static int	exec_cmd(t_shell *mish, char *cmd, char **args, char **envp)
-{
-	pid_t	pid;
-	int		status;
-
-	pid = fork();
-	if (pid == -1)
-		error_handle("minishell: fork error\n", 0);
-	if (pid == 0)
-	{
-		if (execve(cmd, args, envp) == -1)
-		{
-			if (args[0] && args[0][0])
-				ft_err(args[0]);
-			ft_err(": command not found\n");
-			free(cmd);
-			free_all(mish);
-			exit(127);
-		}
-	}
-	waitpid(pid, &status, 0);
-	if (WIFEXITED(status))
-		status = WEXITSTATUS(status);
-	else
-		status = 1;
-	return (status);
-}
-
-static int	exec_sub(t_shell *mish)
-{
-	pid_t	pid;
-	int		status;
-	t_ast	*tree;
-
-	pid = fork();
-	if (pid == -1)
-		error_handle("minishell: fork error\n", 0);
-	if (pid == 0)
-	{
-		if (mish->tree->redirs)
-		{
-			tree = mish->tree;
-			mish->tree = mish->tree->left;
-			status = exec_redir(mish, tree);
-		}
-		else
-			status = exec_ast_subtree(mish, mish->tree->left);
-		exit(status);
-	}
-	waitpid(pid, &status, 0);
-	if (WIFEXITED(status))
-		status = WEXITSTATUS(status);
-	else
-		status = 1;
-	return (status);
-}
-
-static int	check_pipe_status(int *fd, pid_t pid1, pid_t pid2)
-{
-	int	status1;
-	int	status2;
-
-	close(fd[0]);
-	close(fd[1]);
-	waitpid(pid1, &status1, 0);
-	waitpid(pid2, &status2, 0);
-	if (WIFEXITED(status2))
-		status2 = WEXITSTATUS(status2);
-	else
-		status2 = 1;
-	return (status2);
-}
-
-static int	exec_pipe(t_shell *mish, t_ast *left, t_ast *right)
-{
-	int		fd[2];
-	pid_t	pid1;
-	pid_t	pid2;
-	char	*path_left;
-	char	*path_right;
-
-	if (pipe(fd) == -1)
-		error_handle("minishell: pip error\n", 0);
-	pid1 = fork();
-	if (pid1 == -1)
-		error_handle("minishell: fork error\n", 0);
-	if (pid1 == 0)
-	{
-		close(fd[0]);
-		dup2(fd[1], STDOUT_FILENO);
-		close(fd[1]);
-
-		if (left->type == NODE_PIP)
-			exit(exec_pipe(mish, left->left, left->right));
-		
-		if (!check_builtins(left->cmd, &mish->list_env))
-		{
-			path_left = get_path(mish, left->cmd[0]);
-			execve(path_left, left->cmd, mish->env);
-			free(path_left);
-			if (left->cmd[0] && left->cmd[0][0])
-				ft_err(left->cmd[0]);
-			free_all(mish);
-			error_handle(": command not found\n", 1);
-		}
-		exit(0);
-	}
-
-	pid2 = fork();
-	if (pid2 == -1)
-		error_handle("minishell: fork error\n", 0);
-
-	if (pid2 == 0)
-	{
-		close(fd[1]);
-		dup2(fd[0], STDIN_FILENO);
-		close(fd[0]);
-
-		
-		if (!check_builtins(right->cmd, &mish->list_env))
-		{
-			path_right = get_path(mish, right->cmd[0]);
-			execve(path_right, right->cmd, mish->env);
-			free(path_right);
-			if (right->cmd[0] && right->cmd[0][0])
-				ft_err(right->cmd[0]);
-			free_all(mish);
-			error_handle(": command not found\n", 1);
-		}
-		exit(0);
-	}
-	return (check_pipe_status(fd, pid1, pid2));
-}
-
-int	exec_redir(t_shell *mish, t_ast *redir)
-{
-	t_redir	*r;
-	int		fd;
-	int		status = 0;
-	pid_t	pid;
-	char *path = NULL;
-
-	r = redir->redirs;
-	pid = fork();
-	if (pid == -1)
-		error_handle("minishell: fork error\n", 0);
-
-	if (pid == 0)
-	{
-		while (r)
-		{
-			if (r->type == R_OUT)
-				fd = open(r->filename, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-			else if (r->type == R_APPEND)
-				fd = open(r->filename, O_CREAT | O_WRONLY | O_APPEND, 0644);
-			else if (r->type == R_IN)
-				fd = open(r->filename, O_RDONLY);
-
-
-			if (fd < 0)
-			{
-				ft_err("minishell: ");
-				perror(r->filename);
-				free_all(mish);	
-				exit(1);
-			}
-
-			if (r->type == R_OUT || r->type == R_APPEND)
-				dup2(fd, STDOUT_FILENO);
-			else
-				dup2(fd, STDIN_FILENO);
-
-			close(fd);
-			r = r->next;
-		}
-
-		if (mish->tree->cmd[0] && mish->tree->cmd[0][0])
-			path = get_path(mish, mish->tree->cmd[0]);
-		if (mish->tree->cmd && mish->tree->cmd[0][0] != '\0')
-			status = exec_cmd(mish, path, mish->tree->cmd, mish->env);
-		if (path)
-			free(path);
-		exit(status);
-	}
-	
-	waitpid(pid, &status, 0);
-	if (WIFEXITED(status))
-		return WEXITSTATUS(status);
-	return 1;
-}
 
 int exec_ast(t_shell *mish)
 {
@@ -224,12 +22,16 @@ int exec_ast(t_shell *mish)
 	path = NULL;
 	if (mish->tree->type == NODE_CMD)
 	{
-		
-		if (!check_builtins(mish->tree->cmd, &mish->list_env))
+		if (is_built(mish->tree->cmd))
+		{
+			if (mish->tree->redirs)
+				return (exec_redir(mish, mish->tree));
+			exec_built(mish->tree->cmd, &mish->list_env);
+		}
+		else
 		{
 			if (mish->tree->redirs)
 				return exec_redir(mish, mish->tree);
-			else
 			{
 				if (mish->tree->cmd[0] && mish->tree->cmd[0][0])
 					path = get_path(mish, mish->tree->cmd[0]);

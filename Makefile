@@ -16,6 +16,7 @@ AST_DIR		= $(SRC_DIR)ast/
 PARSE_DIR	= $(SRC_DIR)parse/
 ENV_DIR		= $(SRC_DIR)env/
 BUILT_DIR	= $(SRC_DIR)builtins/
+EXEX_DIR	= $(SRC_DIR)exec/
 
 SRC 		= $(SRC_DIR)main.c \
 			  $(LEX_DIR)lexer.c \
@@ -39,8 +40,11 @@ SRC 		= $(SRC_DIR)main.c \
 			  $(BUILT_DIR)exec_env.c \
 			  $(BUILT_DIR)exec_echo.c \
 			  $(BUILT_DIR)utils.c \
-			  $(ENV_DIR)init_env.c 
-			  
+			  $(ENV_DIR)init_env.c \
+			  $(EXEX_DIR)cmd.c \
+			  $(EXEX_DIR)pipe.c \
+			  $(EXEX_DIR)redir.c \
+			  $(EXEX_DIR)subshell.c
 
 
 
@@ -50,7 +54,7 @@ OBJ			= $(SRC:.c=.o)
 LIB_FLAGS	= -L$(LIBFT) -lft -L$(READLINE_DIR)/lib -lreadline -lhistory -lncurses
 IFLAG		= -I$(INC_HEADER) -I$(INC_LIB) -I$(LIBFT) -I$(READLINE_DIR)/include
 
-CFLAG		= -Wall -Wextra -Werror
+CFLAG		= -Wall -Wextra -Werror -g -fsanitize=address
 
 CC			= cc
 RM			= rm -rf

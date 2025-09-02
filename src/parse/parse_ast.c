@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_ast.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 17:02:07 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/31 19:10:41 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/02 21:58:39 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,17 @@ static t_ast	*parse_cmd(t_token **tokens)
 		*tokens = (*tokens)->next;
 		add_redir(node, r_tok->type, *tokens);
 		if (*tokens)
+			*tokens = (*tokens)->next;
+		count = 0;
+		head = *tokens;
+		while (head && head->type == WORD)
+		{
+			++count;
+			head = head->next;
+		}
+		realoc_node(&node, *tokens, count);
+		
+		while (*tokens && (*tokens)->type == WORD)
 			*tokens = (*tokens)->next;
 	}
 	return (node);

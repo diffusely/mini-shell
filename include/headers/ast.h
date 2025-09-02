@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:27:11 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/08/31 17:46:01 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/02 21:41:02 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "lexer.h"
 # include "shell.h"
+# include "exec.h"
 
 typedef struct s_token		t_token;
 typedef struct s_shell		t_shell;
@@ -58,6 +59,7 @@ typedef struct s_ast
 // Creat node
 t_ast	*create_node(t_node_type type, t_ast *right, t_ast *left);
 void	init_node(t_ast **node, t_token *tokens, int count);
+void	realoc_node(t_ast **node, t_token *tokens, int size);
 
 // Parse
 t_ast	*create_tree(t_token **tokens);

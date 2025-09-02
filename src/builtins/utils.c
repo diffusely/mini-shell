@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 21:27:14 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/01 16:42:22 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/02 19:42:32 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,30 +22,50 @@ int	find_word_place(char *word)
 	return (i);
 }
 
-bool	check_builtins(char **cmd, t_list **envp)
+int	is_built(char **cmd)
 {
 	char	*tmp;
 
 	if (!cmd || !cmd[0] || !cmd[0][0])
-		return (false);
+		return (NONE);
 	tmp = *cmd;
-	while (*tmp && is_quoted(*tmp))
-		tmp++;
-	if (*tmp == ' ')
-		return (false);
-	// if (!ft_strncmp(*cmd, "echo", 4))
-	// 	return (exec_echo(tmp, envp));
-	if (tmp[1] && !ft_strncmp(tmp, "cd", 2))
+	if (ft_strncmp(tmp, "echo", 4) == 0)
+		return (ECHO);
+	if (ft_strncmp(tmp, "cd", 2) == 0)
+		return (CD);
+	else if (ft_strncmp(tmp, "pwd", 3) == 0)
+		return (PWD);
+	else if (ft_strncmp(tmp, "export", 6) == 0)
+		return (EXPORT);
+	else if (ft_strncmp(tmp, "unset", 5) == 0)
+		return (UNSET);
+	else if (ft_strncmp(tmp, "env", 3) == 0)
+		return (ENV);
+	else if (ft_strncmp(tmp, "exit", 4) == 0)
+		return (EXIT);
+	return (NONE);
+}
+
+int	exec_built(char **cmd, t_list **envp)
+{
+	int		type;
+	char	*tmp;
+
+	tmp = *cmd;
+	type = is_built(cmd);
+	if (type == ECHO)
+		return (exec_echo(tmp, envp));
+	else if (type == CD)
 		return (exec_cd(cmd[1], envp));
-	else if (!ft_strncmp(tmp, "pwd", 3))
+	else if (type == PWD)
 		return (exec_pwd(tmp));
-	else if (!ft_strncmp(tmp, "export", 6))
-		return (true);
-	else if (!ft_strncmp(tmp, "unset", 5))
-		return (true);
-	else if (!ft_strncmp(tmp, "env", 3))
+	else if (type == EXPORT)
+		return (0);
+	else if (type == UNSET)
+		return (0);
+	else if (type == ENV)
 		return (exec_env(tmp ,envp));
-	else if (!ft_strncmp(tmp, "exit", 4))
-		return (true);
-	return (false);
+	else if (type == EXIT)
+		return (0);
+	return (0);
 }

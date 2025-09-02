@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 21:27:32 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/31 01:21:00 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/02 19:41:52 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,18 @@
 
 typedef struct s_list	t_list;
 
+typedef enum e_built
+{
+	NONE,
+	ECHO,
+	CD,
+	PWD,
+	EXPORT,
+	UNSET,
+	ENV,
+	EXIT
+}	t_built;
+
 // Exec
 bool	exec_cd(char *input, t_list **envp_list);
 bool	exec_echo(char *input, t_list **list_env);
@@ -34,6 +46,7 @@ void	print_env(t_list *env);
 
 // Utils
 int		find_word_place(char *word);
-bool	check_builtins(char **cmd, t_list **envp_list);
+int		exec_built(char **cmd, t_list **envp_list);
+int		is_built(char **cmd);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:41:41 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/30 21:56:04 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/02 16:42:03 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void		push_token(t_token	**tokens, t_token *temp);
 t_token		*create_token(t_token_type type, char *value);
 t_token		*lexer(const char *line);
 bool		syntax_validation(t_token *input);
+bool		syntax_help(t_token *cur);
 
 // Print
 void		print_tokens(t_token *lexer);
