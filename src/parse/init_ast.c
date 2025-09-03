@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 20:30:27 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/02 22:00:36 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/03 16:01:17 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,9 @@ void	realoc_node(t_ast **node, t_token *tokens, int size)
 	while (tmp && tmp[count])
 		++count;
 	res = ft_calloc((count + size + 1), sizeof(char *));
-	i = 0;	
-	while (i < count)
-	{
+	i = -1;	
+	while (++i < count)
 		res[i] = tmp[i];
-		++i;
-	}
 	free(tmp);
 	while (i < count + size)
 	{

@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 17:02:07 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/02 21:58:39 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/03 16:08:54 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,25 @@ static t_ast	*parse_factor(t_token **tokens)
 	return (parse_cmd(tokens));
 }
 
+static void	helper(t_ast **node, t_token **tokens)
+{
+	t_token	*head;
+	int	count;
+
+	if (*tokens)
+		*tokens = (*tokens)->next;
+	count = 0;
+	head = *tokens;
+	while (head && head->type == WORD)
+	{
+		++count;
+		head = head->next;
+	}
+	realoc_node(node, *tokens, count);
+	while (*tokens && (*tokens)->type == WORD)
+		*tokens = (*tokens)->next;
+}
+
 static t_ast	*parse_cmd(t_token **tokens)
 {
 	t_token	*r_tok;
@@ -106,8 +125,8 @@ static t_ast	*parse_cmd(t_token **tokens)
 	int		count;
 
 	head = *tokens;
-	node = ft_calloc(1, sizeof(t_ast));
 	count = 0;
+	node = ft_calloc(1, sizeof(t_ast));
 	while (head && head->type == WORD)
 	{
 		++count;
@@ -121,19 +140,8 @@ static t_ast	*parse_cmd(t_token **tokens)
 		r_tok = *tokens;
 		*tokens = (*tokens)->next;
 		add_redir(node, r_tok->type, *tokens);
-		if (*tokens)
-			*tokens = (*tokens)->next;
-		count = 0;
-		head = *tokens;
-		while (head && head->type == WORD)
-		{
-			++count;
-			head = head->next;
-		}
-		realoc_node(&node, *tokens, count);
-		
-		while (*tokens && (*tokens)->type == WORD)
-			*tokens = (*tokens)->next;
+
+		helper(&node, tokens);
 	}
 	return (node);
 }

@@ -43,7 +43,6 @@ SRC 		= $(SRC_DIR)main.c \
 			  $(ENV_DIR)init_env.c \
 			  $(EXEX_DIR)cmd.c \
 			  $(EXEX_DIR)pipe.c \
-			  $(EXEX_DIR)redir.c \
 			  $(EXEX_DIR)subshell.c
 
 
@@ -54,7 +53,7 @@ OBJ			= $(SRC:.c=.o)
 LIB_FLAGS	= -L$(LIBFT) -lft -L$(READLINE_DIR)/lib -lreadline -lhistory -lncurses
 IFLAG		= -I$(INC_HEADER) -I$(INC_LIB) -I$(LIBFT) -I$(READLINE_DIR)/include
 
-CFLAG		= -Wall -Wextra -Werror -g -fsanitize=address
+CFLAG		= -Wall -Wextra -Werror -g 
 
 CC			= cc
 RM			= rm -rf

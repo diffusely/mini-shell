@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 15:48:25 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/02 19:56:20 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/03 19:26:14 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,14 @@ int exec_ast(t_shell *mish)
 		if (is_built(mish->tree->cmd))
 		{
 			if (mish->tree->redirs)
-				return (exec_redir(mish, mish->tree));
+				create_files(mish, mish->tree->redirs);
 			exec_built(mish->tree->cmd, &mish->list_env);
+			dup2(mish->fd_in, STDIN_FILENO);
+			dup2(mish->fd_out, STDOUT_FILENO);
 		}
 		else
 		{
-			if (mish->tree->redirs)
-				return exec_redir(mish, mish->tree);
-			{
-				if (mish->tree->cmd[0] && mish->tree->cmd[0][0])
-					path = get_path(mish, mish->tree->cmd[0]);
-				status = exec_cmd(mish, path, mish->tree->cmd, mish->env);
-				if (path)
-					free(path);
-			}
+			status = exec_cmd(mish, mish->tree);
 		}
 		return status;
 	}

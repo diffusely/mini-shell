@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:26:24 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/08/31 17:45:02 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/03 19:12:35 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,13 @@ typedef enum e_token_type	t_token_type;
 typedef struct s_shell
 {
 	char	**env;
-	
 	t_token	*token;
 	t_token	*free_token;
-
 	t_ast	*tree;
-	
 	char	*input;
 	int		status;
-	
+	int		fd_in;
+	int		fd_out;
 	t_list	*list_env;
 }	t_shell;
 

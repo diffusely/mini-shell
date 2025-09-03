@@ -6,31 +6,84 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 15:19:22 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/02 15:19:39 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/03 19:25:46 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-int	exec_cmd(t_shell *mish, char *cmd, char **args, char **envp)
+static void	fd_error(t_shell *mish, t_redir *r)
 {
-	pid_t	pid;
-	int		status;
+	ft_err("minishell: ");
+	if (r->filename)
+		perror(r->filename);
+	free_all(mish);	
+	exit(1);
+}
+
+void	create_files(t_shell *mish, t_redir *r)
+{
+	int	fd;
+
+	while (r)
+	{
+		if (r->type == R_OUT)
+			fd = open(r->filename, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		else if (r->type == R_APPEND)
+			fd = open(r->filename, O_CREAT | O_WRONLY | O_APPEND, 0644);
+		else if (r->type == R_IN)
+			fd = open(r->filename, O_RDONLY);
+		else if (r->type == R_HEREDOC)
+			fd = open(r->filename, O_RDONLY);
+		if (fd < 0)
+			fd_error(mish, r);
+		if (r->type == R_OUT || r->type == R_APPEND)
+			dup2(fd, STDOUT_FILENO);
+		else
+			dup2(fd, STDIN_FILENO);
+		close(fd);
+		r = r->next;
+	}
+}
+
+static void	exec_commands(t_shell *mish, int *status)
+{
+	char	*path;
+
+	(void)status;
+	path = NULL;
+	if (mish->tree->cmd[0] && mish->tree->cmd[0][0])
+		path = get_path(mish, mish->tree->cmd[0]);
+	if (mish->tree->cmd[0] && mish->tree->cmd[0][0] != '\0')
+	{
+		if (execve(path, mish->tree->cmd, mish->env) == -1)
+		{
+			if (mish->tree->cmd[0] && mish->tree->cmd[0][0])
+				ft_err(mish->tree->cmd[0]);
+			ft_err(": command not found\n");
+			free(path);
+			free_all(mish);
+			exit(127);
+		}
+	}
+	if (path)
+		free(path);
+}
+
+int	exec_cmd(t_shell *mish, t_ast *redir)
+{
+	int	pid;
+	int	status;
 
 	pid = fork();
 	if (pid == -1)
 		error_handle("minishell: fork error\n", 0);
+	status = 0;
 	if (pid == 0)
 	{
-		if (execve(cmd, args, envp) == -1)
-		{
-			if (args[0] && args[0][0])
-				ft_err(args[0]);
-			ft_err(": command not found\n");
-			free(cmd);
-			free_all(mish);
-			exit(127);
-		}
+		if (redir->redirs)
+			create_files(mish, redir->redirs);
+		exec_commands(mish, &status);
 	}
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))

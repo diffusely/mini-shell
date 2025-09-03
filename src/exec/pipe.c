@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 15:16:28 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/02 22:14:34 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/03 19:38:32 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	exec_pipe(t_shell *mish, t_ast *left, t_ast *right)
 		if (!is_built(left->cmd))
 		{
 			if (left->type == NODE_SUB)
-				exec_sub(mish);
+				exit(exec_ast_subtree(mish, left->left));
 			else
 			{
 				path_left = get_path(mish, left->cmd[0]);
@@ -68,6 +68,7 @@ int	exec_pipe(t_shell *mish, t_ast *left, t_ast *right)
 		}
 		else
 			exec_built(left->cmd, &mish->list_env);
+		//free_all(mish);
 		exit(0);
 	}
 
@@ -85,7 +86,7 @@ int	exec_pipe(t_shell *mish, t_ast *left, t_ast *right)
 		if (!is_built(right->cmd))
 		{
 			if (right->type == NODE_SUB)
-				exec_sub(mish);
+				exit(exec_ast_subtree(mish, right->left));
 			else
 			{
 				path_right = get_path(mish, right->cmd[0]);
@@ -99,6 +100,7 @@ int	exec_pipe(t_shell *mish, t_ast *left, t_ast *right)
 		}
 		else
 			exec_built(right->cmd, &mish->list_env);
+		//free_all(mish);
 		exit(0);
 	}
 	return (check_pipe_status(fd, pid1, pid2));

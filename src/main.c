@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:16:42 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/09/02 22:00:48 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/03 19:21:24 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,13 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	mish = ft_calloc(1, sizeof(t_shell));
+
 	mish->list_env = init_env(envp);
 	mish->env = init_env_matrix(mish->list_env);
-	
 	mish->tree = NULL;
+	mish->fd_in = dup(STDIN_FILENO);
+	mish->fd_out = dup(STDOUT_FILENO);
+
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
