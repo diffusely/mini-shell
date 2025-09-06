@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 15:19:22 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/03 19:25:46 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/06 22:20:32 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	fd_error(t_shell *mish, t_redir *r)
 	ft_err("minishell: ");
 	if (r->filename)
 		perror(r->filename);
-	free_all(mish);	
+	free_all(mish);
 	exit(1);
 }
 
@@ -46,11 +46,10 @@ void	create_files(t_shell *mish, t_redir *r)
 	}
 }
 
-static void	exec_commands(t_shell *mish, int *status)
+static void	exec_commands(t_shell *mish)
 {
 	char	*path;
 
-	(void)status;
 	path = NULL;
 	if (mish->tree->cmd[0] && mish->tree->cmd[0][0])
 		path = get_path(mish, mish->tree->cmd[0]);
@@ -61,7 +60,8 @@ static void	exec_commands(t_shell *mish, int *status)
 			if (mish->tree->cmd[0] && mish->tree->cmd[0][0])
 				ft_err(mish->tree->cmd[0]);
 			ft_err(": command not found\n");
-			free(path);
+			if (path)
+				free(path);
 			free_all(mish);
 			exit(127);
 		}
@@ -83,7 +83,7 @@ int	exec_cmd(t_shell *mish, t_ast *redir)
 	{
 		if (redir->redirs)
 			create_files(mish, redir->redirs);
-		exec_commands(mish, &status);
+		exec_commands(mish);
 	}
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))

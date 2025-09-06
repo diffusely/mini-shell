@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:41:41 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/02 16:42:03 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/06 21:34:52 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@
 
 typedef enum e_token_type
 {
-	HEREDOC, // << 0
-	APPEND,  // >> 1
-	WORD,    // echo hello 2
-	PIP,     // | 3
-	AND,     // && 4
-	OR,      // || 5
-	LPAR,    // ( 6
-	RPAR,    // ) 7
-	OUT,     // > 8
-	IN,      // < 9
-	END      // end 10
+	HEREDOC,
+	APPEND,
+	WORD,
+	PIP,
+	AND,
+	OR,
+	LPAR,
+	RPAR,
+	OUT,
+	IN,
+	END
 }	t_token_type;
 
 typedef struct s_token

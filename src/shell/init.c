@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   message.h                                          :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/18 17:34:24 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/06 21:26:08 by noavetis         ###   ########.fr       */
+/*   Created: 2025/09/06 22:50:19 by noavetis          #+#    #+#             */
+/*   Updated: 2025/09/06 22:55:42 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MESSAGE_H
-# define MESSAGE_H
+#include "shell.h"
 
-# include "libft.h"
-# include "shell.h"
-# include "ast.h"
+t_shell	*init_shell(char **envp)
+{
+	t_shell	*mish;
 
-typedef struct s_ast	t_ast;
-typedef struct s_shell	t_shell;
-
-void	error_print(const char *cmd, const char *msg, int flag);
-void	error_handle(char *msg, int flag);
-void	error_exit_msg(t_shell *mish, t_ast *left, char *msg);
-void	ft_err(char *msg);
-
-#endif
+	mish = ft_calloc(1, sizeof(t_shell));
+	if (!mish)
+		error_handle("Bad alloc *mish*!\n", 1);
+	mish->list_env = init_env(envp);
+	mish->env = init_env_matrix(mish->list_env);
+	mish->tree = NULL;
+	mish->fd_in = dup(STDIN_FILENO);
+	mish->fd_out = dup(STDOUT_FILENO);
+	mish->free = mish;
+	return (mish);
+}

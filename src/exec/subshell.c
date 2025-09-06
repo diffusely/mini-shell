@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 15:14:23 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/03 19:35:18 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/06 22:29:53 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,30 @@
 
 int	exec_ast_subtree(t_shell *mish, t_ast *subtree)
 {
-	t_shell temp;
+	t_shell	temp;
 
 	temp = *mish;
 	temp.tree = subtree;
 	return (exec_ast(&temp));
 }
 
+static void	help_end(pid_t	pid, int *status)
+{
+	waitpid(pid, status, 0);
+	if (WIFEXITED(*status))
+		*status = WEXITSTATUS(*status);
+	else
+		*status = 1;
+}
+
 int	exec_sub(t_shell *mish)
 {
 	pid_t	pid;
 	int		status;
-	t_shell	*mish_free = mish;
+	t_ast	*mish_free;
 	t_ast	*tree;
 
+	mish_free = mish->tree;
 	pid = fork();
 	if (pid == -1)
 		error_handle("minishell: fork error\n", 0);
@@ -41,13 +51,10 @@ int	exec_sub(t_shell *mish)
 		}
 		else
 			status = exec_ast_subtree(mish, mish->tree->left);
-		free_all(mish_free);
+		mish->tree = mish_free;
+		free_all(mish);
 		exit(status);
 	}
-	waitpid(pid, &status, 0);
-	if (WIFEXITED(status))
-		status = WEXITSTATUS(status);
-	else
-		status = 1;
+	help_end(pid, &status);
 	return (status);
 }

@@ -35,6 +35,7 @@ SRC 		= $(SRC_DIR)main.c \
 			  $(SHELL_DIR)history.c \
 			  $(SHELL_DIR)utils.c \
 			  $(SHELL_DIR)get_path.c \
+			  $(SHELL_DIR)init.c \
 			  $(BUILT_DIR)exec_cd.c \
 			  $(BUILT_DIR)exec_pwd.c \
 			  $(BUILT_DIR)exec_env.c \
@@ -43,7 +44,8 @@ SRC 		= $(SRC_DIR)main.c \
 			  $(ENV_DIR)init_env.c \
 			  $(EXEX_DIR)cmd.c \
 			  $(EXEX_DIR)pipe.c \
-			  $(EXEX_DIR)subshell.c
+			  $(EXEX_DIR)subshell.c \
+			  $(EXEX_DIR)utils.c
 
 
 
@@ -53,8 +55,7 @@ OBJ			= $(SRC:.c=.o)
 LIB_FLAGS	= -L$(LIBFT) -lft -L$(READLINE_DIR)/lib -lreadline -lhistory -lncurses
 IFLAG		= -I$(INC_HEADER) -I$(INC_LIB) -I$(LIBFT) -I$(READLINE_DIR)/include
 
-CFLAG		= -Wall -Wextra -Werror -g 
-
+CFLAG		= -Wall -Wextra -Werror -g
 CC			= cc
 RM			= rm -rf
 

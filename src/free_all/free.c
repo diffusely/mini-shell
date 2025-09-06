@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 22:23:48 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/01 20:08:48 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/06 22:34:09 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	free_mish(t_shell *mish)
 {
+	close(mish->fd_in);
+	close(mish->fd_out);
 	if (mish->tree)
 	{
 		free_tree(mish->tree);
@@ -33,12 +35,12 @@ void	free_mish(t_shell *mish)
 
 void	free_all(t_shell *mish)
 {
-	if (mish)
+	if (mish->free)
 	{
-		free_mish(mish);
-		free(mish->env);
-		ft_lstclear(&mish->list_env);
-		free(mish);
+		free_mish(mish->free);
+		free(mish->free->env);
+		ft_lstclear(&mish->free->list_env);
+		free(mish->free);
 	}
 }
 

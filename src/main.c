@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:16:42 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/09/03 19:21:24 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/06 22:58:41 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,15 @@
 #include "shell.h"
 #include "free.h"
 
-// void	init_minishell(t_shell **mish, int argc, char **argv, char **envp)
-// {
-// 	(void)argc;
-// 	(void)argv;
-// 	init_env(envp, &(*mish)->list_env);
-// }
-
 int	main(int argc, char **argv, char **envp)
 {
 	t_shell *mish;
 
-	(void)argc;
 	(void)argv;
-	mish = ft_calloc(1, sizeof(t_shell));
-
-	mish->list_env = init_env(envp);
-	mish->env = init_env_matrix(mish->list_env);
-	mish->tree = NULL;
-	mish->fd_in = dup(STDIN_FILENO);
-	mish->fd_out = dup(STDOUT_FILENO);
-
+	if (argc != 1)
+		 ft_err("Error: no arguments allowed\n");
+	mish = init_shell(envp);
+	
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, SIG_IGN);
 	while (1)

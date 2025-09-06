@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:19:55 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/08/30 22:18:04 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/06 21:41:56 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ bool	remove_list(const char *input, t_list **envp_list)
 {
 	t_list	*curr;
 	t_list	*prev;
+	int		place;
 
 	curr = *envp_list;
 	prev = NULL;
@@ -23,7 +24,7 @@ bool	remove_list(const char *input, t_list **envp_list)
 	{
 		if (curr->content && ft_strchr(curr->content, '='))
 		{
-			int place = find_word_place(curr->content);
+			place = find_word_place(curr->content);
 			if (ft_strncmp(curr->content, input, place) == 0)
 			{
 				if (prev == NULL)
@@ -41,7 +42,7 @@ bool	remove_list(const char *input, t_list **envp_list)
 	return (false);
 }
 
-bool check_unset(char *input, t_list **env_list)
+bool	check_unset(char *input, t_list **env_list)
 {
 	while (*input && ft_isspace(*input))
 		input++;
@@ -55,12 +56,13 @@ bool check_unset(char *input, t_list **env_list)
 	return (true);
 }
 
-t_list* init_env(char **envp)
+t_list	*init_env(char **envp)
 {
-	int	i;
-	char *copy;
-	t_list *list_env;
-	 
+	int		i;
+	char	*copy;
+	t_list	*list_env;
+	t_list	*node;
+
 	list_env = NULL;
 	i = 0;
 	if (list_env == NULL)
@@ -71,7 +73,7 @@ t_list* init_env(char **envp)
 			if (!copy)
 				return (NULL);
 			ft_strcpy(copy, envp[i]);
-			t_list *node = ft_lstnew(copy);
+			node = ft_lstnew(copy);
 			if (!node)
 			{
 				free(copy);

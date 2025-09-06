@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   message.h                                          :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/18 17:34:24 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/06 21:26:08 by noavetis         ###   ########.fr       */
+/*   Created: 2025/09/06 21:06:18 by noavetis          #+#    #+#             */
+/*   Updated: 2025/09/06 21:17:44 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MESSAGE_H
-# define MESSAGE_H
+#include "exec.h"
 
-# include "libft.h"
-# include "shell.h"
-# include "ast.h"
+void	free_and_exit(t_shell *mish, int *status)
+{
+	free_all(mish);
+	exit(*status);
+}
 
-typedef struct s_ast	t_ast;
-typedef struct s_shell	t_shell;
-
-void	error_print(const char *cmd, const char *msg, int flag);
-void	error_handle(char *msg, int flag);
-void	error_exit_msg(t_shell *mish, t_ast *left, char *msg);
-void	ft_err(char *msg);
-
-#endif
+void	dup_and_close(int fd[2], int new_fd, int close_read)
+{
+	if (close_read)
+	{
+		close(fd[1]);
+		dup2(fd[0], new_fd);
+		close(fd[0]);
+	}
+	else
+	{
+		close(fd[0]);
+		dup2(fd[1], new_fd);
+		close(fd[1]);
+	}
+}

@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:27:11 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/09/02 21:41:02 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/06 21:35:32 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ typedef enum e_node
 
 typedef enum e_redir_type
 {
-	R_IN,      // <
-	R_OUT,     // >
-	R_HEREDOC, // <<
-	R_APPEND   // >>
+	R_IN,
+	R_OUT,
+	R_HEREDOC,
+	R_APPEND
 }	t_redir_type;
 
 typedef struct s_redirect

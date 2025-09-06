@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 15:14:36 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/03 16:54:32 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/06 21:17:54 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 typedef struct s_shell		t_shell;
 typedef struct s_ast		t_ast;
 typedef struct s_redirect	t_redir;
+
 // Exec
 int		exec_pipe(t_shell *mish, t_ast *left, t_ast *right);
 void	create_files(t_shell *mish, t_redir *r);
@@ -26,5 +27,7 @@ int		exec_cmd(t_shell *mish, t_ast *redir);
 int		exec_ast_subtree(t_shell *mish, t_ast *subtree);
 int		exec_sub(t_shell *mish);
 int		exex_built_redir(t_shell *mish, t_ast *redir);
+void	free_and_exit(t_shell *mish, int *status);
+void	dup_and_close(int fd[2], int new_fd, int close_read);
 
 #endif

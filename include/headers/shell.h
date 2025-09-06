@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:26:24 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/09/03 19:12:35 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/06 22:58:17 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,13 @@ typedef struct s_shell
 	int		fd_in;
 	int		fd_out;
 	t_list	*list_env;
+	struct s_shell	*free;
 }	t_shell;
 
 void	sigint_handler(int signum);
+
+// Init
+t_shell	*init_shell(char **envp);
 
 // History
 void	print_history(t_shell *mish);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 17:37:14 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/15 02:25:49 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/06 21:23:47 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,3 +34,10 @@ void	ft_err(char *msg)
 	ft_putstr_fd(msg, 2);
 }
 
+void	error_exit_msg(t_shell *mish, t_ast *left, char *msg)
+{
+	if (left->cmd[0] && left->cmd[0][0])
+		ft_err(left->cmd[0]);
+	free_all(mish);
+	error_handle(msg, 1);
+}

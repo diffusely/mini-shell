@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 18:48:53 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/30 16:20:32 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/06 21:35:59 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,4 @@ void print_ast(t_ast *node, int depth)
 
     print_ast(node->left, depth + 1);
     print_ast(node->right, depth + 1);
-}
-
-
-void	execute_ast()
-{
-
 }
