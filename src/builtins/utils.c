@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 21:27:14 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/02 19:42:32 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/07 02:05:54 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,12 @@ int	is_built(char **cmd)
 		return (ENV);
 	else if (ft_strncmp(tmp, "exit", 4) == 0)
 		return (EXIT);
+	else if (ft_strcmp(tmp, "history") == 0)
+		return (HISTORY);
 	return (NONE);
 }
 
-int	exec_built(char **cmd, t_list **envp)
+int	exec_built(char **cmd, t_list **envp, t_shell *mish)
 {
 	int		type;
 	char	*tmp;
@@ -66,6 +68,8 @@ int	exec_built(char **cmd, t_list **envp)
 	else if (type == ENV)
 		return (exec_env(tmp ,envp));
 	else if (type == EXIT)
-		return (0);
+		exec_exit(cmd, mish);
+	else if (type == HISTORY)
+		return (exec_history(cmd));
 	return (0);
 }

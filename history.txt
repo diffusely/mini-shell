@@ -1,152 +1,22 @@
-pwd 
-pwd
-pwd     
-pwd
-pwd   
-pwd      
-               pwd
-                                                           pwd 
-cd test/
-pwd
 ls
 pwd
-pwd
-pwd
-pwd
-pwd
-pwd
-e
-ls | pwd
-ls 
-pwd
-e
-ls | pwd
+chmid 00h history.txt 
 ls
+chmod 000 history.txt 
+history.txt 
 ls
-slslsl
-slsls
-lsls
-ls
-pwd
-pwd
-<<<<<<< HEAD
-ls
-pwd
-c
-ls
+history.tx
+history.t
+history.
 history
+history 
+historye 
+historyer
+historyerqwer
+historyerqwerqwerqwer
+historyerqwerqwerqwerqwerqwer
+historyerqwerqwerqwerqwerqwerqwerqwer
+exitqwer
+history.txt 
+history.
 history
-ls 
-pwd
-lsw
-pwd
-pwd
-e
-l
-ls
-pwd
-pwd
-echo "hello "how are you '' """"
-echo "hello "how are you '' """" |
-echo "hello "how are you '' """" |
-echo "hello "how are you '' """" |
-echo "hello "how are you '' """"    | a
-echo "hello "how are you '' """"
-echo "hello "how are you '' """"
-echo ""hello world""
-echi "hello" "wqer"
-ls|cmd
-ls|||
-./minishell 
-ld||((&&& )dsfcs)
-ls | nor || (echo || noro )
-ls | nor || (echo || noro )
-ls | nor || (echo || noro )
-ls | nor || ((echo || noro ))
-ls | nor || ((echo || noro &&&)fgty)
-echo &&& a
-echo ||| a
-echo |||| a
-ls &&&& pwd
-echo &&* a
-&
-=======
-pwd
-pwd
-pwd
-pwd
-pwd
-pwd
-
-e
- 
-pwd
-pwd
-pwd
-cd 
-e
-pwd
-e
-pwd
-pwd
-pwd
-pwd
-pwd
-pwd
-pwd
-pwd
-pwd
-pwd
-pwd
-pwd
-pwd
-pwd
-pwd
-pwd
-pwd
-pwd
-pwd
-pwd
-pwd
-cd
-e
-pwd
-pwd
-pwd
-pwd
-pwd
-pwd
-cd asdfasd
-safvadfv
-cd dsфсд
-е
-e
-cd adasd
-asdsdavasdv
-cd sdсадв
-е
-е
-е
-е
-е
-
-е
-e
-pwd
-pwd
-cd
-pwd
-cdhtgfv
-e
-cdaf
-e
-cdasdsdfadsf
-e
-cdacavasvf
-pwd
-pwd
-pwd
-ls
-asfa n
-cd
->>>>>>> built-in

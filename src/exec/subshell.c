@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   subshell.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 15:14:23 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/06 22:29:53 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/07 00:14:40 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,7 @@ int	exec_sub(t_shell *mish)
 		else
 			status = exec_ast_subtree(mish, mish->tree->left);
 		mish->tree = mish_free;
-		free_all(mish);
-		exit(status);
+		free_and_exit(mish, status);
 	}
 	help_end(pid, &status);
 	return (status);

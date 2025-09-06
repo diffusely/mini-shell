@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 21:27:32 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/02 19:41:52 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/07 01:14:10 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include "free.h"
 
 typedef struct s_list	t_list;
+typedef struct s_shell	t_shell;
 
 typedef enum e_built
 {
@@ -30,6 +31,7 @@ typedef enum e_built
 	EXPORT,
 	UNSET,
 	ENV,
+	HISTORY,
 	EXIT
 }	t_built;
 
@@ -37,7 +39,9 @@ typedef enum e_built
 bool	exec_cd(char *input, t_list **envp_list);
 bool	exec_echo(char *input, t_list **list_env);
 bool	exec_env(char *input, t_list **list_env);
+int		exec_history(char **cmd);
 bool	exec_pwd(const char *input);
+void	exec_exit(char **cmd, t_shell *mish);
 
 // Functions
 char	*fix_new_line(bool new_line, char *input);
@@ -46,7 +50,7 @@ void	print_env(t_list *env);
 
 // Utils
 int		find_word_place(char *word);
-int		exec_built(char **cmd, t_list **envp_list);
+int		exec_built(char **cmd, t_list **envp_list, t_shell *mish);
 int		is_built(char **cmd);
 
 #endif

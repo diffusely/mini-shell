@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 15:16:28 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/06 22:05:48 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/07 00:36:37 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,14 @@ static void	help_pid1(t_shell *mish, t_ast *left, int *status)
 	if (left->type == NODE_PIP)
 	{
 		*status = exec_pipe(mish, left->left, left->right);
-		free_and_exit(mish, status);
+		free_and_exit(mish, *status);
 	}
 	if (!is_built(left->cmd))
 	{
 		if (left->type == NODE_SUB)
 		{
 			*status = exec_ast_subtree(mish, left->left);
-			free_and_exit(mish, status);
+			free_and_exit(mish, *status);
 		}
 		else
 		{
@@ -69,7 +69,7 @@ static void	help_pid1(t_shell *mish, t_ast *left, int *status)
 		}
 	}
 	else
-		exec_built(left->cmd, &mish->list_env);
+		exec_built(left->cmd, &mish->list_env, mish);
 }
 
 static void	help_pid2(t_shell *mish, t_ast *right, int *status)
@@ -81,7 +81,7 @@ static void	help_pid2(t_shell *mish, t_ast *right, int *status)
 		if (right->type == NODE_SUB)
 		{
 			*status = exec_ast_subtree(mish, right->left);
-			free_and_exit(mish, status);
+			free_and_exit(mish, *status);
 		}
 		else
 		{
@@ -89,14 +89,11 @@ static void	help_pid2(t_shell *mish, t_ast *right, int *status)
 			execve(path, right->cmd, mish->env);
 			if (path)
 				free(path);
-			if (right->cmd[0] && right->cmd[0][0])
-				ft_err(right->cmd[0]);
-			free_all(mish);
-			error_handle(": command not found\n", 1);
+			error_exit_msg(mish, right, "command not found\n");
 		}
 	}
 	else
-		exec_built(right->cmd, &mish->list_env);
+		exec_built(right->cmd, &mish->list_env, mish);
 }
 
 int	exec_pipe(t_shell *mish, t_ast *left, t_ast *right)
@@ -111,7 +108,7 @@ int	exec_pipe(t_shell *mish, t_ast *left, t_ast *right)
 	{
 		dup_and_close(fd, STDOUT_FILENO, 0);
 		help_pid1(mish, left, &status);
-		free_and_exit(mish, &status);
+		free_and_exit(mish, status);
 	}
 	pid2 = fork();
 	if (pid2 == -1)
@@ -123,7 +120,7 @@ int	exec_pipe(t_shell *mish, t_ast *left, t_ast *right)
 	{
 		dup_and_close(fd, STDIN_FILENO, 1);
 		help_pid2(mish, right, &status);
-		free_and_exit(mish, &status);
+		free_and_exit(mish, status);
 	}
 	return (check_pipe_status(fd, pid1, pid2));
 }

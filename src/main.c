@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:16:42 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/09/06 22:58:41 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/07 01:18:12 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,12 @@ int	main(int argc, char **argv, char **envp)
 				continue ;
 			}
 		}
-
-		// if (*input && is_history(input))
-		// print_history(tree, input, token);
-		// add_history_input(tree, input, token);
 		
 		mish->token = lexer(mish->input);
 		mish->free_token = mish->token;
 		//print_tokens(mish->token);
+		add_history(mish->input);
+		add_history_input(mish);
 		if (!syntax_check(mish->token))
 		{
 			free_mish(mish);

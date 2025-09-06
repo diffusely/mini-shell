@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 15:19:22 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/06 22:20:32 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/07 00:02:29 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,7 @@ static void	exec_commands(t_shell *mish)
 			ft_err(": command not found\n");
 			if (path)
 				free(path);
-			free_all(mish);
-			exit(127);
+			free_and_exit(mish, 127);
 		}
 	}
 	if (path)

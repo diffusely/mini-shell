@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 15:14:36 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/06 21:17:54 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/07 00:04:43 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ void	create_files(t_shell *mish, t_redir *r);
 int		exec_cmd(t_shell *mish, t_ast *redir);
 int		exec_ast_subtree(t_shell *mish, t_ast *subtree);
 int		exec_sub(t_shell *mish);
-int		exex_built_redir(t_shell *mish, t_ast *redir);
-void	free_and_exit(t_shell *mish, int *status);
+void	free_and_exit(t_shell *mish, int status);
 void	dup_and_close(int fd[2], int new_fd, int close_read);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:26:24 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/09/06 22:58:17 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/07 01:41:01 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,15 @@ typedef enum e_token_type	t_token_type;
 
 typedef struct s_shell
 {
-	char	**env;
-	t_token	*token;
-	t_token	*free_token;
-	t_ast	*tree;
-	char	*input;
-	int		status;
-	int		fd_in;
-	int		fd_out;
-	t_list	*list_env;
+	char			**env;
+	t_token			*token;
+	t_token			*free_token;
+	t_ast			*tree;
+	char			*input;
+	int				status;
+	int				fd_in;
+	int				fd_out;
+	t_list			*list_env;
 	struct s_shell	*free;
 }	t_shell;
 
@@ -50,10 +50,10 @@ void	sigint_handler(int signum);
 t_shell	*init_shell(char **envp);
 
 // History
-void	print_history(t_shell *mish);
-bool	is_history(char *input);
+void	print_history(void);
+bool	valid_cmd(char *input);
 void	add_history_input(t_shell *mish);
-int		open_fd(t_shell *mish);
+int		open_fd(void);
 
 // Functions
 int		is_space_or_newline(char *input);
