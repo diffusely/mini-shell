@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 00:23:21 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/07 01:14:02 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/08 01:22:24 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	exec_exit(char **cmd, t_shell *mish)
 		ft_err("minishell: exit: ");
 		ft_err(cmd[1]);
 		ft_err(": numeric argument required\n");
+		free_all(mish);
 		exit(2);
 	}
 	free_all(mish);

@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 21:27:32 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/07 01:14:10 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/08 01:34:26 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ typedef enum e_built
 // Exec
 bool	exec_cd(char *input, t_list **envp_list);
 bool	exec_echo(char *input, t_list **list_env);
-bool	exec_env(char *input, t_list **list_env);
+int		exec_env(char *input, t_list **list_env);
 int		exec_history(char **cmd);
-bool	exec_pwd(const char *input);
+int		exec_pwd(const char *input);
 void	exec_exit(char **cmd, t_shell *mish);
 
 // Functions

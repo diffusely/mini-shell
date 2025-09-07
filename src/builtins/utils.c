@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 21:27:14 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/07 02:05:54 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/08 01:25:13 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,15 @@ int	is_built(char **cmd)
 		return (ECHO);
 	if (ft_strncmp(tmp, "cd", 2) == 0)
 		return (CD);
-	else if (ft_strncmp(tmp, "pwd", 3) == 0)
+	else if (ft_strcmp(tmp, "pwd") == 0)
 		return (PWD);
 	else if (ft_strncmp(tmp, "export", 6) == 0)
 		return (EXPORT);
 	else if (ft_strncmp(tmp, "unset", 5) == 0)
 		return (UNSET);
-	else if (ft_strncmp(tmp, "env", 3) == 0)
+	else if (ft_strcmp(tmp, "env") == 0)
 		return (ENV);
-	else if (ft_strncmp(tmp, "exit", 4) == 0)
+	else if (ft_strcmp(tmp, "exit") == 0)
 		return (EXIT);
 	else if (ft_strcmp(tmp, "history") == 0)
 		return (HISTORY);
@@ -65,11 +65,11 @@ int	exec_built(char **cmd, t_list **envp, t_shell *mish)
 		return (0);
 	else if (type == UNSET)
 		return (0);
-	else if (type == ENV)
-		return (exec_env(tmp ,envp));
-	else if (type == EXIT)
+	else if (type == ENV) // WORKED
+		return (exec_env(cmd[1] ,envp));
+	else if (type == EXIT) // WORKED
 		exec_exit(cmd, mish);
-	else if (type == HISTORY)
+	else if (type == HISTORY) // WORKED
 		return (exec_history(cmd));
 	return (0);
 }

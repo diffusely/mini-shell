@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 12:39:23 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/08/31 16:00:53 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/08 01:01:02 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,14 @@ void	print_env(t_list *env)
 	}
 }
 
-bool	exec_env(char *input, t_list **list_env)
+int	exec_env(char *input, t_list **list_env)
 {
 	(void)list_env;
-	printf("%s\n", input);
-	input += 3;
-	printf("%s\n", input);
-	while (*input && ft_isspace(*input))
-		input++;
-	
-	if (*input != '\0')
+	if (input)
 	{
-		ft_err("env: too many arguments\n");
-		return (true);
+		ft_err("minishell: env: too many arguments\n");
+		return (127);
 	}
-	print_env(*list_env);	
-	return (true);
+	print_env(*list_env);
+	return (0);
 }
