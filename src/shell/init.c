@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 22:50:19 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/07 18:04:13 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/07 20:18:32 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ void	shell_loop(t_shell *mish)
 	{
 		mish->input = readline("minishell$ ");
 		if (!mish->input)
+		{
+			printf("exit\n");
 			break ;
+		}
 		if (!*mish->input)
 		{
 			if (is_space_or_newline(mish->input))

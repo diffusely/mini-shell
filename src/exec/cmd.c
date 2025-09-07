@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 15:19:22 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/07 00:02:29 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/07 20:17:44 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,20 +50,15 @@ static void	exec_commands(t_shell *mish)
 {
 	char	*path;
 
-	path = NULL;
-	if (mish->tree->cmd[0] && mish->tree->cmd[0][0])
-		path = get_path(mish, mish->tree->cmd[0]);
-	if (mish->tree->cmd[0] && mish->tree->cmd[0][0] != '\0')
+	path = get_path(mish, mish->tree->cmd[0]);
+	if (execve(path, mish->tree->cmd, mish->env) == -1)
 	{
-		if (execve(path, mish->tree->cmd, mish->env) == -1)
-		{
-			if (mish->tree->cmd[0] && mish->tree->cmd[0][0])
-				ft_err(mish->tree->cmd[0]);
-			ft_err(": command not found\n");
-			if (path)
-				free(path);
-			free_and_exit(mish, 127);
-		}
+		if (mish->tree->cmd[0] && mish->tree->cmd[0][0])
+			ft_err(mish->tree->cmd[0]);
+		ft_err(": command not found\n");
+		if (path)
+			free(path);
+		free_and_exit(mish, 127);
 	}
 	if (path)
 		free(path);
@@ -82,6 +77,11 @@ int	exec_cmd(t_shell *mish, t_ast *redir)
 	{
 		if (redir->redirs)
 			create_files(mish, redir->redirs);
+		if (!mish->tree->cmd[0] || mish->tree->cmd[0][0] == '\0')
+		{
+			free_all(mish);
+			exit(0);
+		}
 		exec_commands(mish);
 	}
 	waitpid(pid, &status, 0);

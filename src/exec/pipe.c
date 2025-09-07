@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 15:16:28 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/07 00:36:37 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/07 22:00:47 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,13 @@ static void	help_pid1(t_shell *mish, t_ast *left, int *status)
 		}
 		else
 		{
+			if (left && left->redirs)
+				create_files(mish, left->redirs);
+			if (!left->cmd[0] || left->cmd[0][0] == '\0')
+			{
+				free_all(mish);
+				exit(0);
+			}
 			path = get_path(mish, left->cmd[0]);
 			execve(path, left->cmd, mish->env);
 			if (path)
@@ -85,11 +92,18 @@ static void	help_pid2(t_shell *mish, t_ast *right, int *status)
 		}
 		else
 		{
+			if (right && right->redirs)
+				create_files(mish, right->redirs);
+			if (!right->cmd[0] || right->cmd[0][0] == '\0')
+			{
+				free_all(mish);
+				exit(0);
+			}
 			path = get_path(mish, right->cmd[0]);
 			execve(path, right->cmd, mish->env);
 			if (path)
 				free(path);
-			error_exit_msg(mish, right, "command not found\n");
+			error_exit_msg(mish, right, ": command not found\n");
 		}
 	}
 	else
@@ -103,6 +117,7 @@ int	exec_pipe(t_shell *mish, t_ast *left, t_ast *right)
 	pid_t	pid2;
 	int		status;
 
+	status = 0;
 	start(mish, fd, &pid1);
 	if (pid1 == 0)
 	{
@@ -112,10 +127,7 @@ int	exec_pipe(t_shell *mish, t_ast *left, t_ast *right)
 	}
 	pid2 = fork();
 	if (pid2 == -1)
-	{
-		free(mish);
 		error_handle("minishell: fork error\n", 0);
-	}
 	if (pid2 == 0)
 	{
 		dup_and_close(fd, STDIN_FILENO, 1);
