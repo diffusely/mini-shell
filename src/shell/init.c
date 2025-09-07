@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 22:50:19 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/06 22:55:42 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/07 18:04:13 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,38 @@ t_shell	*init_shell(char **envp)
 	mish->fd_out = dup(STDOUT_FILENO);
 	mish->free = mish;
 	return (mish);
+}
+
+void	shell_loop(t_shell *mish)
+{
+	while (1)
+	{
+		mish->input = readline("minishell$ ");
+		if (!mish->input)
+			break ;
+		if (!*mish->input)
+		{
+			if (is_space_or_newline(mish->input))
+			{
+				free(mish->input);
+				continue ;
+			}
+		}
+		mish->token = lexer(mish->input);
+		mish->free_token = mish->token;
+		//print_tokens(mish->token);
+		add_history(mish->input);
+		add_history_input(mish);
+		if (!syntax_check(mish->token))
+		{
+			free_mish(mish);
+			continue ;
+		}
+		mish->tree = create_tree(&mish->token);
+		//print_env_matrix(mish->env);
+		//refresh_env_matrix(&mish);
+		//print_ast(mish->tree, 0);
+		mish->status = exec_ast(mish);
+		free_mish(mish);
+	}
 }

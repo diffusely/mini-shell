@@ -20,3 +20,19 @@ exitqwer
 history.txt 
 history.
 history
+ls
+ls || Ls
+ls || ls
+(ls)
+pwd
+ls 
+(ls)
+(ls )
+(ls) | (ls)
+ls && pwd
+ls
+ls > a
+ls > a -la
+ls > a -la pwd
+exit
+ls
