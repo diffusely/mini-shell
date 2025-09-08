@@ -46,6 +46,7 @@ SRC 		= $(SRC_DIR)main.c \
 			  $(EXEX_DIR)cmd.c \
 			  $(EXEX_DIR)pipe.c \
 			  $(EXEX_DIR)subshell.c \
+			  $(EXEX_DIR)heredoc.c \
 			  $(EXEX_DIR)utils.c
 
 
@@ -57,7 +58,7 @@ LIB_FLAGS	= -L$(LIBFT) -lft -L$(READLINE_DIR)/lib -lreadline -lhistory -lncurses
 IFLAG		= -I$(INC_HEADER) -I$(INC_LIB) -I$(LIBFT) -I$(READLINE_DIR)/include
 
 
-FFLAG		= # -g -fsanitize=address
+FFLAG		= -g -fsanitize=address
 CFLAG		= -Wall -Wextra -Werror $(FFLAG) 
 CC			= cc
 RM			= rm -rf

@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 15:19:22 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/08 01:16:14 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/09 00:59:27 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ void	create_files(t_shell *mish, t_redir *r)
 		else if (r->type == R_APPEND)
 			fd = open(r->filename, O_CREAT | O_WRONLY | O_APPEND, 0644);
 		else if (r->type == R_IN)
-			fd = open(r->filename, O_RDONLY);
-		else if (r->type == R_HEREDOC)
 			fd = open(r->filename, O_RDONLY);
 		if (fd < 0)
 			fd_error(mish, r);

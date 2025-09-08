@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_lexer.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 20:46:25 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/02 22:36:40 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/09 00:58:02 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,37 @@ bool	syntax_help(t_token *cur)
 		return (check_type(cur), false);
 	if (!cur->prev && (is_operator(cur->type) || cur->type == RPAR))
 		return (check_type(cur), false);
+	if (cur->type == HEREDOC)
+	{
+		if (cur->next && cur->next->next && cur->next->next->next
+			&& (is_subshell(cur->next->next->type)
+			|| is_redirect(cur->next->next->type)
+			|| is_operator(cur->next->next->type))
+			&& (is_subshell(cur->next->next->next->type)
+			|| is_redirect(cur->next->next->next->type)
+			|| is_operator(cur->next->next->next->type)))
+			return (check_type(cur->next->next), false);
+		heredoc(cur->next->value);
+	}
 	return (true);
+}
+
+bool	check_subs(t_token *input)
+{
+	int	c1;
+	int	c2;
+
+	c1 = 0;
+	c2 = 0;
+	while (input)
+	{
+		if (input->value && *input->value == '(')
+			++c1;
+		if (input->value && *input->value == ')')
+			++c2;
+		input = input->next;
+	}
+	if (c1 == c2)
+		return (true);
+	return (check_type(NULL), false);
 }

@@ -279,3 +279,143 @@ cd ae/we/
 cd e/w/
 cd ae/wer/
 cd e/r/
+<< a
+b << a
+ls << a
+<< a
+<< a
+<< a
+<< a
+ls << |
+ls << a |
+ls << a <<
+ls << a | >
+ls << a
+ls << a
+qwer << a
+<< a
+()
+(ls ) )
+()
+)(
+( ls ) )
+(ls ) ( )
+(ls ) ( ls )
+((ls)))
+(((ls))
+()
+(())
+(()))
+((ls )))
+((ls ))))
+((ls ))))))))))))))))
+(((ls))
+((ls))
+((ls)))
+((((ls)))
+ls || pwd )
+ls || pwd (
+ls || pwd ) ) ) )
+ls || (pwd ) 
+ls || (pwd )  )
+ls || (pwd )  ) ()
+ls || (pwd )  () )
+ls || (pwd )
+(ls))
+(ls | | ))
+( ls )
+( ls ))
+( ls )
+( ls ) )_
+( ls ) )
+ ( ( ls ) )
+( ls )
+(ls)
+( ls )
+( ls ) ) ) ) ) ) 
+( ls qwer qwer qwer )
+( ls qwer )
+( ls qwer qwer qwer qwer 
+qwer qewr qwer qwe r
+( ls )
+( ls )
+( ls 
+ls
+ls pwd
+ls
+pwd
+ls pwd
+ls pwd
+(ls )
+(ls)
+(ls)
+(ls)
+(ls)
+(ls)
+(ls))
+ls >> 
+>> a
+<< a
+<< a
+<< a
+<< a
+ls << a |
+ls << a | |
+ls << a ( |
+ls << a ( |
+ls << a ( 
+ls << a ( 
+ls << a ( | && 234 qewr
+<< a (
+<< a )
+>> a (
+>> a )
+(ls >> a )
+( ls << a )
+<< ls |
+<< ls | &
+<< ls | &&
+<< a |
+<< a | |
+<< a ||
+<< a || |
+<< a | &&
+<< a | 
+<< a | >>
+<< a << <<
+ls << a ls << a
+ls << a ls << a
+ls << a ls << a
+ls < a ls < a
+ls < a ls < a
+ls < a ls < a
+ls < a ls < a
+ls < a -la < a
+ls < a ls < a
+ls < a ls < a
+ls < a ls < a
+ls < a ls < a
+ls < a ls < a
+touch a
+ls < a ls < a
+ls < a ls < a
+ls << a ls << a
+ls << a ls << a
+ls << a | ls << a
+ls << a | ls << a
+ls << a | ls << a
+ls << a ls << a
+ls << a
+ls << a ls << a
+ls << a -la ls > b
+ls << a -la ls < b
+ls << a ls < b
+ls < a
+ls < b
+ls > a
+ls > b
+ls << a ls > b
+ls < a ls > b
+ls << a -la ls > b
+ls << a -la > b
+ls << a -la > b

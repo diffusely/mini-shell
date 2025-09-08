@@ -1,9 +1,9 @@
 a
+b
 history.txt
 ignore_readline.supp
 include
 lib
-ls
 Makefile
 minishell
 pwd

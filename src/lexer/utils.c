@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 01:26:47 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/30 21:55:40 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/09 00:27:13 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ bool	syntax_check(t_token *input)
 			return (check_type(cur), false);
 		cur = cur->next;
 	}
-	return (syntax_validation(input));
+	return (syntax_validation(input) && check_subs(input));
 }
 
 bool	check_quoted(const char *input)
