@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 15:19:22 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/09 00:59:27 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/09 01:16:14 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	exec_cmd(t_shell *mish, t_ast *redir)
 	status = 0;
 	if (pid == 0)
 	{
-		if (redir->redirs)
+		if (redir->redirs && redir->redirs->type != R_HEREDOC)
 			create_files(mish, redir->redirs);
 		if (!mish->tree->cmd[0] || mish->tree->cmd[0][0] == '\0')
 		{

@@ -419,3 +419,31 @@ ls < a ls > b
 ls << a -la ls > b
 ls << a -la > b
 ls << a -la > b
+ls << a
+qwer
+qwe
+ls
+ls | ls
+ls | ls | sort
+make
+ls << a
+ls << a
+<< ls
+<< a
+<< a
+> a
+> a
+> a
+ls | ls | ls
+exit
+<< a
+((ls))
+()
+90
+()
+)(
+ls << a |
+ls << a | |
+ls << a (
+ls << a )
+(ls << a )
