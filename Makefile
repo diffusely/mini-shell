@@ -59,7 +59,7 @@ IFLAG		= -I$(INC_HEADER) -I$(INC_LIB) -I$(LIBFT) -I$(READLINE_DIR)/include
 
 
 FFLAG		= 
-CFLAG		= -Wall -Wextra -Werror $(FFLAG) 
+CFLAG		= -Wall -Wextra -Werror $(FFLAG) -fsanitize=address
 CC			= cc
 RM			= rm -rf
 
@@ -83,7 +83,7 @@ fclean: 	clean
 
 re:			fclean all
 
-valgrind:
-			valgrind --track-origins=yes --leak-check=full --show-leak-kinds=all --track-fds=yes --suppressions=ignore_readline.supp ./minishell
+# valgrind:
+# 			valgrind --track-origins=yes --leak-check=full --show-leak-kinds=all --track-fds=yes --suppressions=ignore_readline.supp ./minishell
 
 .PHONY:	all clean fclean re

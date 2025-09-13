@@ -447,3 +447,15 @@ ls << a | |
 ls << a (
 ls << a )
 (ls << a )
+ls
+cd
+cd
+cd
+cd
+cd
+cd
+cd
+cd
+cd
+ls
+exit
