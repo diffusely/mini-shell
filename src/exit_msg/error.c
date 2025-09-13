@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 17:37:14 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/06 21:23:47 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/13 19:49:53 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,10 @@ void	error_exit_msg(t_shell *mish, t_ast *left, char *msg)
 		ft_err(left->cmd[0]);
 	free_all(mish);
 	error_handle(msg, 1);
+}
+
+void	free_exit_msg(t_shell *mish, char *msg)
+{
+	free_all(mish);
+	error_handle(msg, 0);
 }

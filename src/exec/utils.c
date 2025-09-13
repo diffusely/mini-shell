@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 21:06:18 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/07 00:02:55 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/13 19:53:04 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,25 @@ void	dup_and_close(int fd[2], int new_fd, int close_read)
 		dup2(fd[1], new_fd);
 		close(fd[1]);
 	}
+}
+
+void	empty_cmd(t_shell *mish, t_ast *cmd)
+{
+	if (!cmd->cmd[0] || cmd->cmd[0][0] == '\0')
+	{
+		free_all(mish);
+		exit(2);
+	}
+}
+
+void	exec_pip(t_shell *mish, t_ast *ast)
+{
+	char	*path;
+
+	path = NULL;
+	path = get_path(mish, ast->cmd[0]);
+	execve(path, ast->cmd, mish->env);
+	if (path)
+		free(path);
+	error_exit_msg(mish, ast, ": command not found\n");
 }

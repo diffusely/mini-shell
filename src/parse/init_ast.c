@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 20:30:27 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/03 16:01:17 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/13 20:02:27 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	add_redir(t_ast *node, t_token_type type, t_token *t)
 	redir->filename = ft_strdup(t->value);
 	redir->next = NULL;
 	if (!node->redirs)
-    	node->redirs = redir;
+		node->redirs = redir;
 	else
 	{
 		tmp = node->redirs;
@@ -89,7 +89,7 @@ void	realoc_node(t_ast **node, t_token *tokens, int size)
 	while (tmp && tmp[count])
 		++count;
 	res = ft_calloc((count + size + 1), sizeof(char *));
-	i = -1;	
+	i = -1;
 	while (++i < count)
 		res[i] = tmp[i];
 	free(tmp);

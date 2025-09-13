@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 15:16:28 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/07 22:00:47 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/14 00:11:07 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,29 +24,21 @@ static int	check_pipe_status(int *fd, pid_t pid1, pid_t pid2)
 	if (WIFEXITED(status2))
 		status2 = WEXITSTATUS(status2);
 	else
-		status2 = 1;
+		status2 = 128 + WTERMSIG(status2); 
 	return (status2);
 }
 
 static void	start(t_shell *mish, int *fd, int *pid1)
 {
 	if (pipe(fd) == -1)
-	{
-		free_all(mish);
-		error_handle("minishell: pip error\n", 0);
-	}
+		free_exit_msg(mish, "minishell: pip error\n");
 	*pid1 = fork();
 	if (*pid1 == -1)
-	{
-		free_all(mish);
-		error_handle("minishell: fork error\n", 0);
-	}
+		free_exit_msg(mish, "minishell: fork error\n");
 }
 
 static void	help_pid1(t_shell *mish, t_ast *left, int *status)
 {
-	char	*path;
-
 	if (left->type == NODE_PIP)
 	{
 		*status = exec_pipe(mish, left->left, left->right);
@@ -61,18 +53,10 @@ static void	help_pid1(t_shell *mish, t_ast *left, int *status)
 		}
 		else
 		{
-			if (left && left->redirs)
+			if (left && left->redirs && left->redirs->type != R_HEREDOC)
 				create_files(mish, left->redirs);
-			if (!left->cmd[0] || left->cmd[0][0] == '\0')
-			{
-				free_all(mish);
-				exit(0);
-			}
-			path = get_path(mish, left->cmd[0]);
-			execve(path, left->cmd, mish->env);
-			if (path)
-				free(path);
-			error_exit_msg(mish, left, ": command not found\n");
+			empty_cmd(mish, left);
+			exec_pip(mish, left);
 		}
 	}
 	else
@@ -81,8 +65,6 @@ static void	help_pid1(t_shell *mish, t_ast *left, int *status)
 
 static void	help_pid2(t_shell *mish, t_ast *right, int *status)
 {
-	char	*path;
-
 	if (!is_built(right->cmd))
 	{
 		if (right->type == NODE_SUB)
@@ -92,18 +74,10 @@ static void	help_pid2(t_shell *mish, t_ast *right, int *status)
 		}
 		else
 		{
-			if (right && right->redirs)
+			if (right && right->redirs && right->redirs->type != R_HEREDOC)
 				create_files(mish, right->redirs);
-			if (!right->cmd[0] || right->cmd[0][0] == '\0')
-			{
-				free_all(mish);
-				exit(0);
-			}
-			path = get_path(mish, right->cmd[0]);
-			execve(path, right->cmd, mish->env);
-			if (path)
-				free(path);
-			error_exit_msg(mish, right, ": command not found\n");
+			empty_cmd(mish, right);
+			exec_pip(mish, right);
 		}
 	}
 	else
@@ -127,7 +101,7 @@ int	exec_pipe(t_shell *mish, t_ast *left, t_ast *right)
 	}
 	pid2 = fork();
 	if (pid2 == -1)
-		error_handle("minishell: fork error\n", 0);
+		free_exit_msg(mish, "minishell: fork error\n");
 	if (pid2 == 0)
 	{
 		dup_and_close(fd, STDIN_FILENO, 1);

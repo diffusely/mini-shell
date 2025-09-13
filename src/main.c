@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:16:42 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/09/08 00:43:56 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/14 00:35:15 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include "lexer.h"
 #include "shell.h"
 #include "free.h"
+
+volatile sig_atomic_t		g_signal;
 
 int	main(int argc, char **argv, char **envp)
 {

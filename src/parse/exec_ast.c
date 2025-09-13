@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_ast.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 15:48:25 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/07 00:36:29 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/13 20:56:49 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	help_cmd(t_shell *mish)
 	status = 0;
 	if (is_built(mish->tree->cmd))
 	{
-		if (mish->tree->redirs)
+		if (mish->tree->redirs && mish->tree->redirs->type != R_HEREDOC)
 			create_files(mish, mish->tree->redirs);
 		exec_built(mish->tree->cmd, &mish->list_env, mish);
 		dup2(mish->fd_in, STDIN_FILENO);
@@ -42,10 +42,10 @@ static int	help_and_or(t_shell *mish, int flag)
 	return (status);
 }
 
-int exec_ast(t_shell *mish)
+int	exec_ast(t_shell *mish)
 {
 	if (!mish->tree)
-		return 0;
+		return (0);
 	if (mish->tree->type == NODE_CMD)
 		return (help_cmd(mish));
 	else if (mish->tree->type == NODE_PIP)

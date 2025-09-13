@@ -31,6 +31,7 @@ SRC 		= $(SRC_DIR)main.c \
 			  $(PARSE_DIR)parse_ast.c \
 			  $(PARSE_DIR)init_ast.c \
 			  $(PARSE_DIR)exec_ast.c \
+			  $(PARSE_DIR)utils.c \
 			  $(SHELL_DIR)commands.c \
 			  $(SHELL_DIR)history.c \
 			  $(SHELL_DIR)utils.c \
@@ -58,8 +59,8 @@ LIB_FLAGS	= -L$(LIBFT) -lft -L$(READLINE_DIR)/lib -lreadline -lhistory -lncurses
 IFLAG		= -I$(INC_HEADER) -I$(INC_LIB) -I$(LIBFT) -I$(READLINE_DIR)/include
 
 
-FFLAG		= 
-CFLAG		= -Wall -Wextra -Werror $(FFLAG) -fsanitize=address
+FFLAG		= -fsanitize=address
+CFLAG		= -Wall -Wextra -Werror $(FFLAG) 
 CC			= cc
 RM			= rm -rf
 
@@ -83,7 +84,7 @@ fclean: 	clean
 
 re:			fclean all
 
-# valgrind:
-# 			valgrind --track-origins=yes --leak-check=full --show-leak-kinds=all --track-fds=yes --suppressions=ignore_readline.supp ./minishell
+valgrind:
+			valgrind --track-origins=yes --leak-check=full --show-leak-kinds=all --track-fds=yes --suppressions=ignore_readline.supp ./minishell
 
 .PHONY:	all clean fclean re

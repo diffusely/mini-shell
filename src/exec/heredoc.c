@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 01:43:04 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/09 01:12:18 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/13 19:57:06 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	heredoc(const char *delim)
 		if (!line || ft_strcmp(line, delim) == 0)
 		{
 			free(line);
-			break;
+			break ;
 		}
 		write(fd[1], line, ft_strlen(line));
 		write(fd[1], "\n", 1);

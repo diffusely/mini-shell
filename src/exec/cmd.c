@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 15:19:22 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/09 01:16:14 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/14 00:38:39 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,17 +72,18 @@ int	exec_cmd(t_shell *mish, t_ast *redir)
 	{
 		if (redir->redirs && redir->redirs->type != R_HEREDOC)
 			create_files(mish, redir->redirs);
-		if (!mish->tree->cmd[0] || mish->tree->cmd[0][0] == '\0')
-		{
-			free_all(mish);
-			exit(0);
-		}
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
+		empty_cmd(mish, mish->tree);
 		exec_commands(mish);
 	}
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
 		status = WEXITSTATUS(status);
 	else
-		status = 1;
+		status = 128 + WTERMSIG(status); 
+	set_signals_prompt();
 	return (status);
 }

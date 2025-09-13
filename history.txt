@@ -1,461 +1,88 @@
-qwer
-sleep 1000
-sleep 100
-sleep 100
-sleep 100 | ls 
-sleep 100 | sleep 1100
-sleep 100 | sleep 1100 | sleep 100
-\
-\
-\
-sleep 100
-sleep 100
-sleep 100
-(sleep 100)
-sleep 100
-sleep 100
-sleep 100
-sleep 100
-sleep 100
-ls > a | pwd
-cd src/ | pwd
-ls -la | pwd
-ls > a -la | pwd
-> a
-ls
-< a
-ls
-ls
-> a
-> a | pwd
-ls
-> a | pwd
-> ls | a
-> ls | ls
-historyqewr
-exitqewr
-ex
-exi
-exitq
-exit
-env q
-envqewr
-envqewr
-env
-env q
-envwe
-envq
-envqwe
-en
-env
-env q
-env
-env
-env q
-env
-env q
-history 123
-enc
-env
-env
-env q
-env
-env
-env a
-env a
-sdf
-sdf
-sdf
-sdf
-sdf
-sdf
-sdf
-sdf
-sdf
-sdf
-sdf
-sdf
-sdf
-sdf
-sdf
-sdf
-sdf
-sdf
-sdf
-sdf
-sdf
-sdf
-sdf
-sdf
-sdf
-sdf
-sdf
-sdf
-sdf
-sdf
-sdf
-sdf
-d
-dddddddddddddddddddd
-d
-ls
-ls
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-a
-s
-ls
-w
-q
-q
-q
-ls | pwd
-ls > a | pwd
-ls
-r
-w
-ewr
-wer
-g
-g
-g
-g
-g
-g
-g
-g
-g
-g
-g
-g
-g
-g
-g
-g
-g
-g
-g
-g
-g
-g
-g
-g
-g
-g
-g
-g
-g
-g
-g
-g
-gg
-g
-g
-g
-g
-g
-g
-g
-g
-g
-g
-s
-f
-s
-we
-w
-e
-r
-t
-r
-t
-t
-ls
-ls
-pwd
-ls
-a
-q
-e
-w
-e
-e
-we
-we
-we
-we
-we
-we
-we
-we
-we
-we
-we
-ls 
-ls > a | pwd
-ls > pwd | cd
-ls > a | ls
-ls > a | pwd
-ls > a | pwd
-ls > pwd | cd src/
-ls > pwd | cd 
-env
-env q
-env 
-envq
-envq
-envq
-envq
-envq
-emvq
-env
-env q
-env we qwe
-history
-historya
-history er
-exit
-exit w
-exit qw
-enc
-enc
-env
-env q
-env qwe qwe
-envqwe
-pwdq
-pwd
-pwdqwqe
-owd
-pwd
-pwdq
-pwd
-pwdqe
-pwd
-pwdw
-pwdq
-pwd
-mkdir b/a/c
-mkdir ba/aa/ca
-mkdir -r ba/aa/ca
-cd e/er/te/
-cd e/a/b/
-ls
-cd A/C/
-cd ae/we/
-cd e/w/
-cd ae/wer/
-cd e/r/
-<< a
-b << a
-ls << a
-<< a
-<< a
-<< a
-<< a
-ls << |
-ls << a |
-ls << a <<
-ls << a | >
-ls << a
-ls << a
-qwer << a
-<< a
-()
-(ls ) )
-()
-)(
-( ls ) )
-(ls ) ( )
-(ls ) ( ls )
-((ls)))
-(((ls))
-()
-(())
-(()))
-((ls )))
-((ls ))))
-((ls ))))))))))))))))
-(((ls))
-((ls))
-((ls)))
-((((ls)))
-ls || pwd )
-ls || pwd (
-ls || pwd ) ) ) )
-ls || (pwd ) 
-ls || (pwd )  )
-ls || (pwd )  ) ()
-ls || (pwd )  () )
-ls || (pwd )
-(ls))
-(ls | | ))
-( ls )
-( ls ))
-( ls )
-( ls ) )_
-( ls ) )
- ( ( ls ) )
-( ls )
-(ls)
-( ls )
-( ls ) ) ) ) ) ) 
-( ls qwer qwer qwer )
-( ls qwer )
-( ls qwer qwer qwer qwer 
-qwer qewr qwer qwe r
-( ls )
-( ls )
-( ls 
-ls
-ls pwd
-ls
-pwd
-ls pwd
-ls pwd
-(ls )
-(ls)
-(ls)
-(ls)
-(ls)
-(ls)
-(ls))
-ls >> 
->> a
-<< a
-<< a
-<< a
-<< a
-ls << a |
-ls << a | |
-ls << a ( |
-ls << a ( |
-ls << a ( 
-ls << a ( 
-ls << a ( | && 234 qewr
-<< a (
-<< a )
->> a (
->> a )
-(ls >> a )
-( ls << a )
-<< ls |
-<< ls | &
-<< ls | &&
-<< a |
-<< a | |
-<< a ||
-<< a || |
-<< a | &&
-<< a | 
-<< a | >>
-<< a << <<
-ls << a ls << a
-ls << a ls << a
-ls << a ls << a
-ls < a ls < a
-ls < a ls < a
-ls < a ls < a
-ls < a ls < a
-ls < a -la < a
-ls < a ls < a
-ls < a ls < a
-ls < a ls < a
-ls < a ls < a
-ls < a ls < a
-touch a
-ls < a ls < a
-ls < a ls < a
-ls << a ls << a
-ls << a ls << a
-ls << a | ls << a
-ls << a | ls << a
-ls << a | ls << a
-ls << a ls << a
-ls << a
-ls << a ls << a
-ls << a -la ls > b
-ls << a -la ls < b
-ls << a ls < b
 ls < a
-ls < b
+ls << a
+ls << a | ls
+ls << a
+ls << a
+ls << a
+sort
+sort
+sort
+sort
+ls < <a
+ls << a
+la
+(pwd << a)
+pwd << a | pwd b
+pwd << a | pwd << b
+(pwd << a ) | (pwd << c)
+pwd << a
+pwd > a
+ls << a
+ls << b
+wer << a
+a << a
+touch a
+a << a
+ls <<
+ls << a
+a < ls
+ls < a
+ls < sort
 ls > a
-ls > b
-ls << a ls > b
-ls < a ls > b
-ls << a -la ls > b
-ls << a -la > b
-ls << a -la > b
+a < a
+< a
+ls < ls
+ls < a
+< a
+> a
+ls > a
+echo < a
+cat < a
+cat -e
+cat < a
+cat < a | sort
 ls << a
-qwer
-qwe
+ls << a
+ls << a
+ls << a
+sort
+ls << a
+sort
+sort
+make re
+exit
+sort
+sort
+sort
+sort
+sort
+mkdir -p a/b/c/d
+cd a/b/c/d/
+pwd
+sort
+sort
+sort
 ls
-ls | ls
-ls | ls | sort
+pwd
+cd ..
+./minishell 
+./minishell 
 make
-ls << a
-ls << a
-<< ls
-<< a
-<< a
-> a
-> a
-> a
-ls | ls | ls
-exit
-<< a
-((ls))
-()
-90
-()
-)(
-ls << a |
-ls << a | |
-ls << a (
-ls << a )
-(ls << a )
+vim test.c
 ls
-cd
-cd
-cd
-cd
-cd
-cd
-cd
-cd
-cd
+pwd
+sort
+sort
+sort
+sort
+sort
+sort
+sort
+sorrt
+sort
+gcc test.c 
 ls
-exit
+cc test.c 
+cc test.c -lreadline -lhistory -lncurses
+./a.out 
+ls

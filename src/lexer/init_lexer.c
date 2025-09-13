@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_lexer.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 20:46:25 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/09 01:26:41 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/13 21:09:12 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,13 @@ bool	syntax_help(t_token *cur)
 	{
 		if (cur->next && cur->next->next && cur->next->next->next
 			&& (is_subshell(cur->next->next->type)
-			|| is_redirect(cur->next->next->type)
-			|| is_operator(cur->next->next->type))
+				|| is_redirect(cur->next->next->type)
+				|| is_operator(cur->next->next->type))
 			&& (is_subshell(cur->next->next->next->type)
-			|| is_redirect(cur->next->next->next->type)
-			|| is_operator(cur->next->next->next->type)))
+				|| is_redirect(cur->next->next->next->type)
+				|| is_operator(cur->next->next->next->type)))
 			return (check_type(cur->next->next), false);
+		set_signals_exec();
 		heredoc(cur->next->value);
 	}
 	return (true);

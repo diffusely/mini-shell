@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:26:24 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/09/07 19:08:41 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/14 00:13:38 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,11 @@
 # include <fcntl.h>
 # include <unistd.h>
 
-typedef struct s_ast		t_ast;
-typedef struct s_token		t_token;
-typedef enum e_token_type	t_token_type;
+typedef struct s_ast			t_ast;
+typedef struct s_token			t_token;
+typedef enum e_token_type		t_token_type;
+
+extern volatile sig_atomic_t	g_signal;
 
 typedef struct s_shell
 {
@@ -44,7 +46,12 @@ typedef struct s_shell
 	struct s_shell	*free;
 }	t_shell;
 
+// Signals
 void	sigint_handler(int signum);
+void	set_signals_prompt(void);
+void	set_signals_exec(void);
+void	set_signals_heredoc(void);
+void	sigint_handler_heredoc(int sig);
 
 // Init
 t_shell	*init_shell(char **envp);

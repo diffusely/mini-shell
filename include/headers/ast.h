@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:27:11 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/09/06 21:35:32 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/13 20:00:36 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,8 @@ void	print_ast(t_ast *node, int depth);
 
 // Exec ast
 int		exec_ast(t_shell *mish);
+
+// Utils
+void	helper_ast(t_ast **node, t_token **tokens);
 
 #endif
