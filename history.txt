@@ -86,3 +86,80 @@ cc test.c
 cc test.c -lreadline -lhistory -lncurses
 ./a.out 
 ls
+ls
+sort
+sort
+ls
+ls
+cat
+s
+a
+sort
+ls
+sor
+sort
+ls
+exit
+ls
+cat
+ls
+cat
+cat
+cat
+cat
+cat
+cat
+exit
+cat
+cat
+exit
+cat 
+make
+./minishell 
+sort
+cat
+cat
+exit
+cat
+cat
+exit
+cat
+cat
+cat
+ls
+cat
+exit
+cat
+cat
+<< eof cat
+<< eof cat
+<< eof cat
+ls
+<< eof cat
+cat | cat
+sort | sort
+sort | sort | sort
+sort | sort | sort | sort | sort | sort | sort | sort
+sort | sort | sort | sort | sort | sort | sort | sort
+sort | sort | sort | sort | sort | sort | sort | sort
+ls | ls
+ls | sort
+ls | cat
+cat
+cat | cat
+sort | sort
+sort | sort
+sort | ls
+sort | ls
+sort
+sort | sort
+sort
+sort | sort
+<< a
+pwd
+sort
+sort
+sort |
+sort | sort
+ls 
+pwd

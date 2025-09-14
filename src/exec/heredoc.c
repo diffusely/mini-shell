@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 01:43:04 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/13 19:57:06 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/14 21:57:20 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	heredoc(const char *delim)
 		return (-1);
 	while (1)
 	{
+		// signal(SIGINT, sigint_heredoc);
+		// signal(SIGQUIT, SIG_IGN);  
 		line = readline("> ");
 		if (!line || ft_strcmp(line, delim) == 0)
 		{
@@ -31,6 +33,7 @@ int	heredoc(const char *delim)
 		write(fd[1], "\n", 1);
 		free(line);
 	}
+	signal(SIGINT, SIG_IGN);
 	close(fd[1]);
 	close(fd[0]);
 	return (0);

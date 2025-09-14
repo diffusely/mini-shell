@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:26:24 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/09/14 00:13:38 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/14 19:49:46 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	set_signals_prompt(void);
 void	set_signals_exec(void);
 void	set_signals_heredoc(void);
 void	sigint_handler_heredoc(int sig);
+void	sig_handler(int sig);
 
 // Init
 t_shell	*init_shell(char **envp);

@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 15:16:28 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/14 00:11:07 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/14 21:45:45 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ int	exec_pipe(t_shell *mish, t_ast *left, t_ast *right)
 	int		status;
 
 	status = 0;
+	signal(SIGINT, sig_handler);
+    signal(SIGQUIT, sig_handler);
 	start(mish, fd, &pid1);
 	if (pid1 == 0)
 	{
