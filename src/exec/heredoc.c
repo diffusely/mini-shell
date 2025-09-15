@@ -6,35 +6,58 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 01:43:04 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/14 21:57:20 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/15 21:47:29 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-int	heredoc(const char *delim)
+void	fake_heredoc(const char *delim)
 {
-	int		fd[2];
 	char	*line;
 
-	if (pipe(fd) == -1)
-		return (-1);
 	while (1)
 	{
-		// signal(SIGINT, sigint_heredoc);
-		// signal(SIGQUIT, SIG_IGN);  
 		line = readline("> ");
 		if (!line || ft_strcmp(line, delim) == 0)
 		{
 			free(line);
 			break ;
 		}
-		write(fd[1], line, ft_strlen(line));
-		write(fd[1], "\n", 1);
 		free(line);
 	}
-	signal(SIGINT, SIG_IGN);
-	close(fd[1]);
-	close(fd[0]);
-	return (0);
+}
+
+int	heredoc(t_shell *mish, const char *delim)
+{
+	int		fd[2];
+	pid_t	pid;
+	char	*line;
+
+	if (pipe(fd) == -1)
+		return (-1);
+	pid = fork();
+	if (pid == -1)
+		return (-1);
+	if (pid == 0)
+	{
+		close(fd[0]);
+		while (1)
+		{
+			line = readline("> ");
+			if (!line || ft_strcmp(line, delim) == 0)
+			{
+				free(line);
+				break ;
+			}
+			write(fd[1], line, ft_strlen(line));
+			write(fd[1], "\n", 1);
+			free(line);
+		}
+		close(fd[1]);
+		free_all(mish);
+		exit(0);
+	}
+	waitpid(pid, NULL, 0);
+	return (close(fd[1]), fd[0]);
 }

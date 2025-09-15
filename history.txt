@@ -163,3 +163,38 @@ sort |
 sort | sort
 ls 
 pwd
+<< a
+<< a
+sort < a
+./test.sh << a
+./test.sh << a
+./test.sh
+./test.sh
+./test.sh
+./run.sh 
+./test.sh
+chmod 777 test.sh
+chmod 777 ./test.sh
+./run.sh 
+./run.sh << a
+cd ..
+<< a
+cat << "
+cat << "
+ls << A
+ls << a
+ls < a
+ls < a
+ls > a
+ls < a
+ls << a
+ls << a
+a
+ls << a
+cat << a
+cat << a
+ls << a
+ls << a
+cd """src'"""
+ls << |
+ls << a |

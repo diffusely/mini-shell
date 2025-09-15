@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 15:16:28 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/14 21:45:45 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/15 21:28:04 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	help_pid1(t_shell *mish, t_ast *left, int *status)
 		}
 		else
 		{
-			if (left && left->redirs && left->redirs->type != R_HEREDOC)
+			if (left && left->redirs)
 				create_files(mish, left->redirs);
 			empty_cmd(mish, left);
 			exec_pip(mish, left);
@@ -74,7 +74,7 @@ static void	help_pid2(t_shell *mish, t_ast *right, int *status)
 		}
 		else
 		{
-			if (right && right->redirs && right->redirs->type != R_HEREDOC)
+			if (right && right->redirs)
 				create_files(mish, right->redirs);
 			empty_cmd(mish, right);
 			exec_pip(mish, right);

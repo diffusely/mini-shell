@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 15:14:36 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/13 19:38:30 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/15 21:46:10 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	create_files(t_shell *mish, t_redir *r);
 int		exec_cmd(t_shell *mish, t_ast *redir);
 int		exec_ast_subtree(t_shell *mish, t_ast *subtree);
 int		exec_sub(t_shell *mish);
-int		heredoc(const char *delim);
+int		heredoc(t_shell *mish, const char *delim);
+void	fake_heredoc(const char *delim);
 
 // Utils
 void	empty_cmd(t_shell *mish, t_ast *cmd);
