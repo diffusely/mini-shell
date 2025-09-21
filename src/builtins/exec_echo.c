@@ -6,27 +6,27 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 14:20:25 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/09/21 17:41:17 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/21 19:44:33 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-static char*	find_list(const char* input, t_list **envp_list)
+static char	*find_list(const char *input, t_list **envp_list)
 {
 	t_list	*curr;
 	int		place;
 	char	*content;
-	int 	i;
+	int		i;
 
 	curr = *envp_list;
 	i = 0;
 	while (curr)
 	{
-		if (curr->content && ft_strchr(curr->content, '=')) 
+		if (curr->content && ft_strchr(curr->content, '='))
 		{
 			content = (char *)curr->content;
-			place = find_word_place(curr->content);
+			place = f_w_p(curr->content);
 			if (ft_strncmp(content, input, place) == 0)
 			{
 				while (content[i] != '=')
@@ -39,50 +39,46 @@ static char*	find_list(const char* input, t_list **envp_list)
 	return (NULL);
 }
 
-static void check_dollar(char *input, t_list **list_env, bool new_line)
+static void	check_dollar(char *input, t_list **list_env, bool new_line)
 {
-    char *cmd;
+	char	*cmd;
 
-    input++;
-    cmd = find_list(input, list_env);
-
-    if (cmd)
-        printf("%s", cmd);
-    else
-        printf("wqwe");
-    if (new_line)
-        printf("\n");
+	input++;
+	cmd = find_list(input, list_env);
+	if (cmd)
+		printf("%s", cmd);
+	if (new_line)
+		printf("\n");
 }
 
-char *remove_quotes(char *str)
+char	*remove_quotes(char *str)
 {
-    char *src = str;
-    char *dst = str;
+	char	*src;
+	char	*dst;
 
-    if (!str)
-        return NULL;
-
-    while (*src)
-    {
-        if (*src != '\'' && *src != '"')
-            *dst++ = *src;
-        src++;
-    }
-    *dst = '\0';
-    return (str);
+	src = str;
+	dst = str;
+	if (!str)
+		return (NULL);
+	while (*src)
+	{
+		if (*src != '\'' && *src != '"')
+			*dst++ = *src;
+		src++;
+	}
+	*dst = '\0';
+	return (str);
 }
 
-static void print_arg(char *arg, t_list **envp)
+static void	print_arg(char *arg, t_list **envp)
 {
-    if (!arg)
-        return;
-
-    arg = remove_quotes(arg);
-
-    if (arg[0] == '$')
-        check_dollar(arg, envp, false);
-    else
-        printf("%s", arg);
+	if (!arg)
+		return ;
+	arg = remove_quotes(arg);
+	if (arg && arg[0] == '$')
+		check_dollar(arg, envp, false);
+	else
+		printf("%s", arg);
 }
 
 bool	exec_echo(char **cmd, t_list **envp)

@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 15:16:28 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/15 21:28:04 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/21 19:36:32 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	check_pipe_status(int *fd, pid_t pid1, pid_t pid2)
 	if (WIFEXITED(status2))
 		status2 = WEXITSTATUS(status2);
 	else
-		status2 = 128 + WTERMSIG(status2); 
+		status2 = 128 + WTERMSIG(status2);
 	return (status2);
 }
 
@@ -93,7 +93,7 @@ int	exec_pipe(t_shell *mish, t_ast *left, t_ast *right)
 
 	status = 0;
 	signal(SIGINT, sig_handler);
-    signal(SIGQUIT, sig_handler);
+	signal(SIGQUIT, sig_handler);
 	start(mish, fd, &pid1);
 	if (pid1 == 0)
 	{

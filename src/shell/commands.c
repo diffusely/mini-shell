@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:19:55 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/09/06 21:41:56 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/21 20:08:28 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ bool	remove_list(const char *input, t_list **envp_list)
 {
 	t_list	*curr;
 	t_list	*prev;
-	int		place;
 
 	curr = *envp_list;
 	prev = NULL;
@@ -24,8 +23,7 @@ bool	remove_list(const char *input, t_list **envp_list)
 	{
 		if (curr->content && ft_strchr(curr->content, '='))
 		{
-			place = find_word_place(curr->content);
-			if (ft_strncmp(curr->content, input, place) == 0)
+			if (ft_strncmp(curr->content, input, f_w_p(curr->content)) == 0)
 			{
 				if (prev == NULL)
 					*envp_list = curr->next;

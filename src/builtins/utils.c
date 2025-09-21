@@ -3,16 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmakarya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 21:27:14 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/21 14:54:53 by vmakarya         ###   ########.fr       */
+/*   Updated: 2025/09/21 21:32:40 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-int	find_word_place(char *word)
+void	ft_err_msg(char *str, char *msg)
+{
+	ft_err(str);
+	ft_err(msg);
+	ft_err("\n");
+}
+
+int	f_w_p(char *word)
 {
 	int	i;
 
@@ -58,20 +65,20 @@ int	exec_built(char **cmd, t_list **envp, t_shell *mish)
 	tmp = NULL;
 	type = is_built(cmd);
 	if (type == ECHO)
-		return (exec_echo(cmd, envp)); // WORKED hamarya
+		return (exec_echo(cmd, envp));
 	else if (type == UNSET)
-		return (exec_unset(cmd, envp)); // WORKED
+		return (exec_unset(cmd, envp));
 	else if (type == EXPORT)
-		return (exec_export(cmd, envp)); //WORKED
+		return (exec_export(cmd, envp));
 	if (type == CD)
-		return (exec_cd(cmd, envp, i)); //WORKED
+		return (exec_cd(&mish, cmd, envp, i));
 	else if (type == PWD)
-		return (exec_pwd(tmp)); //WORKED
-	else if (type == ENV) // WORKED
-		return (exec_env(cmd[1] ,envp));
-	else if (type == EXIT) // WORKED
+		return (exec_pwd(tmp));
+	else if (type == ENV)
+		return (exec_env(cmd[1], envp));
+	else if (type == EXIT)
 		exec_exit(cmd, mish);
-	else if (type == HISTORY) // WORKED
+	else if (type == HISTORY)
 		return (exec_history(cmd));
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 22:50:19 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/13 19:55:29 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/21 19:29:39 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	shell_loop(t_shell *mish)
 		}
 		mish->token = lexer(mish->input);
 		mish->free_token = mish->token;
-		//print_tokens(mish->token);
 		add_history(mish->input);
 		add_history_input(mish);
 		if (!syntax_check(mish->token))
@@ -57,9 +56,6 @@ void	shell_loop(t_shell *mish)
 			continue ;
 		}
 		mish->tree = create_tree(&mish->token);
-		//print_env_matrix(mish->env);
-		//refresh_env_matrix(&mish);
-		//print_ast(mish->tree, 0);
 		mish->status = exec_ast(mish);
 		free_mish(mish);
 	}

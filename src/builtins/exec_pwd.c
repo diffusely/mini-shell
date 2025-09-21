@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pwd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 12:37:59 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/09/08 01:37:25 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/21 19:28:17 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	exec_pwd(const char *input)
 {
-	(void)input;
 	char	*pwd;
 
+	(void)input;
 	pwd = NULL;
 	pwd = getcwd(NULL, 0);
 	if (pwd)

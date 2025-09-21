@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 15:19:22 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/15 21:37:07 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/21 19:36:12 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	exec_cmd(t_shell *mish, t_ast *redir)
 	if (WIFEXITED(status))
 		status = WEXITSTATUS(status);
 	else
-		status = 128 + WTERMSIG(status); 
+		status = 128 + WTERMSIG(status);
 	if (status == 130)
 		printf("\n");
 	if (status == 131)

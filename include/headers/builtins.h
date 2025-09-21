@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmakarya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 21:27:32 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/21 14:38:28 by vmakarya         ###   ########.fr       */
+/*   Updated: 2025/09/21 21:31:56 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef enum e_built
 }	t_built;
 
 // Exec
-int		exec_cd(char **input, t_list **envp_list, int i);
+int		exec_cd(t_shell **shell, char **input, t_list **envp_list, int i);
 bool	exec_echo(char **cmd, t_list **list_env);
 int		exec_env(char *input, t_list **list_env);
 int		exec_history(char **cmd);
@@ -50,7 +50,8 @@ void	print_env(t_list *env);
 char	*remove_quotes(char *str);
 
 // Utils
-int		find_word_place(char *word);
+void	ft_err_msg(char *str, char *msg);
+int		f_w_p(char *word);
 int		exec_built(char **cmd, t_list **envp_list, t_shell *mish);
 int		is_built(char **cmd);
 

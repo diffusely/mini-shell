@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 15:14:23 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/14 00:12:20 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/21 19:36:02 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	help_end(pid_t	pid, int *status)
 	if (WIFEXITED(*status))
 		*status = WEXITSTATUS(*status);
 	else
-		*status = 128 + WTERMSIG(*status); 
+		*status = 128 + WTERMSIG(*status);
 }
 
 int	exec_sub(t_shell *mish)

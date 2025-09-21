@@ -542,3 +542,242 @@ echo $SHLVL
 echo $PWD
 ls
 cd include/
+echo hello"word"
+echo ""
+echi ""
+echo ""
+""
+"
+;;
+ls
+cd weqr
+cd "qwer"
+cd "qwer'"
+echo $?
+echo $?
+make
+exit
+echo wer
+echo PATH
+echo $PATH
+echo $qwe
+exit
+echo $werwerewrwerwer
+echo $wr
+echo $wrqweqwe
+echo -n $wrqweqwe
+echo -n $wrqweqwe
+exit
+echo -n asdasd
+exit
+echo wqerqwer
+echo -n wqerqwer
+echo -n asdasd
+echo -n asdasd
+echo -n asdasd
+exit
+echo -n qewr
+echo -n qewr
+echo -n qewr
+echo -n qewr
+exit
+echo wqer
+echo wqerqqwe
+echo -n wqerqqwe
+echo -n wqerqqwe
+echo -n wqerqqwe
+echo -n wqerqqwe
+echo -n wqerqqwe
+echo -n wqerqqwe
+echo -n wqerqqwe
+echo -n wqerqqwe
+echo -n wqerqqwe
+echo -n wqerqqwe
+echo -n wqerqqwe
+echo -n wqerqqwe
+echo -n wqerqqwe
+echo -n wqerqqwe
+echo -n wqerqqwe
+echo -n wqerqqwe
+echo -n wqerqqwe
+echo -n wqerqqwe
+echo -n wqerqqwe
+echo -n wqerqqwe
+echo -n wqerqqwe
+echo -n wqerqqweqwe
+qwe
+qwewe
+qwewe
+echo -n wqerqqweqwe
+echo -n wqerqqweqwe
+echo -n wqerqqweqwe
+echo -n wqerqqweqwe
+echo -n wqerqqweqwe
+echo -n wqerqqweqwe
+echo -n wqerqqweqweqw
+echo -n wqerqqweqweqwqw
+echo -n wqerqqweqweqwqwqw
+echo -n wqerqqweqweqwqwqwqw
+e
+ewe
+eweqwe
+eweqwee
+echo -n wqer
+qwe
+exot
+exit
+env
+unset SESSION_MANAGER
+env
+exit
+env
+echo $PWD
+echo PWD
+exit
+exit
+echo $PWD
+cd ..
+unset HOME
+cd
+ls
+pwd
+cd
+pwd
+cd
+pwd
+exit
+cd
+unset HOME
+cd
+pwd
+pwd
+exit
+cd
+ls
+cd
+unset HOME
+cd
+cd
+cd
+pwd
+cd
+pwd
+cd
+cd
+cd
+ls
+ls
+cd ..
+pwd
+enc
+env
+ls
+ls
+pwd
+env
+exit
+ls
+env
+echo $PWD
+cd ..
+echo PATH
+echo $PATH
+echo $PWD
+cd ..
+echo $HOME
+echo $PWD
+cd ..
+echo $PWD
+cd ..
+cd ..
+pwd
+cd ..
+pwd
+cd ..
+echo $PWD
+cd ..
+echo $PWD
+cd ..
+echo $PWD
+cd ..
+echo $PATH
+echo $PWD
+cd ..
+ls
+ls
+ls
+echo $PWD
+cd ..
+cd ..
+echo $PWD
+cd ..
+ls
+cd ..
+echo $PWD
+cd ..
+echo $PWD
+cd ..
+echo $PWD
+cd ..
+echo $PWD
+cd ..
+ls
+ls
+ls
+ls
+pwd
+cd ..
+echo $PATH
+echo $PWD
+cd ..
+echo $PWD
+cd ..
+echo $PWD
+cd ..
+echo $PED
+echo $PWD
+cd ..
+echo $PATH
+cd ..
+echo $PWD
+cd ..
+echo $PWD
+cd ..
+echo $PWD
+cd ..
+echo $PWD
+cd ..
+echo $PWD
+cd ..
+echo $PWD
+cd ..
+echo $PWD
+cd ..
+echo $PWD
+cd ..
+echo $PWD
+cd ..
+echo $PWD
+cd ..
+echo $PWD
+cd ..
+echo $PWD
+cd ..
+echo $PWD
+cd ..
+echo $PWD
+cd ..
+echo $PWD
+cd ..
+echo $PWD
+cd ..
+echo $PWd
+echo $PWD
+cd ..
+echo $PWD
+cd ..
+ls
+echo $PWD
+cd ..
+cd ..
+cd ..
