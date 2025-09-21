@@ -3,31 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   exec_echo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmakarya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 14:20:25 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/09/21 16:34:32 by vmakarya         ###   ########.fr       */
+/*   Updated: 2025/09/21 17:41:17 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-static char* find_list(const char* input, t_list **envp_list)
+static char*	find_list(const char* input, t_list **envp_list)
 {
-	t_list *curr;
+	t_list	*curr;
+	int		place;
+	char	*content;
+	int 	i;
 
 	curr = *envp_list;
+	i = 0;
 	while (curr)
 	{
 		if (curr->content && ft_strchr(curr->content, '=')) 
 		{
-			int place = find_word_place(curr->content);
-			if (ft_strncmp(curr->content, input, place) == 0)
+			content = (char *)curr->content;
+			place = find_word_place(curr->content);
+			if (ft_strncmp(content, input, place) == 0)
 			{
-				while (*(char *)curr->content != '=')
-					curr->content++;
-				curr->content++;
-				return (curr->content);
+				while (content[i] != '=')
+					i++;
+				return (content + i + 1);
 			}
 		}
 		curr = curr->next;
@@ -45,7 +49,7 @@ static void check_dollar(char *input, t_list **list_env, bool new_line)
     if (cmd)
         printf("%s", cmd);
     else
-        printf("");
+        printf("wqwe");
     if (new_line)
         printf("\n");
 }

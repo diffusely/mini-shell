@@ -490,3 +490,55 @@ cd """src'"""
 ls << |
 ls << a |
 >>>>>>> a1607f9e08943da338c266ffe7147e1231e856a3
+echo -n "Noro"
+echo Noro
+env
+unset PATH
+env
+ls
+w
+r
+w
+wqer
+exit\
+exit
+echo $PATH
+exit
+echo $PATH
+echo $ENV
+echo $ENV
+echo $SHLVL
+exit
+echo $PATH
+ecit
+ecit
+eqwe
+qwe
+ewq
+qwe
+qwe
+exit
+weqr
+qwe
+qwe
+rqwe
+qwe
+qwe
+qwe
+echo $PATH
+qwe
+exit
+echo $PATH
+exit
+ls
+echo $PATH
+qwe
+qwre
+qwe
+ewq
+qwe
+echo $PATH
+echo $SHLVL
+echo $PWD
+ls
+cd include/
