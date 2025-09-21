@@ -3,63 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 12:35:24 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/09/21 22:04:06 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/22 02:25:12 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#include "built.h"
 
-static bool	find_list(const char *input, t_list **envp_list)
+static void	change_type(char *input, char *old, t_list *curr)
 {
-	t_list	*curr;
-	int		place;
-
-	curr = *envp_list;
-	while (curr)
+	if (ft_strncmp(curr->content, "OLDPWD=", 7) == 0)
 	{
-		if (curr->content && ft_strchr(curr->content, '='))
+		if (!old)
 		{
-			place = f_w_p(curr->content);
-			if (ft_strncmp(curr->content, input, place) == 0)
-				return (true);
+			*(char *)(curr->content + 7) = '\0';
+			return ;
 		}
-		curr = curr->next;
+		free(curr->content);
+		curr->content = ft_calloc(1, ft_strlen(old) + 8);
+		ft_strcpy(curr->content, "OLDPWD=");
+		ft_strcpy(curr->content + 7, old);
 	}
-	return (false);
+	else if (ft_strncmp(curr->content, "PWD=", 4) == 0)
+	{
+		free(curr->content);
+		curr->content = ft_calloc(1, ft_strlen(input) + 5);
+		ft_strcpy(curr->content, "PWD=");
+		ft_strcpy(curr->content + 4, input);
+	}
 }
 
-static void	find_change(char *input, t_list **envp_list)
+static void	find_change(char *input, char *old, t_list **envp_list)
 {
 	t_list	*curr;
 
-	if (!envp_list || !*envp_list)
+	if (!envp_list)
 		return ;
 	curr = *envp_list;
 	while (curr)
 	{
 		if (curr->content && ft_strchr(curr->content, '='))
-		{
-			if (ft_strncmp(curr->content, "PWD=", 4) == 0)
-			{
-				char *new_pwd = malloc(ft_strlen(input) + 5);
-				if (!new_pwd)
-    				return;
-
-				ft_strcpy(new_pwd, "PWD=");
-				strcat(new_pwd, input);
-
-				char *old = curr->content;
-				printf("%s\n", old);
-				curr->content = new_pwd;
-				if (old)
-    				free(old);
-				free(input);
-				return ;
-			}
-		}
+			change_type(input, old, curr);
 		curr = curr->next;
 	}
 }
@@ -79,6 +65,7 @@ bool	check_arguments_count(char **input)
 int	exec_cd(t_shell **shell, char **input, t_list **envp_list, int i)
 {
 	char	*res;
+	char	*old;
 
 	if (check_arguments_count(input))
 		return (ft_err("cd: too many arguments \n"), 1);
@@ -88,17 +75,25 @@ int	exec_cd(t_shell **shell, char **input, t_list **envp_list, int i)
 		return (1);
 	}
 	res = input[1];
+	old = find_list("PWD", envp_list);
 	if (!res)
 	{
-		if (find_list("HOME", envp_list) && chdir(getenv("HOME")) == 0)
-			return (find_change(getenv("HOME"), envp_list), 0);
-		return (ft_err("minishell: cd: HOME not set\n"), 1);
+		res = find_list("HOME", envp_list);
+		if (res && chdir(res) == 0)
+		{
+			find_change(res, old, envp_list);
+			return (refresh_env_matrix(shell), 0);
+		}
+		if (!res)
+			return (ft_err("minishell: cd: HOME not set\n"), 1);
 	}
-	if (chdir(res) == 0)
+	else if (chdir(res) == 0)
 	{
-		find_change(getcwd(NULL, 0), envp_list);
-		refresh_env_matrix(shell);
-		return (0);
+		res = getcwd(NULL, 0);
+		find_change(res, old, envp_list);
+		if (res)
+			free(res);
+		return (refresh_env_matrix(shell), 0);
 	}
 	ft_err_msg("cd: no such file or directory: ", res);
 	return (127);

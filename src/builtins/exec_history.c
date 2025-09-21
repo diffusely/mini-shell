@@ -6,13 +6,13 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 00:23:21 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/08 01:22:24 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/22 02:14:55 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#include "built.h"
 
-int	exec_history(char **cmd)
+int	exec_history(t_shell *mish, char **cmd)
 {
 	if (!valid_cmd(cmd[1]))
 	{
@@ -21,7 +21,7 @@ int	exec_history(char **cmd)
 		ft_err(": numeric argument required\n");
 		return (1);
 	}
-	print_history();
+	print_history(mish);
 	return (0);
 }
 

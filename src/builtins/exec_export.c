@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec_export.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 23:08:24 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/09/21 19:35:07 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/21 23:38:07 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#include "built.h"
 
 void	push_back(const char *cmd, t_list **envp_list)
 {

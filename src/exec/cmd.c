@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 15:19:22 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/21 19:36:12 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/21 23:58:08 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ static void	exec_commands(t_shell *mish)
 
 	path = NULL;
 	path = get_path(mish, mish->tree->cmd[0]);
-	execve(path, mish->tree->cmd, mish->env);
+	if (path)
+		execve(path, mish->tree->cmd, mish->env);
 	if (mish->tree->cmd[0] && mish->tree->cmd[0][0])
 		ft_err(mish->tree->cmd[0]);
 	ft_err(": command not found\n");

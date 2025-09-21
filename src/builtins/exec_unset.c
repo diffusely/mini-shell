@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec_unset.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 17:52:54 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/09/21 19:26:33 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/22 00:08:09 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#include "built.h"
 
 void	find_remove(const char *input, t_list **envp_list)
 {
@@ -41,7 +41,7 @@ void	find_remove(const char *input, t_list **envp_list)
 	}
 }
 
-bool	exec_unset(char **cmd, t_list **envp)
+bool	exec_unset(t_shell *mish, char **cmd, t_list **envp)
 {
 	int		i;
 
@@ -54,5 +54,6 @@ bool	exec_unset(char **cmd, t_list **envp)
 		find_remove(cmd[i], envp);
 		i++;
 	}
+	refresh_env_matrix(&mish);
 	return (true);
 }

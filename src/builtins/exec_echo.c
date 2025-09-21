@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec_echo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 14:20:25 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/09/21 19:44:33 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/22 01:21:04 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#include "built.h"
 
-static char	*find_list(const char *input, t_list **envp_list)
+static char	*find_lst(const char *input, t_list **envp_list)
 {
 	t_list	*curr;
 	int		place;
@@ -44,7 +44,7 @@ static void	check_dollar(char *input, t_list **list_env, bool new_line)
 	char	*cmd;
 
 	input++;
-	cmd = find_list(input, list_env);
+	cmd = find_lst(input, list_env);
 	if (cmd)
 		printf("%s", cmd);
 	if (new_line)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 21:06:18 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/13 19:53:04 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/21 23:59:40 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ void	exec_pip(t_shell *mish, t_ast *ast)
 
 	path = NULL;
 	path = get_path(mish, ast->cmd[0]);
-	execve(path, ast->cmd, mish->env);
+	if (path)
+		execve(path, ast->cmd, mish->env);
 	if (path)
 		free(path);
 	error_exit_msg(mish, ast, ": command not found\n");

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 21:27:14 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/21 21:32:40 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/22 01:43:49 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#include "built.h"
 
 void	ft_err_msg(char *str, char *msg)
 {
@@ -67,18 +67,37 @@ int	exec_built(char **cmd, t_list **envp, t_shell *mish)
 	if (type == ECHO)
 		return (exec_echo(cmd, envp));
 	else if (type == UNSET)
-		return (exec_unset(cmd, envp));
+		return (exec_unset(mish, cmd, envp));
 	else if (type == EXPORT)
 		return (exec_export(cmd, envp));
 	if (type == CD)
 		return (exec_cd(&mish, cmd, envp, i));
 	else if (type == PWD)
-		return (exec_pwd(tmp));
+		return (exec_pwd(mish, tmp));
 	else if (type == ENV)
 		return (exec_env(cmd[1], envp));
 	else if (type == EXIT)
 		exec_exit(cmd, mish);
 	else if (type == HISTORY)
-		return (exec_history(cmd));
+		return (exec_history(mish, cmd));
 	return (0);
+}
+
+char	*find_list(const char *input, t_list **envp_list)
+{
+	t_list	*curr;
+	int		place;
+
+	curr = *envp_list;
+	while (curr)
+	{
+		if (curr->content && ft_strchr(curr->content, '='))
+		{
+			place = f_w_p(curr->content);
+			if (ft_strncmp(curr->content, input, place) == 0)
+				return (curr->content + place + 1);
+		}
+		curr = curr->next;
+	}
+	return (NULL);
 }
