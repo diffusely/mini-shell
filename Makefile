@@ -42,13 +42,15 @@ SRC 		= $(SRC_DIR)main.c \
 			  $(BUILT_DIR)exec_env.c \
 			  $(BUILT_DIR)exec_echo.c \
 			  $(BUILT_DIR)exec_history.c \
+			  $(BUILT_DIR)exec_unset.c \
 			  $(BUILT_DIR)utils.c \
+			  $(BUILT_DIR)exec_export.c \
 			  $(ENV_DIR)init_env.c \
 			  $(EXEX_DIR)cmd.c \
 			  $(EXEX_DIR)pipe.c \
 			  $(EXEX_DIR)subshell.c \
 			  $(EXEX_DIR)heredoc.c \
-			  $(EXEX_DIR)utils.c
+			  $(EXEX_DIR)utils.c \
 
 
 

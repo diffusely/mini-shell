@@ -163,3 +163,292 @@ sort |
 sort | sort
 ls 
 pwd
+c lear
+ clear
+./minishell 
+cd
+pwd
+c lear
+clear
+make
+make
+cd asdsad
+cd asd sdfsad
+pwd asdasd
+exit
+bash
+env asdsad
+bash
+make re
+clear
+./minishell 
+cd asd asdasd
+bash
+make
+make re
+clear
+./minishell 
+cd asd asd asd
+pwd asdasd
+make
+cd asd asd a
+make
+cd asd asd asd
+asd asd asd asd
+make
+cd asd asd asd 
+asdasd
+asd
+as
+asd asd asd asd
+cd wer wer wer
+clear
+exit
+cd asd asd asd asdasd
+cd asd asd asd
+cd "asd" asd dsc
+cd ".." asd dsc
+make
+make
+make
+make
+./minishell 
+exit
+make
+cd asd asd
+make
+exit
+cd asd asd asd
+exit
+cd asd asd asd
+cd ..
+make
+cd asd asd 
+cd ..
+make
+cd ..
+pwd
+cd
+cd
+cd sad
+cd
+pwd asd
+exit
+cd asd asd
+$?
+echo $?
+cd "asds"sadasd
+bash
+exit
+cd ".."asdsa
+cd ".."
+cd ".".
+exit
+cd "sadasd"sdasd
+pwd
+pwd
+exit
+cd "asdas"sadsa
+exit
+cd "asdas"sadas
+exit
+cd "sdsa"sadas
+exit
+cd "sadsa"sadasd
+cd "sadasd"sadsad
+cd "sadasd"sdasd
+cd "asdsa"sdasd
+pwd
+pwd
+cd
+cd "asdsad"sdasd
+exit
+cd "Sdasd"sadasd
+exit
+cd "sdsa"sdsad
+exit
+cd "sdas"sdasd
+exit
+cd "sadsa"Sdasd
+exit
+cd "ASdasd"sdasd
+exit
+cd "sdasd"sdsa
+cd "Sadsad"Sdasd
+cd ".."asdasd
+bash
+clear
+cd sads asdasd
+pwd "sdad"asdsad
+bahs
+bash
+cd """src"""
+pwd
+cd ".."
+cd '..'
+pwd
+bash
+cd """..'""" 
+cd "sdasd"sadas
+cd "sdsa"ASdsad
+cd "asdas"sdas
+cd """"sdasdasd'""""
+cd "sdasdasd'"
+make
+cd "sdasdasd'"
+exit
+cd "sdasdasd'"
+bash
+exit
+cd "sdasdasd'"
+cd "sdasdasd'" asdsad
+bash
+exit
+cd "sdasd"sd asdasd
+cd "sdasd"sd
+bash
+cd ".." asdasd
+exit
+echo sadasd
+env
+unset OLDPWD
+env
+unset PATH
+env
+ecit
+exit
+env
+"env"
+clear
+"env"
+'env'
+exit
+"env"
+env
+clear
+exit
+"env"
+env
+env asdas
+"env"
+echo asdasd
+echo asdas
+echo asdasd
+echo $PATH
+exit
+pwd
+echo asdasd
+exit
+echo asdasd
+make
+./minishell 
+echo asdasd
+exir
+exit
+make
+clear
+./minishell 
+echo asdas
+echo "sads" asdsd
+echo "$PATH" assd
+echo $"PATH" assd
+exit
+bash
+echo sadsa
+exit
+echo """sadasd"""
+exit
+echo $PATH "asdasd" asdasd
+exit
+echo asdasd
+echo "sadasd" asdasd
+echo $PATH sdasd
+exit
+pwd
+cd "sdasd"
+cd "sdasd" sadsad
+bash
+cd ..
+pwd
+cd ..
+pwd
+env
+clear
+exit
+cd ..
+pwd asdas
+echo -n asdasd
+exit
+echo asdsad
+env
+unset SHLVL
+env
+unset SHLVL
+env
+exit
+env
+unset SHLVL
+env
+unset PATH
+env
+exit
+unset "PATH"
+env
+unset SHLVL "HOMDE"
+env
+unset SHLVL "HOME"
+env
+exit
+echo asdasd
+echo "Valeri " Makaryan
+echo "Valeri " Makaryan '
+clear
+env
+export var=var
+env
+export chr="chr"
+env
+export chr="   chr"
+env
+export chr=   chr
+env
+unset chr
+env
+exit
+clear
+env
+export var=var
+env
+export var=chlp
+env
+clear
+echo PATH
+echo $PATH
+exit
+echo $PATH
+exit
+export var=var
+env
+unset PATH
+env
+env
+export chlp=clp
+env
+export
+export
+export
+export
+unset
+exit 9223372036854775807
+9223372036854775808
+exit 9223372036854775808
+export
+env
+unset SHLVL
+export
+clear
+exir
+echo PATH 
+echo $PATH 
+exit
+exit

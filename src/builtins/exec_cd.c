@@ -6,7 +6,7 @@
 /*   By: vmakarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 12:35:24 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/09/13 17:07:16 by vmakarya         ###   ########.fr       */
+/*   Updated: 2025/09/16 17:04:02 by vmakarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,27 +31,37 @@ static bool	find_list(const char *input, t_list **envp_list)
 	return (false);
 }
 
-bool	exec_cd(char *input, t_list **envp_list)
+bool check_arguments_count(char **input)
 {
-	int	i;
+	int i;
 
-	if (!input)
+	i = 0;
+	while (input[i])
+		i++;
+	if (i > 2)
+		return (true);
+	return (false);
+}
+
+int	exec_cd(char **input, t_list **envp_list, int i)
+{
+	char *res;
+
+	if(check_arguments_count(input))
+		return (printf("cd: too many arguments \n"), 1);
+	if(i % 2 != 0)
+		return (printf("cd: no such file or directory: %s\n", input[1]), 1);
+	res = input[1]; 
+	if (!res)
 	{
 		if (find_list("HOME", envp_list) && chdir(getenv("HOME")) == 0)
-			return (true);
-		return (true);
+			return (0);
+		return (0);
 	}
-	while (*input && is_quoted(*input))
-		++input;
-	i = 0;
-	while (input[i] && !is_quoted(input[i]))
-		++i;
-	if (input[i])
-		input[i] = '\0';
-	if (chdir(input) == 0)
-		return (true);
+	if (chdir(res) == 0)
+		return (0);
 	ft_err("cd: no such file or directory: ");
-	ft_err((char *)input);
+	ft_err(res);
 	ft_err("\n");
-	return (true);
+	return (127);
 }

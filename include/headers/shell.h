@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vmakarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:26:24 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/09/14 19:49:46 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/21 14:52:30 by vmakarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int		open_fd(void);
 // Functions
 int		is_space_or_newline(char *input);
 void	print_env(t_list *env);
+void	find_remove(const char* input, t_list **envp_list);
 
 // Commands
 bool	check_unset(char *input, t_list **env_list);

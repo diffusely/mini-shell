@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vmakarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 21:27:14 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/08 01:25:13 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/21 14:54:53 by vmakarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,21 @@ int	exec_built(char **cmd, t_list **envp, t_shell *mish)
 {
 	int		type;
 	char	*tmp;
+	int		i;
 
-	tmp = *cmd;
+	i = 0;
+	tmp = NULL;
 	type = is_built(cmd);
 	if (type == ECHO)
-		return (exec_echo(tmp, envp));
-	else if (type == CD)
-		return (exec_cd(cmd[1], envp));
-	else if (type == PWD)
-		return (exec_pwd(tmp));
-	else if (type == EXPORT)
-		return (0);
+		return (exec_echo(cmd, envp)); // WORKED hamarya
 	else if (type == UNSET)
-		return (0);
+		return (exec_unset(cmd, envp)); // WORKED
+	else if (type == EXPORT)
+		return (exec_export(cmd, envp)); //WORKED
+	if (type == CD)
+		return (exec_cd(cmd, envp, i)); //WORKED
+	else if (type == PWD)
+		return (exec_pwd(tmp)); //WORKED
 	else if (type == ENV) // WORKED
 		return (exec_env(cmd[1] ,envp));
 	else if (type == EXIT) // WORKED
