@@ -61,7 +61,7 @@ LIB_FLAGS	= -L$(LIBFT) -lft -L$(READLINE_DIR)/lib -lreadline -lhistory -lncurses
 IFLAG		= -I$(INC_HEADER) -I$(INC_LIB) -I$(LIBFT) -I$(READLINE_DIR)/include
 
 
-FFLAG		= -fsanitize=address
+FFLAG		= #-fsanitize=address
 CFLAG		= -Wall -Wextra -Werror $(FFLAG) 
 CC			= cc
 RM			= rm -rf

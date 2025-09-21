@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 20:46:25 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/13 21:09:12 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/15 21:46:37 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,7 @@ bool	syntax_help(t_token *cur)
 				|| is_redirect(cur->next->next->next->type)
 				|| is_operator(cur->next->next->next->type)))
 			return (check_type(cur->next->next), false);
-		set_signals_exec();
-		heredoc(cur->next->value);
+		fake_heredoc(cur->next->value);
 	}
 	return (true);
 }

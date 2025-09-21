@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 15:48:25 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/13 20:56:49 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/15 21:28:16 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	help_cmd(t_shell *mish)
 	status = 0;
 	if (is_built(mish->tree->cmd))
 	{
-		if (mish->tree->redirs && mish->tree->redirs->type != R_HEREDOC)
+		if (mish->tree->redirs)
 			create_files(mish, mish->tree->redirs);
 		exec_built(mish->tree->cmd, &mish->list_env, mish);
 		dup2(mish->fd_in, STDIN_FILENO);

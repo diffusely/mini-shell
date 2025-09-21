@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 15:19:22 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/14 19:44:48 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/15 21:37:07 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	create_files(t_shell *mish, t_redir *r)
 			fd = open(r->filename, O_CREAT | O_WRONLY | O_APPEND, 0644);
 		else if (r->type == R_IN)
 			fd = open(r->filename, O_RDONLY);
+		else if (r->type == R_HEREDOC)
+			fd = heredoc(mish, r->filename);
 		if (fd < 0)
 			fd_error(mish, r);
 		if (r->type == R_OUT || r->type == R_APPEND)
@@ -70,7 +72,7 @@ int	exec_cmd(t_shell *mish, t_ast *redir)
 	status = 0;
 	if (pid == 0)
 	{
-		if (redir->redirs && redir->redirs->type != R_HEREDOC)
+		if (redir->redirs)
 			create_files(mish, redir->redirs);
 		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_DFL);
