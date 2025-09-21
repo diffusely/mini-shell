@@ -6,7 +6,7 @@
 /*   By: vmakarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 17:52:54 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/09/21 14:53:06 by vmakarya         ###   ########.fr       */
+/*   Updated: 2025/09/21 17:27:35 by vmakarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void find_remove(const char* input, t_list **envp_list)
         return;
     prev = NULL;
     curr = *envp_list;
-    while (curr)
+    while (curr) 
     {
         if (curr->content && ft_strchr(curr->content, '='))
         {

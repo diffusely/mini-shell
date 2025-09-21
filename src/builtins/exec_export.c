@@ -6,16 +6,13 @@
 /*   By: vmakarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 23:08:24 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/09/21 16:20:26 by vmakarya         ###   ########.fr       */
+/*   Updated: 2025/09/21 17:26:21 by vmakarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "libft.h"
 # include "shell.h"
 # include "message.h"
-
-#include <stdlib.h>
-#include <string.h>
 
 void push_back(const char *cmd, t_list **envp_list)
 {
