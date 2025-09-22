@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:26:24 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/09/22 02:17:42 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/22 20:40:37 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_shell	*init_shell(char **envp);
 void	shell_loop(t_shell *mish);
 
 // History
-void	print_history(t_shell *mish);
+int		print_history(t_shell *mish);
 bool	valid_cmd(char *input);
 void	add_history_input(t_shell *mish);
 int		open_fd(t_shell *mish, bool flag);

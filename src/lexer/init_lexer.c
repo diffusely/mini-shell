@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_lexer.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 20:46:25 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/15 21:46:37 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/22 20:55:26 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,7 @@ bool	syntax_help(t_token *cur)
 			&& (is_subshell(cur->next->next->next->type)
 				|| is_redirect(cur->next->next->next->type)
 				|| is_operator(cur->next->next->next->type)))
-			return (check_type(cur->next->next), false);
-		fake_heredoc(cur->next->value);
+			return (fake_heredoc(cur->next->value), check_type(cur->next->next), false);
 	}
 	return (true);
 }

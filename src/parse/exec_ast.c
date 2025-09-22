@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_ast.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 15:48:25 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/15 21:28:16 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/22 20:49:58 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	help_cmd(t_shell *mish)
 	{
 		if (mish->tree->redirs)
 			create_files(mish, mish->tree->redirs);
-		exec_built(mish->tree->cmd, &mish->list_env, mish);
+		status = exec_built(mish->tree->cmd, &mish->list_env, mish);
 		dup2(mish->fd_in, STDIN_FILENO);
 		dup2(mish->fd_out, STDOUT_FILENO);
 	}

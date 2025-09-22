@@ -1,6 +1,7 @@
 *.o
 .vscode
 *.a
+a.out
 minishell
 history.txt
 valgrind-out.txt

@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 21:16:26 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/22 02:24:52 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/22 20:50:16 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ bool	valid_cmd(char *input)
 	return (false);
 }
 
-void	print_history(t_shell *mish)
+int	print_history(t_shell *mish)
 {
 	int		fd;
 	int		count;
@@ -51,7 +51,7 @@ void	print_history(t_shell *mish)
 	count = 1;
 	fd = open_fd(mish, true);
 	if (fd == -1)
-		return ;
+		return (1);
 	str = get_next_line(fd);
 	while (str)
 	{
@@ -60,7 +60,7 @@ void	print_history(t_shell *mish)
 		str = get_next_line(fd);
 	}
 	get_next_line(-1);
-	close(fd);
+	return (close(fd), 0);
 }
 
 void	add_history_input(t_shell *mish)

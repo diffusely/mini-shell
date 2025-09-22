@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 00:23:21 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/22 02:14:55 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/22 20:41:37 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ int	exec_history(t_shell *mish, char **cmd)
 		ft_err(": numeric argument required\n");
 		return (1);
 	}
-	print_history(mish);
-	return (0);
+	return (print_history(mish));
 }
 
 void	exec_exit(char **cmd, t_shell *mish)
