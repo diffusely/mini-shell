@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vmakarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 21:27:14 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/22 01:43:49 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/22 16:21:02 by vmakarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,21 +65,22 @@ int	exec_built(char **cmd, t_list **envp, t_shell *mish)
 	tmp = NULL;
 	type = is_built(cmd);
 	if (type == ECHO)
-		return (exec_echo(cmd, envp));
+		return (exec_echo(cmd, envp, &mish));
 	else if (type == UNSET)
 		return (exec_unset(mish, cmd, envp));
 	else if (type == EXPORT)
 		return (exec_export(cmd, envp));
 	if (type == CD)
-		return (exec_cd(&mish, cmd, envp, i));
+		return (exec_cd(mish, cmd, envp, i));
 	else if (type == PWD)
 		return (exec_pwd(mish, tmp));
 	else if (type == ENV)
-		return (exec_env(cmd[1], envp));
+		return (exec_env(cmd[1], envp, &mish));
 	else if (type == EXIT)
 		exec_exit(cmd, mish);
 	else if (type == HISTORY)
 		return (exec_history(mish, cmd));
+	mish->status = 127;
 	return (0);
 }
 

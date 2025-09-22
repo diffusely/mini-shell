@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vmakarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 12:35:24 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/09/22 02:25:12 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/22 17:13:31 by vmakarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,39 +62,90 @@ bool	check_arguments_count(char **input)
 	return (false);
 }
 
-int	exec_cd(t_shell **shell, char **input, t_list **envp_list, int i)
-{
-	char	*res;
-	char	*old;
+// bool	exec_cd(t_shell *shell, char **input, t_list **envp_list, int i)
+// {
+// 	char	*res;
+// 	char	*old;
 
-	if (check_arguments_count(input))
-		return (ft_err("cd: too many arguments \n"), 1);
-	if (i % 2 != 0)
-	{
-		ft_err_msg("cd: no such file or directory: ", input[1]);
-		return (1);
-	}
-	res = input[1];
-	old = find_list("PWD", envp_list);
+// 	if (check_arguments_count(input))
+// 	{
+// 		shell->status = 2;
+// 		return (ft_err("cd: too many arguments \n"), 1);
+// 	}
+// 	if (i % 2 != 0)
+// 	{
+// 		shell->status = 1;
+// 		ft_err_msg("cd: no such file or directory: ", input[1]);
+// 		return (true);
+// 	}
+// 	res = input[1];
+// 	old = find_list("PWD", envp_list);
+// 	if (!res)
+// 	{
+// 		res = find_list("HOME", envp_list);
+// 		if (res && chdir(res) == 0)
+// 		{
+// 			shell->status = 0;
+// 			find_change(res, old, envp_list);
+// 			return (refresh_env_matrix(&shell), 0);
+// 		}
+// 		if (!res)
+// 		{
+// 			shell->status = 1;
+// 			return (ft_err("minishell: cd: HOME not set\n"), 1);
+// 		}
+// 	}
+// 	else if (chdir(res) == 0)
+// 	{
+// 		res = getcwd(NULL, 0);
+// 		find_change(res, old, envp_list);
+// 		if (res)
+// 			free(res);
+// 		shell->status = 0;
+// 		return (refresh_env_matrix(&shell), 0);
+// 	}
+// 	ft_err_msg("cd: no such file or directory: ", res);
+// 	shell->status = 1;
+// 	return (true);
+// }
+
+
+static bool	change_dir(t_shell *shell, char *res, char *old, t_list **envp_list)
+{
 	if (!res)
 	{
 		res = find_list("HOME", envp_list);
-		if (res && chdir(res) == 0)
-		{
-			find_change(res, old, envp_list);
-			return (refresh_env_matrix(shell), 0);
-		}
 		if (!res)
+		{
+			shell->status = 1;
 			return (ft_err("minishell: cd: HOME not set\n"), 1);
+		}
 	}
-	else if (chdir(res) == 0)
+	if (chdir(res) == 0)
 	{
-		res = getcwd(NULL, 0);
-		find_change(res, old, envp_list);
-		if (res)
-			free(res);
-		return (refresh_env_matrix(shell), 0);
+		char *cwd = getcwd(NULL, 0);
+		find_change(cwd ? cwd : res, old, envp_list);
+		if (cwd)
+			free(cwd);
+		shell->status = 0;
+		return (refresh_env_matrix(&shell), 0);
 	}
 	ft_err_msg("cd: no such file or directory: ", res);
-	return (127);
+	shell->status = 1;
+	return (1);
+}
+
+bool	exec_cd(t_shell *shell, char **input, t_list **envp_list, int i)
+{
+	char *old = find_list("PWD", envp_list);
+
+	if (check_arguments_count(input))
+	{
+		shell->status = 2;
+		ft_err("cd: too many arguments \n");
+		return (true);
+	}
+	if (i % 2 != 0)
+		return (shell->status = 1, ft_err_msg("cd: no such file or directory: ", input[1]), 1);
+	return (change_dir(shell, input[1], old, envp_list));
 }

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pwd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vmakarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 12:37:59 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/09/22 02:25:21 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/22 16:11:12 by vmakarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "built.h"
 
-int	exec_pwd(t_shell *mish, const char *input)
+bool	exec_pwd(t_shell *mish, const char *input)
 {
 	char	*pwd;
 
@@ -23,7 +23,7 @@ int	exec_pwd(t_shell *mish, const char *input)
 	{
 		printf("%s\n", pwd);
 		free(pwd);
-		return (0);
+		return (false);
 	}
 	pwd = find_list("PWD", &mish->list_env);
 	if (pwd)
@@ -32,5 +32,5 @@ int	exec_pwd(t_shell *mish, const char *input)
 		return (0);
 	}
 	ft_err("minishell: pwd error\n");
-	return (1);
+	return (true);
 }

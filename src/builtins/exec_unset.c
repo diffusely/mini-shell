@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_unset.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vmakarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 17:52:54 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/09/22 00:08:09 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/22 15:25:31 by vmakarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,6 @@ bool	exec_unset(t_shell *mish, char **cmd, t_list **envp)
 		i++;
 	}
 	refresh_env_matrix(&mish);
+	mish->status = 0;
 	return (true);
 }

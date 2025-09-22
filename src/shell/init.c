@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vmakarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 22:50:19 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/22 02:12:25 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/22 15:55:42 by vmakarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_shell	*init_shell(char **envp)
 	mish = ft_calloc(1, sizeof(t_shell));
 	if (!mish)
 		error_handle("Bad alloc *mish*!\n", 1);
+	mish->status = 0;
 	mish->list_env = init_env(envp);
 	mish->env = init_env_matrix(mish->list_env);
 	mish->tree = NULL;

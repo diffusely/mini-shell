@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_echo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vmakarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 14:20:25 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/09/22 01:21:04 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/22 16:35:09 by vmakarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,34 +70,42 @@ char	*remove_quotes(char *str)
 	return (str);
 }
 
-static void	print_arg(char *arg, t_list **envp)
+static void	print_arg(char *arg, t_list **envp, t_shell **mish)
 {
 	if (!arg)
 		return ;
+	(void)mish;
 	arg = remove_quotes(arg);
-	if (arg && arg[0] == '$')
+	if (!ft_strcmp(arg, "$?"))
+		printf("%d", (*mish)->status);
+	else if (arg && arg[0] == '$')
 		check_dollar(arg, envp, false);
 	else
 		printf("%s", arg);
 }
 
-bool	exec_echo(char **cmd, t_list **envp)
+bool	exec_echo(char **cmd, t_list **envp, t_shell **mish)
 {
 	bool	new_line;
 	int		i;
+	int		j;
 
-	new_line = true;
 	i = 1;
-	if (cmd[i] && !strcmp(cmd[i], "-n"))
+	new_line = true;
+	while (cmd[i] && cmd[i][0] == '-' && cmd[i][1] == 'n')
 	{
+		j = 1;
+		while (cmd[i][j] == 'n')
+			j++;
+		if (cmd[i][j] != '\0')
+			break;
 		new_line = false;
 		i++;
 	}
 	while (cmd[i])
 	{
-		print_arg(cmd[i], envp);
-		if (cmd[i + 1])
-			printf(" ");
+		print_arg(cmd[i], envp, mish);
+		if (cmd[i + 1]) printf(" ");
 		i++;
 	}
 	if (new_line)

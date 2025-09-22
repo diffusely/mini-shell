@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vmakarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 21:27:32 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/22 01:43:39 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/22 16:10:50 by vmakarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,15 @@ typedef enum e_built
 	UNSET,
 	ENV,
 	HISTORY,
-	EXIT
+	EXIT,
 }	t_built;
 
-// Exec
-int		exec_cd(t_shell **shell, char **input, t_list **envp_list, int i);
-bool	exec_echo(char **cmd, t_list **list_env);
-int		exec_env(char *input, t_list **list_env);
+// Exec%
+bool	exec_cd(t_shell *shell, char **input, t_list **envp_list, int i);
+bool	exec_echo(char **cmd, t_list **list_env, t_shell **mish);
+bool	exec_env(char *input, t_list **list_env, t_shell **mish);
 int		exec_history(t_shell *mish, char **cmd);
-int		exec_pwd(t_shell *mish, const char *input);
+bool	exec_pwd(t_shell *mish, const char *input);
 void	exec_exit(char **cmd, t_shell *mish);
 bool	exec_unset(t_shell *mish, char **cmd, t_list **envp);
 bool	exec_export(char **cmd, t_list **envp_list);

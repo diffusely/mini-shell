@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vmakarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 12:39:23 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/09/21 23:38:01 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/22 16:09:19 by vmakarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,15 @@ void	print_env(t_list *env)
 	}
 }
 
-int	exec_env(char *input, t_list **list_env)
+bool	exec_env(char *input, t_list **list_env, t_shell **mish)
 {
 	if (input)
 	{
 		ft_err("minishell: env: too many arguments\n");
-		return (127);
+		(*mish)->status = 127;
+		return (1);
 	}
+	(*mish)->status = 0;
 	print_env(*list_env);
 	return (0);
 }
