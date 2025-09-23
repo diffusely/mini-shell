@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:41:41 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/09 00:09:32 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/22 23:09:24 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libft.h"
 # include "message.h"
+# include "utils.h"
 # include "shell.h"
 
 typedef enum e_token_type
@@ -48,13 +49,9 @@ bool		syntax_validation(t_token *input);
 bool		syntax_help(t_token *cur);
 bool		check_subs(t_token *input);
 
-// Print
-void		print_tokens(t_token *lexer);
-
 // Utils
 void		init_sub_val(t_token **st, t_token **a, int *d, bool *v);
 bool		syntax_check(t_token *input);
-bool		is_and(const char *line, int i);
 void		check_type(t_token *tok);
 
 #endif

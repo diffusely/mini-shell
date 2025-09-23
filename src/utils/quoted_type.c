@@ -1,39 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   input_type.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/29 01:26:47 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/09 00:27:13 by noavetis         ###   ########.fr       */
+/*   Created: 2025/09/22 22:35:12 by noavetis          #+#    #+#             */
+/*   Updated: 2025/09/22 22:51:35 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "utils.h"
 
-void	init_sub_val(t_token **start, t_token **after, int *depth, bool *v)
+bool	is_quoted(char c)
 {
-	*start = NULL;
-	*after = NULL;
-	*depth = 0;
-	*v = true;
+	return (c == '"' || c == '\'');
 }
 
-bool	syntax_check(t_token *input)
+bool	is_space_or_newline(char *input)
 {
-	t_token	*cur;
-
-	cur = input;
-	while (cur)
+	while (*input)
 	{
-		if (cur->type == LPAR)
-			break ;
-		if (cur->type == RPAR)
-			return (check_type(cur), false);
-		cur = cur->next;
+		if (!ft_isspace(*input))
+			return (false);
+		input++;
 	}
-	return (syntax_validation(input) && check_subs(input));
+	return (true);
 }
 
 bool	check_quoted(const char *input)
@@ -54,21 +46,4 @@ bool	check_quoted(const char *input)
 		i++;
 	}
 	return (single_open || double_open);
-}
-
-bool	is_and(const char *line, int i)
-{
-	if (line[i] && line[i + 1] && line[i] == '&' && line[i + 1] == '&')
-		return (true);
-	return (false);
-}
-
-void	check_type(t_token *tok)
-{
-	ft_err("minishell: syntax error near unexpected token `");
-	if (tok)
-		ft_err(tok->value);
-	else
-		ft_err("newline");
-	ft_err("'\n");
 }

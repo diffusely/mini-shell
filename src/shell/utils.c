@@ -5,40 +5,22 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/04 20:59:16 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/31 00:46:47 by noavetis         ###   ########.fr       */
+/*   Created: 2025/08/27 19:54:24 by noavetis          #+#    #+#             */
+/*   Updated: 2025/09/23 23:14:08 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell.h"
+#include "free.h"
 
-bool	is_redirect(t_token_type type)
+void	free_split(char **str)
 {
-	return (type == IN || type == OUT || type == APPEND || type == HEREDOC);
-}
+	int	i;
 
-bool	is_operator(t_token_type type)
-{
-	return (type == OR || type == AND || type == PIP);
-}
-
-bool	is_subshell(t_token_type type)
-{
-	return (type == RPAR || type == LPAR);
-}
-
-bool	is_quoted(char c)
-{
-	return (c == '"' || c == '\'');
-}
-
-int	is_space_or_newline(char *input)
-{
-	while (*input)
-	{
-		if (!ft_isspace(*input))
-			return (false);
-		input++;
-	}
-	return (true);
+	i = 0;
+	if (!str)
+		return ;
+	while (str[i])
+		free(str[i++]);
+	free(str);
+	str = NULL;
 }

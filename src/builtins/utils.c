@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmakarya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 21:27:14 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/22 16:21:02 by vmakarya         ###   ########.fr       */
+/*   Updated: 2025/09/24 00:21:56 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 void	ft_err_msg(char *str, char *msg)
 {
 	ft_err(str);
-	ft_err(msg);
-	ft_err("\n");
+	perror(msg);
 }
 
 int	f_w_p(char *word)
@@ -27,32 +26,6 @@ int	f_w_p(char *word)
 	while (word && word[i] && word[i] != '=')
 		++i;
 	return (i);
-}
-
-int	is_built(char **cmd)
-{
-	char	*tmp;
-
-	if (!cmd || !cmd[0] || !cmd[0][0])
-		return (NONE);
-	tmp = *cmd;
-	if (ft_strncmp(tmp, "echo", 4) == 0)
-		return (ECHO);
-	if (ft_strncmp(tmp, "cd", 2) == 0)
-		return (CD);
-	else if (ft_strcmp(tmp, "pwd") == 0)
-		return (PWD);
-	else if (ft_strncmp(tmp, "export", 6) == 0)
-		return (EXPORT);
-	else if (ft_strncmp(tmp, "unset", 5) == 0)
-		return (UNSET);
-	else if (ft_strcmp(tmp, "env") == 0)
-		return (ENV);
-	else if (ft_strcmp(tmp, "exit") == 0)
-		return (EXIT);
-	else if (ft_strcmp(tmp, "history") == 0)
-		return (HISTORY);
-	return (NONE);
 }
 
 int	exec_built(char **cmd, t_list **envp, t_shell *mish)
@@ -75,7 +48,7 @@ int	exec_built(char **cmd, t_list **envp, t_shell *mish)
 	else if (type == PWD)
 		return (exec_pwd(mish, tmp));
 	else if (type == ENV)
-		return (exec_env(cmd[1], envp, &mish));
+		return (exec_env(cmd[1], envp));
 	else if (type == EXIT)
 		exec_exit(cmd, mish);
 	else if (type == HISTORY)
@@ -101,4 +74,20 @@ char	*find_list(const char *input, t_list **envp_list)
 		curr = curr->next;
 	}
 	return (NULL);
+}
+
+bool	check_exit_num(char *input)
+{
+	int	i;
+
+	if (!input)
+		return (false);
+	i = 0;
+	if (input[0] == '+' || input[0] == '-')
+		i++;
+	while (input && ft_isdigit(input[i]))
+		i++;
+	if (input[i] == '\0')
+		return (true);
+	return (false);
 }

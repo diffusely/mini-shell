@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmakarya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 22:50:19 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/22 15:55:42 by vmakarya         ###   ########.fr       */
+/*   Updated: 2025/09/24 02:08:41 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,32 @@ t_shell	*init_shell(char **envp)
 	return (mish);
 }
 
+static void	expand_and_exec(t_shell *mish)
+{
+	t_token	*tmp;
+
+	tmp = mish->token;
+	while (tmp)
+	{
+		tmp->value = expand(tmp->value, mish);
+		tmp = tmp->next;
+	}
+	mish->tree = create_tree(&mish->token);
+	mish->status = exec_ast(mish);
+	free_mish(mish);
+}
+
+static bool	token_and_syntax(t_shell *mish)
+{
+	mish->token = lexer(mish->input);
+	mish->free_token = mish->token;
+	add_history(mish->input);
+	add_history_input(mish);
+	if (!syntax_check(mish->token))
+		return (free_mish(mish), false);
+	return (true);
+}
+
 void	shell_loop(t_shell *mish)
 {
 	while (1)
@@ -47,17 +73,8 @@ void	shell_loop(t_shell *mish)
 				continue ;
 			}
 		}
-		mish->token = lexer(mish->input);
-		mish->free_token = mish->token;
-		add_history(mish->input);
-		add_history_input(mish);
-		if (!syntax_check(mish->token))
-		{
-			free_mish(mish);
+		if (!token_and_syntax(mish))
 			continue ;
-		}
-		mish->tree = create_tree(&mish->token);
-		mish->status = exec_ast(mish);
-		free_mish(mish);
+		expand_and_exec(mish);
 	}
 }

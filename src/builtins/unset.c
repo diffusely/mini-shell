@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_unset.c                                       :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmakarya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 17:52:54 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/09/22 15:25:31 by vmakarya         ###   ########.fr       */
+/*   Updated: 2025/09/24 00:25:52 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,18 @@ void	find_remove(const char *input, t_list **envp_list)
 	}
 }
 
-bool	exec_unset(t_shell *mish, char **cmd, t_list **envp)
+int	exec_unset(t_shell *mish, char **cmd, t_list **envp)
 {
 	int		i;
 
 	if (!cmd || !*cmd)
-		return (false);
+		return (1);
 	i = 1;
 	while (cmd[i])
 	{
-		cmd[i] = remove_quotes(cmd[i]);
 		find_remove(cmd[i], envp);
 		i++;
 	}
 	refresh_env_matrix(&mish);
-	mish->status = 0;
-	return (true);
+	return (0);
 }

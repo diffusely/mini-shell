@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_ast.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 20:30:27 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/13 20:02:27 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/23 22:44:14 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,4 +100,23 @@ void	realoc_node(t_ast **node, t_token *tokens, int size)
 	}
 	(*node)->cmd = res;
 	(*node)->cmd[i] = NULL;
+}
+
+void	helper_ast(t_ast **node, t_token **tokens)
+{
+	t_token	*head;
+	int		count;
+
+	if (*tokens)
+		*tokens = (*tokens)->next;
+	count = 0;
+	head = *tokens;
+	while (head && head->type == WORD)
+	{
+		++count;
+		head = head->next;
+	}
+	realoc_node(node, *tokens, count);
+	while (*tokens && (*tokens)->type == WORD)
+		*tokens = (*tokens)->next;
 }

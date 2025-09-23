@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:16:42 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/09/14 00:35:15 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/24 02:09:19 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 #include "shell.h"
 #include "free.h"
 
-volatile sig_atomic_t		g_signal;
+volatile sig_atomic_t	g_signal;
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_shell *mish;
+	t_shell	*mish;
 
 	(void)argv;
 	if (argc != 1)
-		 ft_err("Error: no arguments allowed\n");
+		ft_err("Error: no arguments allowed\n");
 	mish = init_shell(envp);
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, SIG_IGN);

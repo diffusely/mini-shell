@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 22:23:48 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/21 23:47:50 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/23 23:14:21 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,36 @@ void	free_tree(t_ast *root)
 			free_redirs(root->redirs);
 	}
 	free(root);
+}
+
+void	free_tokens(t_token *tokens)
+{
+	t_token	*temp;
+
+	if (!tokens)
+		return ;
+	while (tokens)
+	{
+		temp = tokens;
+		tokens = tokens->next;
+		free(temp->value);
+		temp->value = NULL;
+		free(temp);
+		temp = NULL;
+	}
+}
+
+void	free_redirs(t_redir *redir)
+{
+	t_redir	*tmp;
+
+	while (redir)
+	{
+		tmp = redir->next;
+		free(redir->filename);
+		redir->filename = NULL;
+		free(redir);
+		redir = NULL;
+		redir = tmp;
+	}
 }

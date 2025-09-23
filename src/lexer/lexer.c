@@ -6,64 +6,11 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 17:06:06 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/31 19:00:53 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/23 22:48:08 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
-
-static t_token_type	token_type(char first, char second)
-{
-	if (first == '\0')
-		return (END);
-	if (first == '<' && second == '<')
-		return (HEREDOC);
-	if (first == '>' && second == '>')
-		return (APPEND);
-	if (first == '&' && second == '&')
-		return (AND);
-	if (first == '|' && second == '|')
-		return (OR);
-	if (first == '>')
-		return (OUT);
-	if (first == '<')
-		return (IN);
-	if (first == '|')
-		return (PIP);
-	if (first == '(')
-		return (LPAR);
-	if (first == ')')
-		return (RPAR);
-	return (WORD);
-}
-
-static char	*token_value(t_token_type type)
-{
-	char	*res;
-
-	res = NULL;
-	if (type == END)
-		res = ft_strdup("");
-	else if (type == HEREDOC)
-		res = ft_strdup("<<");
-	else if (type == APPEND)
-		res = ft_strdup(">>");
-	else if (type == AND)
-		res = ft_strdup("&&");
-	else if (type == OR)
-		res = ft_strdup("||");
-	else if (type == OUT)
-		res = ft_strdup(">");
-	else if (type == IN)
-		res = ft_strdup("<");
-	else if (type == PIP)
-		res = ft_strdup("|");
-	else if (type == LPAR)
-		res = ft_strdup("(");
-	else if (type == RPAR)
-		res = ft_strdup(")");
-	return (res);
-}
 
 static char	*word_dup(int *i, const char *line)
 {
@@ -113,6 +60,32 @@ static bool	help_lex(const char *line, char *res, t_token **t, int *i)
 	}
 	push_token(t, create_token(type, res));
 	return (true);
+}
+
+bool	syntax_check(t_token *input)
+{
+	t_token	*cur;
+
+	cur = input;
+	while (cur)
+	{
+		if (cur->type == LPAR)
+			break ;
+		if (cur->type == RPAR)
+			return (check_type(cur), false);
+		cur = cur->next;
+	}
+	return (syntax_validation(input) && check_subs(input));
+}
+
+void	check_type(t_token *tok)
+{
+	ft_err("minishell: syntax error near unexpected token `");
+	if (tok)
+		ft_err(tok->value);
+	else
+		ft_err("newline");
+	ft_err("'\n");
 }
 
 t_token	*lexer(const char *line)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_export.c                                      :+:      :+:    :+:   */
+/*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 23:08:24 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/09/21 23:38:07 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/24 00:15:58 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,22 @@ void	push_back(const char *cmd, t_list **envp_list)
 	tmp->next = new_node;
 }
 
+static bool	valid_identifier(const char *s)
+{
+	int	i;
+
+	if (!s || !(ft_isalpha(*s) || *s == '_'))
+		return (false);
+	i = 1;
+	while (s[i] && s[i] != '=')
+	{
+		if (!(ft_isalnum(s[i]) || s[i] == '_'))
+			return (false);
+		++i;
+	}
+	return (true);
+}
+
 static bool	print_export(char **cmd, t_list	*tmp, int i)
 {
 	if (!cmd[i])
@@ -52,7 +68,7 @@ static bool	print_export(char **cmd, t_list	*tmp, int i)
 	return (false);
 }
 
-bool	exec_export(char **cmd, t_list **envp_list)
+int	exec_export(char **cmd, t_list **envp_list)
 {
 	t_list	*tmp;
 	int		i;
@@ -60,12 +76,18 @@ bool	exec_export(char **cmd, t_list **envp_list)
 
 	tmp = *envp_list;
 	i = 1;
-	j = 0;
+	if (!valid_identifier(cmd[i]))
+	{
+		ft_err("minishell: export: ");
+		ft_err(cmd[1]);
+		ft_err(": not a valid identifier");
+		return (1);
+	}
 	if (print_export(cmd, tmp, i))
-		return (true);
+		return (0);
 	while (cmd[i])
 	{
-		cmd[i] = remove_quotes(cmd[i]);
+		j = 0;
 		while (cmd[i][j])
 		{
 			if (cmd[i][j] == '=')
@@ -78,5 +100,5 @@ bool	exec_export(char **cmd, t_list **envp_list)
 		}
 		i++;
 	}
-	return (true);
+	return (0);
 }

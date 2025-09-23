@@ -5,14 +5,55 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/22 21:16:26 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/22 20:50:16 by noavetis         ###   ########.fr       */
+/*   Created: 2025/09/07 00:23:21 by noavetis          #+#    #+#             */
+/*   Updated: 2025/09/23 23:51:09 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell.h"
+#include "built.h"
 
-int	open_fd(t_shell *mish, bool flag)
+int	exec_history(t_shell *mish, char **cmd)
+{
+	if (!valid_cmd(cmd[1]))
+	{
+		ft_err("minishell: history: ");
+		ft_err(cmd[1]);
+		ft_err(": numeric argument required\n");
+		return (1);
+	}
+	return (print_history(mish));
+}
+
+void	exec_exit(char **cmd, t_shell *mish)
+{
+	int	num;
+
+	ft_putstr_fd("exit\n", 1);
+	if (!valid_cmd(cmd[1]))
+	{
+		if (!valid_cmd(cmd[2]))
+		{
+			ft_err("minishell: exit: too many arguments");
+			free_all(mish);
+			exit(1);
+		}
+		if (check_exit_num(cmd[1]))
+		{
+			num = ft_atoi(cmd[1]);
+			free_all(mish);
+			exit(num);
+		}
+		ft_err("minishell: exit: ");
+		ft_err(cmd[1]);
+		ft_err(": numeric argument required\n");
+		free_all(mish);
+		exit(2);
+	}
+	free_all(mish);
+	exit(0);
+}
+
+static int	open_fd(t_shell *mish, bool flag)
 {
 	int			fd;
 	char		*home;
@@ -33,13 +74,6 @@ int	open_fd(t_shell *mish, bool flag)
 		perror("minishell: history");
 	free(path);
 	return (fd);
-}
-
-bool	valid_cmd(char *input)
-{
-	if (!input)
-		return (true);
-	return (false);
 }
 
 int	print_history(t_shell *mish)
