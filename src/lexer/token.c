@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 20:46:25 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/23 23:16:54 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/27 20:42:45 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ bool	syntax_help(t_token *cur)
 				|| is_redirect(cur->next->next->next->type)
 				|| is_operator(cur->next->next->next->type)))
 		{
+			cur->next->value = expand(cur->next->value, NULL);
 			fake_heredoc(cur->next->value);
 			return (check_type(cur->next->next), false);
 		}

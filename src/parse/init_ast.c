@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 20:30:27 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/23 22:44:14 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/27 21:22:41 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ void	init_node(t_ast **node, t_token *tokens, int count)
 	i = 0;
 	while (tokens && i < count)
 	{
-		(*node)->cmd[i++] = ft_strdup(tokens->value);
+		if (tokens->value)
+			(*node)->cmd[i++] = ft_strdup(tokens->value);
 		tokens = tokens->next;
 	}
 	(*node)->cmd[i] = NULL;

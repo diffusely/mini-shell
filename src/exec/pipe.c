@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 15:16:28 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/21 19:36:32 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/27 00:17:52 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,12 @@ static void	help_pid1(t_shell *mish, t_ast *left, int *status)
 		}
 	}
 	else
-		exec_built(left->cmd, &mish->list_env, mish);
+	{
+		if (left && left->redirs)
+			*status = create_files(mish, left->redirs);
+		if (*status == 0)
+			exec_built(left->cmd, &mish->list_env, mish);
+	}
 }
 
 static void	help_pid2(t_shell *mish, t_ast *right, int *status)
@@ -81,7 +86,12 @@ static void	help_pid2(t_shell *mish, t_ast *right, int *status)
 		}
 	}
 	else
-		exec_built(right->cmd, &mish->list_env, mish);
+	{
+		if (right && right->redirs)
+			*status = create_files(mish, right->redirs);
+		if (*status == 0)
+			exec_built(right->cmd, &mish->list_env, mish);
+	}
 }
 
 int	exec_pipe(t_shell *mish, t_ast *left, t_ast *right)

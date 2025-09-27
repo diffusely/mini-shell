@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 21:06:18 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/21 23:59:40 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/27 21:23:27 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,16 @@ void	dup_and_close(int fd[2], int new_fd, int close_read)
 
 void	empty_cmd(t_shell *mish, t_ast *cmd)
 {
-	if (!cmd->cmd[0] || cmd->cmd[0][0] == '\0')
+	if (!cmd->cmd[0])
 	{
 		free_all(mish);
-		exit(2);
+		exit(0);
+	}
+	if (cmd->cmd[0][0] == '\0')
+	{
+		ft_err("minishell: command not found\n");
+		free_all(mish);
+		exit(127);
 	}
 }
 

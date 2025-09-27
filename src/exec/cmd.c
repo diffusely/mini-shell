@@ -6,22 +6,25 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 15:19:22 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/21 23:58:08 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/27 20:01:59 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-static void	fd_error(t_shell *mish, t_redir *r)
+static void	fd_error(t_shell *mish, t_redir *r, bool flag)
 {
 	ft_err("minishell: ");
 	if (r->filename)
 		perror(r->filename);
-	free_all(mish);
-	exit(1);
+	if (flag)
+	{
+		free_all(mish);
+		exit(1);
+	}
 }
 
-void	create_files(t_shell *mish, t_redir *r)
+int	create_files(t_shell *mish, t_redir *r)
 {
 	int	fd;
 
@@ -34,9 +37,19 @@ void	create_files(t_shell *mish, t_redir *r)
 		else if (r->type == R_IN)
 			fd = open(r->filename, O_RDONLY);
 		else if (r->type == R_HEREDOC)
+		{
 			fd = heredoc(mish, r->filename);
+			if (r->next && r->next->type == R_HEREDOC)
+				close(fd);
+		}
 		if (fd < 0)
-			fd_error(mish, r);
+		{
+			if (is_built(mish->tree->cmd))
+				fd_error(mish, r, 0);
+			else
+				fd_error(mish, r, 1);
+			return (1);
+		}
 		if (r->type == R_OUT || r->type == R_APPEND)
 			dup2(fd, STDOUT_FILENO);
 		else
@@ -44,6 +57,7 @@ void	create_files(t_shell *mish, t_redir *r)
 		close(fd);
 		r = r->next;
 	}
+	return (0);
 }
 
 static void	exec_commands(t_shell *mish)

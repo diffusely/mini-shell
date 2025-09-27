@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 21:27:14 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/24 00:21:56 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/26 23:25:23 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ int	exec_built(char **cmd, t_list **envp, t_shell *mish)
 		exec_exit(cmd, mish);
 	else if (type == HISTORY)
 		return (exec_history(mish, cmd));
-	mish->status = 127;
 	return (0);
 }
 

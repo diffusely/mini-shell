@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:27:11 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/09/22 23:10:06 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/26 23:57:26 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,5 @@ int		exec_ast(t_shell *mish);
 
 // Utils
 void	helper_ast(t_ast **node, t_token **tokens);
-
+int		help_cmd(t_shell *mish);
 #endif

@@ -1,4 +1,4 @@
-NAME		= minishell
+NAME		= minishell_bonus
 
 LIBFT		= lib/libft/
 
@@ -27,6 +27,7 @@ SRC 		= $(SRC_DIR)main.c \
 			  $(SHELL_DIR)error.c \
 			  $(SHELL_DIR)path.c \
 			  $(SHELL_DIR)init.c \
+			  $(SHELL_DIR)wildcard.c \
 			  $(AST_DIR)ast.c \
 			  $(PARSE_DIR)parse_ast.c \
 			  $(PARSE_DIR)init_ast.c \
@@ -57,7 +58,7 @@ IFLAG		= -I$(INC_HEADER) -I$(INC_LIB) -I$(LIBFT) -I$(READLINE_DIR)/include
 
 FFLAG		= -fsanitize=address
 CFLAG		= -Wall -Wextra -Werror $(FFLAG) 
-CC			= cc
+CC			= cc -g
 RM			= rm -rf
 
 $(NAME):	$(OBJ)

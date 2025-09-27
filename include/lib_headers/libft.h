@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 17:34:02 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/27 20:21:15 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/28 00:29:29 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_strjoin_free(char *s1, char const *s2);
 char	*ft_strjoin(const char *s1, char const *s2);
 void	*ft_calloc(size_t count, size_t size);
+void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
 char	*ft_itoa(int n);
 char	*ft_strdup(const char *src);
 void	ft_lstadd_back(t_list **lst, t_list *new_l);

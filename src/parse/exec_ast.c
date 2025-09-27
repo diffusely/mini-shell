@@ -6,13 +6,13 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 15:48:25 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/22 20:49:58 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/26 23:57:13 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ast.h"
 
-static int	help_cmd(t_shell *mish)
+int	help_cmd(t_shell *mish)
 {
 	int	status;
 
@@ -20,8 +20,9 @@ static int	help_cmd(t_shell *mish)
 	if (is_built(mish->tree->cmd))
 	{
 		if (mish->tree->redirs)
-			create_files(mish, mish->tree->redirs);
-		status = exec_built(mish->tree->cmd, &mish->list_env, mish);
+			status = create_files(mish, mish->tree->redirs);
+		if (status == 0)
+			status = exec_built(mish->tree->cmd, &mish->list_env, mish);
 		dup2(mish->fd_in, STDIN_FILENO);
 		dup2(mish->fd_out, STDOUT_FILENO);
 	}

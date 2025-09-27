@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 00:23:21 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/23 23:51:09 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/24 02:21:12 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	exec_exit(char **cmd, t_shell *mish)
 	{
 		if (!valid_cmd(cmd[2]))
 		{
-			ft_err("minishell: exit: too many arguments");
+			ft_err("minishell: exit: too many arguments\n");
 			free_all(mish);
 			exit(1);
 		}

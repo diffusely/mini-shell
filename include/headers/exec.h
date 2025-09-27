@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 15:14:36 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/15 21:46:10 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/26 23:27:29 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct s_redirect	t_redir;
 
 // Exec
 int		exec_pipe(t_shell *mish, t_ast *left, t_ast *right);
-void	create_files(t_shell *mish, t_redir *r);
+int		create_files(t_shell *mish, t_redir *r);
 int		exec_cmd(t_shell *mish, t_ast *redir);
 int		exec_ast_subtree(t_shell *mish, t_ast *subtree);
 int		exec_sub(t_shell *mish);

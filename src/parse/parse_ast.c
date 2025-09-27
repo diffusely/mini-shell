@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_ast.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 17:02:07 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/14 00:43:43 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/27 21:22:17 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,8 @@ static t_ast	*parse_cmd(t_token **tokens)
 	node = ft_calloc(1, sizeof(t_ast));
 	while (head && head->type == WORD)
 	{
-		++count;
+		if (head->value)
+			++count;
 		head = head->next;
 	}
 	init_node(&node, *tokens, count);

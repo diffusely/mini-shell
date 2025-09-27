@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 01:19:10 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/24 01:59:12 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/27 20:41:05 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ char	*expand_dollar(t_shell *mish, const char *s, int *i)
 	int		start;
 
 	(*i)++;
-	if (s[*i] == '?')
+	value = NULL;
+	if (mish && s[*i] == '?')
 		return ((*i)++, ft_itoa(mish->status));
 	start = *i;
 	while (s[*i] && (ft_isalnum(s[*i]) || s[*i] == '_'))
@@ -48,21 +49,22 @@ char	*expand_dollar(t_shell *mish, const char *s, int *i)
 	if (*i == start)
 		return (ft_strdup("$"));
 	name = ft_substr(s, start, *i - start);
-	value = find_list(name, &mish->list_env);
+	if (mish)
+		value = find_list(name, &mish->list_env);
 	free(name);
 	if (!value)
 		return (ft_strdup(""));
 	return (ft_strdup(value));
 }
 
-static char	*init_res(char *s, t_shell *mish, char **res, int *i)
+static void	init_res(char *s, t_shell *mish, char **res, int *i)
 {
 	if (s[*i] == '"')
 	{
 		(*i)++;
 		while (s[*i] && s[*i] != '"')
 		{
-			if (s[*i] == '$')
+			if (mish && s[*i] == '$')
 				*res = str_join_free(*res, expand_dollar(mish, s, i));
 			else
 				*res = str_join_char(*res, s[(*i)++]);
@@ -70,11 +72,10 @@ static char	*init_res(char *s, t_shell *mish, char **res, int *i)
 		if (s[*i] == '"')
 			(*i)++;
 	}
-	else if (s[*i] == '$')
+	else if (mish && s[*i] == '$')
 		*res = str_join_free(*res, expand_dollar(mish, s, i));
 	else
 		*res = str_join_char(*res, s[(*i)++]);
-	return (*res);
 }
 
 char	*expand(char *s, t_shell *mish)
