@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:26:24 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/09/27 22:07:18 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/09/28 13:35:07 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,6 @@ t_shell	*init_shell(char **envp);
 void	shell_loop(t_shell *mish);
 char	*get_path(t_shell *mish, char *cmd);
 char	**wildcard_expand(const char *pattern);
+void	create_wildcard_tok(t_token *tmp,t_token *cur ,char **match);
 
 #endif
