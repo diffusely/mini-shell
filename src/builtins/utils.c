@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 21:27:14 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/26 23:25:23 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/01 22:56:11 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ int	exec_built(char **cmd, t_list **envp, t_shell *mish)
 	if (type == ECHO)
 		return (exec_echo(cmd, envp, &mish));
 	else if (type == UNSET)
-		return (exec_unset(mish, cmd, envp));
+		return (exec_unset(cmd, envp));
 	else if (type == EXPORT)
 		return (exec_export(cmd, envp));
 	if (type == CD)
-		return (exec_cd(mish, cmd, envp, i));
+		return (exec_cd(cmd, envp, i));
 	else if (type == PWD)
 		return (exec_pwd(mish, tmp));
 	else if (type == ENV)

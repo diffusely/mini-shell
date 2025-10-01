@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 22:23:48 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/23 23:14:21 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/01 22:49:33 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	free_all(t_shell *mish)
 	if (mish->free)
 	{
 		free_mish(mish->free);
-		free(mish->free->env);
+		free_split(mish->free->env);
 		ft_lstclear(&mish->free->list_env);
 		close(mish->fd_in);
 		close(mish->fd_out);

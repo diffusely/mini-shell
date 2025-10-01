@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 12:35:24 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/09/28 20:47:59 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/01 22:55:57 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	change_type(char *input, char *old, t_list *curr, bool f)
 {
-	char	*res;
+	char	*res = NULL;
 
 	if (ft_strncmp(curr->content, "OLDPWD=", 7) == 0)
 	{
@@ -30,14 +30,15 @@ static void	change_type(char *input, char *old, t_list *curr, bool f)
 	}
 	else if (ft_strncmp(curr->content, "PWD=", 4) == 0)
 	{
-		free(curr->content);
 		if (f)
 		{
-			res = ft_strjoin(old, "/");
-			res = ft_strjoin_free(res, input);
+			res = ft_strjoin(old, ft_strdup("/"));
+			res = ft_strjoin(res, input);
+			//printf("%s\n", res);
+			free(curr->content);
 			curr->content = ft_calloc(1, ft_strlen(res) + 5);
 			ft_strcpy(curr->content, "PWD=");
-			ft_strcpy(curr->content + 4, old);
+			ft_strcpy(curr->content + 4, res);
 			return ;
 		}
 		curr->content = ft_calloc(1, ft_strlen(input) + 5);
@@ -72,8 +73,10 @@ bool	check_arguments_count(char **input)
 		return (true);
 	return (false);
 }
-
-static int	change_dir(t_shell *shell, char *res, char *old, t_list **envp_list)
+//  mkdir -p a/b/c && cd a/b/c/ && rm -rf ../../../a
+//  
+//	
+static int	change_dir(char *res, char *old, t_list **envp_list)
 {
 	char	*cwd;
 
@@ -97,12 +100,12 @@ static int	change_dir(t_shell *shell, char *res, char *old, t_list **envp_list)
 			ft_err("cd: error retrieving current directory:");
 			perror(" getcwd: cannot access parent directories: ");
 		}
-		return (refresh_env_matrix(&shell), 0);
+		return (0);
 	}
 	return (ft_err_msg("minishell: cd: ", res), 1);
 }
 
-int	exec_cd(t_shell *shell, char **input, t_list **envp_list, int i)
+int	exec_cd(char **input, t_list **envp_list, int i)
 {
 	char	*old;
 
@@ -111,5 +114,5 @@ int	exec_cd(t_shell *shell, char **input, t_list **envp_list, int i)
 		return (ft_err("minishell: cd: too many arguments\n"), 1);
 	if (i % 2 != 0)
 		return (ft_err_msg("minishell: cd: ", input[1]), 1);
-	return (change_dir(shell, input[1], old, envp_list));
+	return (change_dir(input[1], old, envp_list));
 }

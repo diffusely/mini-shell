@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 22:50:19 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/28 13:37:52 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/01 22:52:59 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ static void	expand_and_exec(t_shell *mish)
 	}
 	mish->tree = create_tree(&mish->token);
 	mish->status = exec_ast(mish);
+	refresh_env_matrix(&mish);
 	free_mish(mish);
 }
 

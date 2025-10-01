@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 21:27:32 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/24 01:56:50 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/01 22:55:35 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ typedef enum e_built
 }	t_built;
 
 // Exec%
-int		exec_cd(t_shell *shell, char **input, t_list **envp_list, int i);
+int		exec_cd(char **input, t_list **envp_list, int i);
 int		exec_echo(char **cmd, t_list **list_env, t_shell **mish);
 int		exec_env(char *input, t_list **list_env);
 int		exec_history(t_shell *mish, char **cmd);
 int		exec_pwd(t_shell *mish, const char *input);
 void	exec_exit(char **cmd, t_shell *mish);
-int		exec_unset(t_shell *mish, char **cmd, t_list **envp);
+int		exec_unset(char **cmd, t_list **envp);
 int		exec_export(char **cmd, t_list **envp_list);
 
 // Functions

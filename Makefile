@@ -1,4 +1,4 @@
-NAME		= minishell
+NAME		= minishell_bonus
 
 LIBFT		= lib/libft/
 

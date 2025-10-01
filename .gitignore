@@ -6,4 +6,5 @@ minishell
 history.txt
 valgrind-out.txt
 file.txt
-minishell_tester
+minishell_tester/*/
+42_minishell_tester/*/

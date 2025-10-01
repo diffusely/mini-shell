@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 12:39:23 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/09/24 00:01:17 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/01 22:49:13 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	**init_env_matrix(t_list *env)
 	i = 0;
 	while (i < len)
 	{
-		res[i] = env->content;
+		res[i] = ft_strdup(env->content);
 		env = env->next;
 		++i;
 	}
@@ -86,6 +86,6 @@ t_list	*init_env(char **envp)
 void	refresh_env_matrix(t_shell **shell)
 {
 	if ((*shell)->env)
-		free((*shell)->env);
+		free_split((*shell)->env);
 	(*shell)->env = init_env_matrix((*shell)->list_env);
 }

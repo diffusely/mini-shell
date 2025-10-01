@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 17:52:54 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/09/24 00:25:52 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/01 22:55:09 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	find_remove(const char *input, t_list **envp_list)
 	}
 }
 
-int	exec_unset(t_shell *mish, char **cmd, t_list **envp)
+int	exec_unset(char **cmd, t_list **envp)
 {
 	int		i;
 
@@ -53,6 +53,5 @@ int	exec_unset(t_shell *mish, char **cmd, t_list **envp)
 		find_remove(cmd[i], envp);
 		i++;
 	}
-	refresh_env_matrix(&mish);
 	return (0);
 }
