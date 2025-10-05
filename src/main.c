@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:16:42 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/09/24 02:09:19 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/05 21:59:25 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "shell.h"
 #include "free.h"
 
-volatile sig_atomic_t	g_signal;
+volatile sig_atomic_t	g_signal = 0;
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -25,8 +25,7 @@ int	main(int argc, char **argv, char **envp)
 	if (argc != 1)
 		ft_err("Error: no arguments allowed\n");
 	mish = init_shell(envp);
-	signal(SIGINT, sigint_handler);
-	signal(SIGQUIT, SIG_IGN);
+	set_signals_prompt();
 	shell_loop(mish);
 	free_all(mish);
 	return (0);

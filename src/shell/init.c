@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 22:50:19 by noavetis          #+#    #+#             */
-/*   Updated: 2025/10/01 22:52:59 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/05 22:01:56 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,12 @@ void	shell_loop(t_shell *mish)
 			printf("exit\n");
 			break ;
 		}
+		if (g_signal == SIGINT)
+		{
+			mish->status = 130;
+			g_signal = 0;
+		}
+
 		if (!*mish->input)
 		{
 			if (is_space_or_newline(mish->input))
