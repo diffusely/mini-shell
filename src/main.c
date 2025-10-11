@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:16:42 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/10/05 21:59:25 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/11 19:42:20 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	main(int argc, char **argv, char **envp)
 	if (argc != 1)
 		ft_err("Error: no arguments allowed\n");
 	mish = init_shell(envp);
-	set_signals_prompt();
 	shell_loop(mish);
 	free_all(mish);
 	return (0);

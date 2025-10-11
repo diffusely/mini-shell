@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:26:24 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/09/28 13:35:07 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/11 21:29:49 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 typedef struct s_ast			t_ast;
 typedef struct s_token			t_token;
 typedef enum e_token_type		t_token_type;
+typedef struct s_redirect		t_redir;
 
 extern volatile sig_atomic_t	g_signal;
 
@@ -52,9 +53,8 @@ typedef struct s_shell
 void	sigint_handler(int signum);
 void	set_signals_prompt(void);
 void	set_signals_exec(void);
-void	set_signals_heredoc(void);
-void	sigint_handler_heredoc(int sig);
 void	sig_handler(int sig);
+void	give_heredoc_signals(void);
 
 // Shell
 t_shell	*init_shell(char **envp);
@@ -62,5 +62,6 @@ void	shell_loop(t_shell *mish);
 char	*get_path(t_shell *mish, char *cmd);
 char	**wildcard_expand(const char *pattern);
 void	create_wildcard_tok(t_token *tmp,t_token *cur ,char **match);
+int		create_files(t_shell *mish, t_redir *r, bool ex);
 
 #endif

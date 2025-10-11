@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 23:08:24 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/09/24 00:15:58 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/11 21:47:52 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,18 @@ static bool	print_export(char **cmd, t_list	*tmp, int i)
 	return (false);
 }
 
+static int	helper(char **cmd)
+{
+	if (!valid_identifier(cmd[1]))
+	{
+		ft_err("minishell: export: ");
+		ft_err(cmd[1]);
+		ft_err(": not a valid identifier\n");
+		return (1);
+	}
+	return (0);
+}
+
 int	exec_export(char **cmd, t_list **envp_list)
 {
 	t_list	*tmp;
@@ -75,17 +87,12 @@ int	exec_export(char **cmd, t_list **envp_list)
 	int		j;
 
 	tmp = *envp_list;
-	i = 1;
-	if (!valid_identifier(cmd[i]))
-	{
-		ft_err("minishell: export: ");
-		ft_err(cmd[1]);
-		ft_err(": not a valid identifier");
-		return (1);
-	}
-	if (print_export(cmd, tmp, i))
+	i = 0;
+	if (!cmd[1] && print_export(cmd, tmp, 1))
 		return (0);
-	while (cmd[i])
+	if (helper(cmd))
+		return (1);
+	while (cmd[++i])
 	{
 		j = 0;
 		while (cmd[i][j])
@@ -98,7 +105,6 @@ int	exec_export(char **cmd, t_list **envp_list)
 			}
 			j++;
 		}
-		i++;
 	}
 	return (0);
 }

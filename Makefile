@@ -10,7 +10,6 @@ SRC_DIR		= src/
 
 LEX_DIR		= $(SRC_DIR)lexer/
 SHELL_DIR	= $(SRC_DIR)shell/
-AST_DIR		= $(SRC_DIR)ast/
 PARSE_DIR	= $(SRC_DIR)parse/
 BUILT_DIR	= $(SRC_DIR)builtins/
 EXEX_DIR	= $(SRC_DIR)exec/
@@ -28,7 +27,6 @@ SRC 		= $(SRC_DIR)main.c \
 			  $(SHELL_DIR)path.c \
 			  $(SHELL_DIR)init.c \
 			  $(SHELL_DIR)wildcard.c \
-			  $(AST_DIR)ast.c \
 			  $(PARSE_DIR)parse_ast.c \
 			  $(PARSE_DIR)init_ast.c \
 			  $(PARSE_DIR)exec_ast.c \

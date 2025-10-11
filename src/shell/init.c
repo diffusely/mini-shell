@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 22:50:19 by noavetis          #+#    #+#             */
-/*   Updated: 2025/10/05 22:01:56 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/11 21:19:51 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ static void	expand_and_exec(t_shell *mish)
 	mish->tree = create_tree(&mish->token);
 	mish->status = exec_ast(mish);
 	refresh_env_matrix(&mish);
-	free_mish(mish);
 }
 
 static bool	token_and_syntax(t_shell *mish)
@@ -95,6 +94,7 @@ void	shell_loop(t_shell *mish)
 {
 	while (1)
 	{
+		set_signals_prompt();
 		mish->input = readline("minishell$ ");
 		if (!mish->input)
 		{
@@ -106,20 +106,14 @@ void	shell_loop(t_shell *mish)
 			mish->status = 130;
 			g_signal = 0;
 		}
-
-		if (!*mish->input)
-		{
-			if (is_space_or_newline(mish->input))
-			{
-				free(mish->input);
-				continue ;
-			}
-		}
-		if (!token_and_syntax(mish))
-		{
+		if (is_space_or_newline(mish->input))
+			free(mish->input);
+		else if (!token_and_syntax(mish))
 			mish->status = 2;
-			continue ;
+		else
+		{
+			expand_and_exec(mish);
+			free_mish(mish);
 		}
-		expand_and_exec(mish);
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 15:16:28 by noavetis          #+#    #+#             */
-/*   Updated: 2025/10/01 22:42:56 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/11 20:06:49 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,16 @@ static void	help_pid1(t_shell *mish, t_ast *left, int *status)
 		else
 		{
 			if (left && left->redirs)
-				create_files(mish, left->redirs);
+				create_files(mish, left->redirs, true);
 			empty_cmd(mish, left);
 			exec_pip(mish, left);
 		}
+		return ;
 	}
-	else
-	{
-		if (left && left->redirs)
-			*status = create_files(mish, left->redirs);
-		if (*status == 0)
-			exec_built(left->cmd, &mish->list_env, mish);
-	}
+	if (left && left->redirs)
+		*status = create_files(mish, left->redirs, true);
+	if (*status == 0)
+		exec_built(left->cmd, &mish->list_env, mish);
 }
 
 static void	help_pid2(t_shell *mish, t_ast *right, int *status)
@@ -80,7 +78,7 @@ static void	help_pid2(t_shell *mish, t_ast *right, int *status)
 		else
 		{
 			if (right && right->redirs)
-				create_files(mish, right->redirs);
+				create_files(mish, right->redirs, true);
 			empty_cmd(mish, right);
 			exec_pip(mish, right);
 		}
@@ -88,7 +86,7 @@ static void	help_pid2(t_shell *mish, t_ast *right, int *status)
 	else
 	{
 		if (right && right->redirs)
-			*status = create_files(mish, right->redirs);
+			*status = create_files(mish, right->redirs, true);
 		if (*status == 0)
 			exec_built(right->cmd, &mish->list_env, mish);
 	}

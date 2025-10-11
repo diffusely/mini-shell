@@ -6,59 +6,11 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 15:19:22 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/27 20:01:59 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/11 21:28:40 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
-
-static void	fd_error(t_shell *mish, t_redir *r, bool flag)
-{
-	ft_err("minishell: ");
-	if (r->filename)
-		perror(r->filename);
-	if (flag)
-	{
-		free_all(mish);
-		exit(1);
-	}
-}
-
-int	create_files(t_shell *mish, t_redir *r)
-{
-	int	fd;
-
-	while (r)
-	{
-		if (r->type == R_OUT)
-			fd = open(r->filename, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-		else if (r->type == R_APPEND)
-			fd = open(r->filename, O_CREAT | O_WRONLY | O_APPEND, 0644);
-		else if (r->type == R_IN)
-			fd = open(r->filename, O_RDONLY);
-		else if (r->type == R_HEREDOC)
-		{
-			fd = heredoc(mish, r->filename);
-			if (r->next && r->next->type == R_HEREDOC)
-				close(fd);
-		}
-		if (fd < 0)
-		{
-			if (is_built(mish->tree->cmd))
-				fd_error(mish, r, 0);
-			else
-				fd_error(mish, r, 1);
-			return (1);
-		}
-		if (r->type == R_OUT || r->type == R_APPEND)
-			dup2(fd, STDOUT_FILENO);
-		else
-			dup2(fd, STDIN_FILENO);
-		close(fd);
-		r = r->next;
-	}
-	return (0);
-}
 
 static void	exec_commands(t_shell *mish)
 {
@@ -76,10 +28,25 @@ static void	exec_commands(t_shell *mish)
 	free_and_exit(mish, 127);
 }
 
+static void	helper(int *status)
+{
+	if (WIFEXITED(*status))
+		*status = WEXITSTATUS(*status);
+	else
+	{
+		*status = 128 + WTERMSIG(*status);
+		if (*status == 130)
+			printf("\n");
+		if (*status == 131)
+			printf("Quit (core dumped)\n");
+	}
+	set_signals_prompt();
+}
+
 int	exec_cmd(t_shell *mish, t_ast *redir)
 {
-	int	pid;
-	int	status;
+	int		pid;
+	int		status;
 
 	pid = fork();
 	if (pid == -1)
@@ -88,23 +55,16 @@ int	exec_cmd(t_shell *mish, t_ast *redir)
 	if (pid == 0)
 	{
 		if (redir->redirs)
-			create_files(mish, redir->redirs);
-		signal(SIGINT, SIG_DFL);
-		signal(SIGQUIT, SIG_DFL);
-		empty_cmd(mish, mish->tree);
-		exec_commands(mish);
+			status = create_files(mish, redir->redirs, true);
+		set_signals_exec();
+		if (status == 0)
+		{
+			empty_cmd(mish, mish->tree);
+			exec_commands(mish);
+		}
 	}
-	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, SIG_IGN);
 	waitpid(pid, &status, 0);
-	if (WIFEXITED(status))
-		status = WEXITSTATUS(status);
-	else
-		status = 128 + WTERMSIG(status);
-	if (status == 130)
-		printf("\n");
-	if (status == 131)
-		printf("Quit (core dumped)\n");
-	set_signals_prompt();
-	return (status);
+	return (helper(&status), status);
 }

@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 21:06:18 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/27 21:23:27 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/10 23:10:14 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,17 @@ void	exec_pip(t_shell *mish, t_ast *ast)
 	if (path)
 		free(path);
 	error_exit_msg(mish, ast, ": command not found\n");
+}
+
+int	heredoc_helper(t_shell *mish, int status, int *fd, int ex)
+{
+	if ((WIFEXITED(status) && WEXITSTATUS(status) == 130)
+		|| WIFSIGNALED(status))
+	{
+		close(fd[0]);
+		if (ex)
+			free_and_exit(mish, 130);
+		return (1);
+	}
+	return (0);
 }
