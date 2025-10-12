@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 17:34:02 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/28 00:29:29 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/12 14:23:45 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ char	*ft_strcpy(char *dest, const char *src);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_strjoin_free(char *s1, char const *s2);
+char	*ft_strjoin_free2(char *s1, char *s2);
 char	*ft_strjoin(const char *s1, char const *s2);
 void	*ft_calloc(size_t count, size_t size);
 void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);

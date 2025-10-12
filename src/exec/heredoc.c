@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 01:43:04 by noavetis          #+#    #+#             */
-/*   Updated: 2025/10/11 20:45:58 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/12 19:08:36 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 static void	ctrl_d_message(const char *delim, char *line)
 {
-	printf("minishell: ");
-	printf("warning: ");
-	printf("here-document at line 1 delimited by end-of-file ");
-	printf("(wanted `%s')\n", delim);
+	ft_err("minishell: ");
+	ft_err("warning: ");
+	ft_err("here-document at line 1 delimited by end-of-file ");
+	ft_err("(wanted `");
+	ft_err((char *)delim);
+	ft_err("')\n");
 	free(line);
 }
 

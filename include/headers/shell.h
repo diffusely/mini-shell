@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:26:24 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/10/11 21:29:49 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/12 14:12:56 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include "get_next_line.h"
 # include "free.h"
 # include "built.h"
-
 
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -61,7 +60,9 @@ t_shell	*init_shell(char **envp);
 void	shell_loop(t_shell *mish);
 char	*get_path(t_shell *mish, char *cmd);
 char	**wildcard_expand(const char *pattern);
-void	create_wildcard_tok(t_token *tmp,t_token *cur ,char **match);
+void	create_wildcard_tok(t_token *tmp, t_token *cur, char **match);
 int		create_files(t_shell *mish, t_redir *r, bool ex);
+char	*str_join_free(char *s1, char *s2);
+char	*str_join_char(char *s, char c);
 
 #endif

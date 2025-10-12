@@ -6,13 +6,14 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 15:14:36 by noavetis          #+#    #+#             */
-/*   Updated: 2025/10/11 21:27:53 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/12 19:35:41 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXEC_H
 # define EXEC_H
 
+# include <errno.h>
 # include "shell.h"
 # include "ast.h"
 
@@ -34,4 +35,6 @@ void	dup_and_close(int fd[2], int new_fd, int close_read);
 void	free_and_exit(t_shell *mish, int status);
 void	exec_pip(t_shell *mish, t_ast *ast);
 int		heredoc_helper(t_shell *mish, int status, int *fd, int ex);
+int		print_exec_error(const char *cmd, char *path);
+
 #endif

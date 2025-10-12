@@ -6,26 +6,59 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 15:19:22 by noavetis          #+#    #+#             */
-/*   Updated: 2025/10/11 21:28:40 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/12 19:35:24 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-static void	exec_commands(t_shell *mish)
+#include <errno.h>
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+int	print_exec_error(const char *cmd, char *path)
+{
+	int	flag;
+
+	if (!cmd)
+		return (1);
+	ft_err("minishell: ");
+	ft_err((char *)cmd);
+	flag = access(cmd, X_OK);
+	if (ft_strchr(cmd, '/') && errno == 2)
+		ft_err(": No such file or directory\n");
+	else if (!ft_strcmp(path, "Error"))
+		ft_err(": command not found\n");
+	else if (errno == EACCES && flag == -1)
+		ft_err(": Permission denied\n");
+	else if (errno == EACCES && flag == 0)
+		ft_err(": Is a directory\n");
+	else if (errno == ENOEXEC)
+		ft_err(": Exec format error\n");
+	else
+		ft_err(strerror(errno));
+	if (!ft_strcmp(path, "Error") || errno == 2)
+		return (127);
+	else if (errno == EACCES)
+		return (126);
+	return (errno);
+}
+
+void	exec_commands(t_shell *mish)
 {
 	char	*path;
+	char	*cmd;
+	int		exit_code;
 
-	path = NULL;
-	path = get_path(mish, mish->tree->cmd[0]);
-	if (path)
-		execve(path, mish->tree->cmd, mish->env);
-	if (mish->tree->cmd[0] && mish->tree->cmd[0][0])
-		ft_err(mish->tree->cmd[0]);
-	ft_err(": command not found\n");
-	if (path)
-		free(path);
-	free_and_exit(mish, 127);
+	cmd = mish->tree->cmd[0];
+	path = get_path(mish, cmd);
+	execve(path, mish->tree->cmd, mish->env);
+	exit_code = 0;
+	exit_code = print_exec_error(cmd, path);
+	free(path);
+	free_and_exit(mish, exit_code);
 }
 
 static void	helper(int *status)

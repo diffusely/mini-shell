@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 22:27:00 by noavetis          #+#    #+#             */
-/*   Updated: 2025/05/09 23:19:11 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/12 14:23:55 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,14 @@ char	*ft_strjoin_free(char *s1, char const *s2)
 	}
 	str[i] = '\0';
 	return (free(s1), str);
+}
+
+char	*ft_strjoin_free2(char *s1, char *s2)
+{
+	char	*res;
+
+	if (!s1 || !s2)
+		return (NULL);
+	res = ft_strjoin(s1, s2);
+	return (free(s2), res);
 }

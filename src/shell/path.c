@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_path.c                                         :+:      :+:    :+:   */
+/*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 19:29:20 by noavetis          #+#    #+#             */
-/*   Updated: 2025/08/30 18:57:27 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/12 18:33:12 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,16 @@
 
 static char	*helper(char **path, char *cmd)
 {
-	char	*res;
-	int		i;
 	int		j;
 
 	j = 0;
-	i = -1;
 	while (cmd[j])
 	{
 		if (cmd[j] == '.' && cmd[j + 1] == '.')
 			return (free_split(path), ft_strdup("Error"));
 		++j;
 	}
-	while (path[++i])
-	{
-		res = ft_strdup(cmd);
-		if (access(res, X_OK) == 0)
-			return (free_split(path), res);
-		free(res);
-	}
-	return (free_split(path), ft_strdup("Error"));
+	return (free_split(path), ft_strdup(cmd));
 }
 
 static char	*find_path(t_shell *mish, char **path, char *cmd)

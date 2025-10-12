@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 21:27:14 by noavetis          #+#    #+#             */
-/*   Updated: 2025/10/01 22:56:11 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/12 14:00:06 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	exec_built(char **cmd, t_list **envp, t_shell *mish)
 	tmp = NULL;
 	type = is_built(cmd);
 	if (type == ECHO)
-		return (exec_echo(cmd, envp, &mish));
+		return (exec_echo(cmd));
 	else if (type == UNSET)
 		return (exec_unset(cmd, envp));
 	else if (type == EXPORT)

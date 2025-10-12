@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 21:27:32 by noavetis          #+#    #+#             */
-/*   Updated: 2025/10/01 22:55:35 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/12 14:38:48 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef enum e_built
 
 // Exec%
 int		exec_cd(char **input, t_list **envp_list, int i);
-int		exec_echo(char **cmd, t_list **list_env, t_shell **mish);
+int		exec_echo(char **cmd);
 int		exec_env(char *input, t_list **list_env);
 int		exec_history(t_shell *mish, char **cmd);
 int		exec_pwd(t_shell *mish, const char *input);
@@ -62,5 +62,6 @@ int		f_w_p(char *word);
 int		exec_built(char **cmd, t_list **envp_list, t_shell *mish);
 char	*find_list(const char *input, t_list **envp_list);
 bool	check_exit_num(char *input);
+void	helper_cd(t_list *curr, char *input, char *old);
 
 #endif

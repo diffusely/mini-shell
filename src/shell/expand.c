@@ -6,13 +6,13 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 01:19:10 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/27 20:41:05 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/12 14:12:07 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static char	*str_join_free(char *s1, char *s2)
+char	*str_join_free(char *s1, char *s2)
 {
 	char	*res;
 
@@ -22,7 +22,7 @@ static char	*str_join_free(char *s1, char *s2)
 	return (free(s1), free(s2), res);
 }
 
-static char	*str_join_char(char *s, char c)
+char	*str_join_char(char *s, char c)
 {
 	char	str[2];
 	char	*tmp;

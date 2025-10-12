@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:27:11 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/09/26 23:57:26 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/12 16:25:42 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,6 @@ void	realoc_node(t_ast **node, t_token *tokens, int size);
 // Parse
 t_ast	*create_tree(t_token **tokens);
 void	add_redir(t_ast *node, t_token_type type, t_token *t);
-
-// Print ast
-void	print_ast(t_ast *node, int depth);
 
 // Exec ast
 int		exec_ast(t_shell *mish);

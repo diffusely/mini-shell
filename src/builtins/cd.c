@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 12:35:24 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/10/01 22:55:57 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/12 14:39:27 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 static void	change_type(char *input, char *old, t_list *curr, bool f)
 {
-	char	*res = NULL;
-
 	if (ft_strncmp(curr->content, "OLDPWD=", 7) == 0)
 	{
 		if (!old)
@@ -32,21 +30,17 @@ static void	change_type(char *input, char *old, t_list *curr, bool f)
 	{
 		if (f)
 		{
-			res = ft_strjoin(old, ft_strdup("/"));
-			res = ft_strjoin(res, input);
-			//printf("%s\n", res);
-			free(curr->content);
-			curr->content = ft_calloc(1, ft_strlen(res) + 5);
-			ft_strcpy(curr->content, "PWD=");
-			ft_strcpy(curr->content + 4, res);
+			helper_cd(curr, input, old);
 			return ;
 		}
+		free(curr->content);
 		curr->content = ft_calloc(1, ft_strlen(input) + 5);
 		ft_strcpy(curr->content, "PWD=");
 		ft_strcpy(curr->content + 4, input);
 	}
 }
 
+//  mkdir -p a/b/c && cd a/b/c/ && rm -rf ../../../a
 static void	find_change(char *input, char *old, t_list **envp_list, bool f)
 {
 	t_list	*curr;
@@ -73,9 +67,7 @@ bool	check_arguments_count(char **input)
 		return (true);
 	return (false);
 }
-//  mkdir -p a/b/c && cd a/b/c/ && rm -rf ../../../a
-//  
-//	
+
 static int	change_dir(char *res, char *old, t_list **envp_list)
 {
 	char	*cwd;

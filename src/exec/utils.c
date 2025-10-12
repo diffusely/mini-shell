@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 21:06:18 by noavetis          #+#    #+#             */
-/*   Updated: 2025/10/10 23:10:14 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/12 19:35:08 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,16 @@ void	empty_cmd(t_shell *mish, t_ast *cmd)
 void	exec_pip(t_shell *mish, t_ast *ast)
 {
 	char	*path;
+	char	*cmd;
+	int		exit_code;
 
-	path = NULL;
-	path = get_path(mish, ast->cmd[0]);
-	if (path)
-		execve(path, ast->cmd, mish->env);
-	if (path)
-		free(path);
-	error_exit_msg(mish, ast, ": command not found\n");
+	cmd = ast->cmd[0];
+	path = get_path(mish, cmd);
+	execve(path, ast->cmd, mish->env);
+	exit_code = 0;
+	exit_code = print_exec_error(cmd, path);
+	free(path);
+	free_and_exit(mish, exit_code);
 }
 
 int	heredoc_helper(t_shell *mish, int status, int *fd, int ex)
