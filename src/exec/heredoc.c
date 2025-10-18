@@ -3,27 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 01:43:04 by noavetis          #+#    #+#             */
-/*   Updated: 2025/10/12 19:08:36 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/18 16:18:10 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-static void	ctrl_d_message(const char *delim, char *line)
+static void	ctrl_d_message(const char *delim, char *line, int l_count)
 {
 	ft_err("minishell: ");
 	ft_err("warning: ");
-	ft_err("here-document at line 1 delimited by end-of-file ");
+	ft_err("here-document at line ");
+	ft_putnbr_fd(l_count, 2);
+	ft_err(" delimited by end-of-file");
 	ft_err("(wanted `");
 	ft_err((char *)delim);
 	ft_err("')\n");
 	free(line);
 }
 
-void	fake_heredoc(const char *delim)
+void	fake_heredoc(const char *delim, int l_count)
 {
 	pid_t	pid;
 	char	*line;
@@ -37,9 +39,11 @@ void	fake_heredoc(const char *delim)
 		while (1)
 		{
 			line = readline("> ");
+			
 			if (!line || ft_strcmp(line, delim) == 0)
 			{
-				ctrl_d_message(delim, line);
+				if (!line)
+					ctrl_d_message(delim, line, l_count);
 				break ;
 			}
 			free(line);
@@ -51,14 +55,15 @@ void	fake_heredoc(const char *delim)
 	wait(NULL);
 }
 
-void	help_heredic(char *line, const char *delim, int *fd)
+void	help_heredoc(char *line, const char *delim, int *fd, int l_count)
 {
 	while (1)
 	{
 		line = readline("> ");
 		if (!line || ft_strcmp(line, delim) == 0)
 		{
-			ctrl_d_message(delim, line);
+			if (!line)
+				ctrl_d_message(delim, line, l_count);
 			break ;
 		}
 		write(fd[1], line, ft_strlen(line));
@@ -90,7 +95,7 @@ int	heredoc(t_shell *mish, const char *delim, bool ex)
 	{
 		give_heredoc_signals();
 		close(fd[0]);
-		help_heredic(NULL, delim, fd);
+		help_heredoc(NULL, delim, fd, mish->l_count);
 		close(fd[1]);
 		free_and_exit(mish, 0);
 	}

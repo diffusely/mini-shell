@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 21:27:14 by noavetis          #+#    #+#             */
-/*   Updated: 2025/10/12 14:00:06 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/13 21:38:11 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,22 +59,23 @@ int	exec_built(char **cmd, t_list **envp, t_shell *mish)
 char	*find_list(const char *input, t_list **envp_list)
 {
 	t_list	*curr;
-	int		place;
+	size_t	len;
 
 	curr = *envp_list;
 	while (curr)
 	{
 		if (curr->content && ft_strchr(curr->content, '='))
 		{
-			place = f_w_p(curr->content);
-			if (ft_strncmp(curr->content, input, place) == 0)
-				return (curr->content + place + 1);
+			len = ft_strlen(input);
+			if (!ft_strncmp(curr->content, input, len)
+				&& ((char *)curr->content)[len]
+				&& ((char *)curr->content)[len] == '=')
+				return (((char *)curr->content) + len + 1);
 		}
 		curr = curr->next;
 	}
 	return (NULL);
 }
-
 bool	check_exit_num(char *input)
 {
 	int	i;

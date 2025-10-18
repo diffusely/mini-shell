@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 22:50:19 by noavetis          #+#    #+#             */
-/*   Updated: 2025/10/11 21:19:51 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/18 16:18:18 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_shell	*init_shell(char **envp)
 	mish->tree = NULL;
 	mish->fd_in = dup(STDIN_FILENO);
 	mish->fd_out = dup(STDOUT_FILENO);
+	mish->l_count = 1;
 	mish->free = mish;
 	return (mish);
 }
@@ -81,10 +82,18 @@ static void	expand_and_exec(t_shell *mish)
 
 static bool	token_and_syntax(t_shell *mish)
 {
+	t_token	*tmp;
+
 	mish->token = lexer(mish->input);
 	mish->free_token = mish->token;
+	tmp = mish->token;
 	add_history(mish->input);
 	add_history_input(mish);
+	while (tmp)
+	{
+		tmp->l_count = mish->l_count;
+		tmp = tmp->next;
+	}
 	if (!syntax_check(mish->token))
 		return (free_mish(mish), false);
 	return (true);
@@ -96,6 +105,7 @@ void	shell_loop(t_shell *mish)
 	{
 		set_signals_prompt();
 		mish->input = readline("minishell$ ");
+		++mish->l_count;
 		if (!mish->input)
 		{
 			printf("exit\n");

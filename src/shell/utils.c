@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 19:54:24 by noavetis          #+#    #+#             */
-/*   Updated: 2025/10/11 21:31:26 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/18 15:34:48 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@ void	sig_handler(int sig)
 	{
 		write(1, "Quit (core dumped)\n", 20);
 		g_signal = 131;
+	}
+	else if (sig == EOF)
+	{
+		g_signal = 132;
 	}
 }
 

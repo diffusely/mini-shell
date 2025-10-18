@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 20:46:25 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/27 20:42:45 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/18 15:55:25 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ bool	syntax_help(t_token *cur)
 				|| is_operator(cur->next->next->next->type)))
 		{
 			cur->next->value = expand(cur->next->value, NULL);
-			fake_heredoc(cur->next->value);
+			fake_heredoc(cur->next->value, cur->l_count);
 			return (check_type(cur->next->next), false);
 		}
 	}

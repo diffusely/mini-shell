@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 12:35:24 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/10/12 14:39:27 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/13 20:52:41 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ static void	change_type(char *input, char *old, t_list *curr, bool f)
 	}
 }
 
-//  mkdir -p a/b/c && cd a/b/c/ && rm -rf ../../../a
 static void	find_change(char *input, char *old, t_list **envp_list, bool f)
 {
 	t_list	*curr;

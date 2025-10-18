@@ -3,20 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 15:19:22 by noavetis          #+#    #+#             */
-/*   Updated: 2025/10/12 19:35:24 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/13 21:04:24 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
-
-#include <errno.h>
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
 
 int	print_exec_error(const char *cmd, char *path)
 {
@@ -78,8 +72,8 @@ static void	helper(int *status)
 
 int	exec_cmd(t_shell *mish, t_ast *redir)
 {
-	int		pid;
-	int		status;
+	int	pid;
+	int	status;
 
 	pid = fork();
 	if (pid == -1)
