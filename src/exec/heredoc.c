@@ -6,7 +6,7 @@
 /*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 01:43:04 by noavetis          #+#    #+#             */
-/*   Updated: 2025/10/18 16:18:10 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/18 16:45:08 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,16 @@ void	fake_heredoc(const char *delim, int l_count)
 	wait(NULL);
 }
 
-void	help_heredoc(char *line, const char *delim, int *fd, int l_count)
+static void	help_heredoc(char *line, const char *delim, int *fd, t_shell *mish)
 {
 	while (1)
 	{
 		line = readline("> ");
+		line = expand(line, mish);
 		if (!line || ft_strcmp(line, delim) == 0)
 		{
 			if (!line)
-				ctrl_d_message(delim, line, l_count);
+				ctrl_d_message(delim, line, mish->l_count);
 			break ;
 		}
 		write(fd[1], line, ft_strlen(line));
@@ -95,7 +96,7 @@ int	heredoc(t_shell *mish, const char *delim, bool ex)
 	{
 		give_heredoc_signals();
 		close(fd[0]);
-		help_heredoc(NULL, delim, fd, mish->l_count);
+		help_heredoc(NULL, delim, fd, mish);
 		close(fd[1]);
 		free_and_exit(mish, 0);
 	}
