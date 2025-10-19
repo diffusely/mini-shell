@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   subshell.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 15:14:23 by noavetis          #+#    #+#             */
-/*   Updated: 2025/09/21 19:36:02 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/19 00:00:40 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,30 @@ int	exec_ast_subtree(t_shell *mish, t_ast *subtree)
 	return (exec_ast(&temp));
 }
 
-static void	help_end(pid_t	pid, int *status)
+static void	help_end(pid_t pid, int *status)
 {
 	waitpid(pid, status, 0);
 	if (WIFEXITED(*status))
 		*status = WEXITSTATUS(*status);
 	else
 		*status = 128 + WTERMSIG(*status);
+	set_signals_prompt();
+}
+
+static bool	helper(t_shell *mish, int *status)
+{
+	t_ast	*tree;
+
+	if (mish->tree->redirs)
+	{
+		tree = mish->tree;
+		mish->tree = mish->tree->left;
+		*status = create_files(mish, tree->redirs, true);
+		if (*status == 0)
+			*status = exec_ast_subtree(mish, mish->tree);
+		return (false);
+	}
+	return (true);
 }
 
 int	exec_sub(t_shell *mish)
@@ -35,7 +52,6 @@ int	exec_sub(t_shell *mish)
 	pid_t	pid;
 	int		status;
 	t_ast	*mish_free;
-	t_ast	*tree;
 
 	mish_free = mish->tree;
 	pid = fork();
@@ -43,17 +59,11 @@ int	exec_sub(t_shell *mish)
 		error_handle("minishell: fork error\n", 0);
 	if (pid == 0)
 	{
-		if (mish->tree->redirs)
-		{
-			tree = mish->tree;
-			mish->tree = mish->tree->left;
-			status = exec_cmd(mish, tree);
-		}
-		else
+		set_signals_exec();
+		if (helper(mish, &status))
 			status = exec_ast_subtree(mish, mish->tree->left);
 		mish->tree = mish_free;
 		free_and_exit(mish, status);
 	}
-	help_end(pid, &status);
-	return (status);
+	return (help_end(pid, &status), status);
 }

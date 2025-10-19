@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 15:48:25 by noavetis          #+#    #+#             */
-/*   Updated: 2025/10/12 14:58:16 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/18 23:48:22 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	help_and_or(t_shell *mish, int flag)
 	status = exec_ast_subtree(mish, mish->tree->left);
 	if (flag && status == 0)
 		status = exec_ast_subtree(mish, mish->tree->right);
-	else if (status != 0)
+	else if (status != 0 && status != 131 && status != 130)
 		status = exec_ast_subtree(mish, mish->tree->right);
 	return (status);
 }
@@ -56,6 +56,8 @@ int	exec_ast(t_shell *mish)
 	else if (mish->tree->type == NODE_OR)
 		return (help_and_or(mish, 0));
 	else if (mish->tree->type == NODE_SUB)
+	{
 		return (exec_sub(mish));
+	}
 	return (0);
 }

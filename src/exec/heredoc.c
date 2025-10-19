@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 01:43:04 by noavetis          #+#    #+#             */
-/*   Updated: 2025/10/18 16:45:08 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/18 23:55:08 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-static void	ctrl_d_message(const char *delim, char *line, int l_count)
+static void	ctrl_d_message(char *delim, int l_count)
 {
+	delim = expand(delim, NULL);
 	ft_err("minishell: ");
 	ft_err("warning: ");
 	ft_err("here-document at line ");
@@ -22,7 +23,7 @@ static void	ctrl_d_message(const char *delim, char *line, int l_count)
 	ft_err("(wanted `");
 	ft_err((char *)delim);
 	ft_err("')\n");
-	free(line);
+	free(delim);
 }
 
 void	fake_heredoc(const char *delim, int l_count)
@@ -39,11 +40,10 @@ void	fake_heredoc(const char *delim, int l_count)
 		while (1)
 		{
 			line = readline("> ");
-			
 			if (!line || ft_strcmp(line, delim) == 0)
 			{
 				if (!line)
-					ctrl_d_message(delim, line, l_count);
+					ctrl_d_message(ft_strdup(delim), l_count);
 				break ;
 			}
 			free(line);
@@ -55,16 +55,24 @@ void	fake_heredoc(const char *delim, int l_count)
 	wait(NULL);
 }
 
-static void	help_heredoc(char *line, const char *delim, int *fd, t_shell *mish)
+static void	help_heredoc(char *line, char *delim, int *fd, t_shell *mish)
 {
+	bool	op;
+
+	if (strchr(delim, '"') || strchr(delim, '\''))
+		op = false;
+	else
+		op = true;
 	while (1)
 	{
 		line = readline("> ");
-		line = expand(line, mish);
+		if (line && op)
+			line = expand(line, mish);
 		if (!line || ft_strcmp(line, delim) == 0)
 		{
 			if (!line)
-				ctrl_d_message(delim, line, mish->l_count);
+				ctrl_d_message(ft_strdup(delim), mish->l_count);
+			free(line);
 			break ;
 		}
 		write(fd[1], line, ft_strlen(line));
@@ -81,7 +89,7 @@ static void	helper(int *fd, pid_t pid, int *status)
 	waitpid(pid, status, 0);
 }
 
-int	heredoc(t_shell *mish, const char *delim, bool ex)
+int	heredoc(t_shell *mish, char *delim, bool ex)
 {
 	int		fd[2];
 	pid_t	pid;

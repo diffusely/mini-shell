@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 15:14:36 by noavetis          #+#    #+#             */
-/*   Updated: 2025/10/18 16:09:37 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/18 23:03:10 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		exec_pipe(t_shell *mish, t_ast *left, t_ast *right);
 int		exec_cmd(t_shell *mish, t_ast *redir);
 int		exec_ast_subtree(t_shell *mish, t_ast *subtree);
 int		exec_sub(t_shell *mish);
-int		heredoc(t_shell *mish, const char *delim, bool ex);
+int		heredoc(t_shell *mish, char *delim, bool ex);
 void	fake_heredoc(const char *delim, int l_count);
 
 // Utils
