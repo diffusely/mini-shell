@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 12:39:23 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/10/10 22:10:54 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/29 01:26:39 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	print_env(t_list *env)
 {
 	while (env)
 	{
-		if (env->content)
+		if (env->content && ft_strchr(env->content, '='))
 			printf("%s\n", (char *)env->content);
 		env = env->next;
 	}

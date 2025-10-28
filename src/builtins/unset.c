@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 17:52:54 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/10/19 14:45:19 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/29 01:50:37 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,28 +23,15 @@ void	find_remove(const char *input, t_list **envp_list)
 	curr = *envp_list;
 	while (curr)
 	{
-		if (curr->content && ft_strchr(curr->content, '='))
+		if (ft_strncmp(curr->content, input, f_w_p(curr->content)) == 0)
 		{
-			if (ft_strncmp(curr->content, input, f_w_p(curr->content)) == 0)
-			{
-				if (!prev)
-					*envp_list = curr->next;
-				else
-					prev->next = curr->next;
-				free(curr->content);
-				free(curr);
-				return ;
-			}
-			else if (ft_strcmp(curr->content, input) == 0)
-			{
-				if (!prev)
-					*envp_list = curr->next;
-				else
-					prev->next = curr->next;
-				free(curr->content);
-				free(curr);
-				return ;
-			}
+			if (!prev)
+				*envp_list = curr->next;
+			else
+				prev->next = curr->next;
+			free(curr->content);
+			free(curr);
+			return ;
 		}
 		prev = curr;
 		curr = curr->next;

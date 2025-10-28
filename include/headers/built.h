@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 21:27:32 by noavetis          #+#    #+#             */
-/*   Updated: 2025/10/19 14:45:29 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/29 02:03:49 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	refresh_env_matrix(t_shell **shell);
 int		print_history(t_shell *mish);
 void	add_history_input(t_shell *mish);
 void	find_remove(const char *input, t_list **envp_list);
-char	*expand(char *s, t_shell *mish);
+char	*expand(char *s, t_shell *mish, bool flag);
 
 // Utils
 void	ft_err_msg(char *str, char *msg);

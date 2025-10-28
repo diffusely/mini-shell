@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 01:43:04 by noavetis          #+#    #+#             */
-/*   Updated: 2025/10/18 23:55:08 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/29 02:09:22 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static void	ctrl_d_message(char *delim, int l_count)
 {
-	delim = expand(delim, NULL);
 	ft_err("minishell: ");
 	ft_err("warning: ");
 	ft_err("here-document at line ");
@@ -23,7 +22,6 @@ static void	ctrl_d_message(char *delim, int l_count)
 	ft_err("(wanted `");
 	ft_err((char *)delim);
 	ft_err("')\n");
-	free(delim);
 }
 
 void	fake_heredoc(const char *delim, int l_count)
@@ -58,21 +56,24 @@ void	fake_heredoc(const char *delim, int l_count)
 static void	help_heredoc(char *line, char *delim, int *fd, t_shell *mish)
 {
 	bool	op;
+	char	*dl;
 
 	if (strchr(delim, '"') || strchr(delim, '\''))
 		op = false;
 	else
 		op = true;
+	dl = expand(delim, mish, 0);
 	while (1)
 	{
 		line = readline("> ");
 		if (line && op)
-			line = expand(line, mish);
-		if (!line || ft_strcmp(line, delim) == 0)
+			line = expand(line, mish, 1);
+		if (!line || ft_strcmp(line, dl) == 0)
 		{
 			if (!line)
-				ctrl_d_message(ft_strdup(delim), mish->l_count);
+				ctrl_d_message(ft_strdup(dl), mish->l_count);
 			free(line);
+			free(dl);
 			break ;
 		}
 		write(fd[1], line, ft_strlen(line));

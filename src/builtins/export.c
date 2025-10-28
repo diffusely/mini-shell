@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 23:08:24 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/10/19 14:49:46 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/29 01:53:47 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ int	exec_export(char **cmd, t_list **envp_list)
 {
 	t_list	*tmp;
 	int		i;
-	int		j;
 
 	tmp = *envp_list;
 	i = 0;
@@ -94,22 +93,8 @@ int	exec_export(char **cmd, t_list **envp_list)
 		return (1);
 	while (cmd[++i])
 	{
-		j = 0;
-		while (cmd[i][j])
-		{
-			if (cmd[i][j] == '=')
-			{
-				find_remove(cmd[i], envp_list);
-				push_back(cmd[i], envp_list);
-				break ;
-			}
-			j++;
-		}
-		if (!cmd[i][j])
-		{
-			find_remove(cmd[i], envp_list);
-			push_back(cmd[i], envp_list);
-		}
+		find_remove(cmd[i], envp_list);
+		push_back(cmd[i], envp_list);
 	}
 	return (0);
 }

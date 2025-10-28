@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 01:19:10 by noavetis          #+#    #+#             */
-/*   Updated: 2025/10/13 21:15:07 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/29 02:03:38 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static void	init_res(char *s, t_shell *mish, char **res, int *i)
 		*res = str_join_char(*res, s[(*i)++]);
 }
 
-char	*expand(char *s, t_shell *mish)
+char	*expand(char *s, t_shell *mish, bool flag)
 {
 	char	*res;
 	int		start;
@@ -100,5 +100,7 @@ char	*expand(char *s, t_shell *mish)
 		else
 			init_res(s, mish, &res, &i);
 	}
-	return (free(s), res);
+	if (flag)
+		free(s);
+	return (res);
 }
