@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 21:06:18 by noavetis          #+#    #+#             */
-/*   Updated: 2025/10/13 21:01:55 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/29 00:57:00 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,11 @@ void	exec_pip(t_shell *mish, t_ast *ast)
 
 	cmd = ast->cmd[0];
 	path = get_path(mish, cmd);
-	execve(path, ast->cmd, mish->env);
-	exit_code = 0;
+	if (path)
+		execve(path, ast->cmd, mish->env);
 	exit_code = print_exec_error(cmd, path);
-	free(path);
+	if (path)
+		free(path);
 	free_and_exit(mish, exit_code);
 }
 

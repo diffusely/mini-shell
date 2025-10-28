@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 17:52:54 by vmakarya          #+#    #+#             */
-/*   Updated: 2025/10/01 22:55:09 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/19 14:45:19 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,16 @@ void	find_remove(const char *input, t_list **envp_list)
 		if (curr->content && ft_strchr(curr->content, '='))
 		{
 			if (ft_strncmp(curr->content, input, f_w_p(curr->content)) == 0)
+			{
+				if (!prev)
+					*envp_list = curr->next;
+				else
+					prev->next = curr->next;
+				free(curr->content);
+				free(curr);
+				return ;
+			}
+			else if (ft_strcmp(curr->content, input) == 0)
 			{
 				if (!prev)
 					*envp_list = curr->next;

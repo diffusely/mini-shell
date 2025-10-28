@@ -3,14 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noavetis <noavetis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 15:19:22 by noavetis          #+#    #+#             */
-/*   Updated: 2025/10/13 21:04:24 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/10/29 01:03:02 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
+
+static void	print_error(const char *cmd, char *path, int flag)
+{
+	if (ft_strchr(cmd, '/') && errno == 2)
+		ft_err(": No such file or directory\n");
+	else if (path && !ft_strcmp(path, "Error"))
+		ft_err(": command not found\n");
+	else if (errno == EACCES && flag == -1)
+		ft_err(": Permission denied\n");
+	else if (errno == EACCES && flag == 0)
+		ft_err(": Is a directory\n");
+	else if (errno == ENOEXEC)
+		ft_err(": Exec format error\n");
+	else
+	{
+		ft_err(": ");
+		ft_err(strerror(errno));
+		ft_err("\n");
+	}
+}
 
 int	print_exec_error(const char *cmd, char *path)
 {
@@ -21,19 +41,8 @@ int	print_exec_error(const char *cmd, char *path)
 	ft_err("minishell: ");
 	ft_err((char *)cmd);
 	flag = access(cmd, X_OK);
-	if (ft_strchr(cmd, '/') && errno == 2)
-		ft_err(": No such file or directory\n");
-	else if (!ft_strcmp(path, "Error"))
-		ft_err(": command not found\n");
-	else if (errno == EACCES && flag == -1)
-		ft_err(": Permission denied\n");
-	else if (errno == EACCES && flag == 0)
-		ft_err(": Is a directory\n");
-	else if (errno == ENOEXEC)
-		ft_err(": Exec format error\n");
-	else
-		ft_err(strerror(errno));
-	if (!ft_strcmp(path, "Error") || errno == 2)
+	print_error(cmd, path, flag);
+	if (path && (!ft_strcmp(path, "Error") || errno == 2))
 		return (127);
 	else if (errno == EACCES)
 		return (126);
@@ -48,10 +57,11 @@ void	exec_commands(t_shell *mish)
 
 	cmd = mish->tree->cmd[0];
 	path = get_path(mish, cmd);
-	execve(path, mish->tree->cmd, mish->env);
-	exit_code = 0;
+	if (path)
+		execve(path, mish->tree->cmd, mish->env);
 	exit_code = print_exec_error(cmd, path);
-	free(path);
+	if (path)
+		free(path);
 	free_and_exit(mish, exit_code);
 }
 
