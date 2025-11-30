@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 22:50:19 by noavetis          #+#    #+#             */
-/*   Updated: 2025/10/29 01:55:57 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/11/30 22:21:55 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void	expand_and_exec(t_shell *mish)
 				|| ft_strchr(tmp->value, '"')))
 			quated = true;
 		if (!(tmp->prev && tmp->prev->type == HEREDOC))
-			tmp->value = expand(tmp->value, mish);
+			tmp->value = expand(tmp->value, mish, 1);
 		if (tmp->value && tmp->value[0] == '\0' && !quated)
 		{
 			free(tmp->value);
